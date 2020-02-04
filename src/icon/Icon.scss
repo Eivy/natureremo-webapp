@@ -1,0 +1,15 @@
+svg.icon {
+  fill-opacity: 0;
+  stroke: black;
+  stroke-width: 5;
+  text {
+    font-size: 50px;
+  }
+  &.power {
+    stroke: #ccc;
+  }
+  &.power.on {
+    stroke: #61dafb;
+    color: #61dafb;
+  }
+}
