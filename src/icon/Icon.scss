@@ -2,14 +2,19 @@ svg.icon {
   fill-opacity: 0;
   stroke: black;
   stroke-width: 5;
-  text {
-    font-size: 50px;
-  }
   &.power {
     stroke: #ccc;
   }
   &.power.on {
     stroke: #61dafb;
     color: #61dafb;
+  }
+  text {
+    stroke-width: 0;
+    fill-opacity: 1;
+  }
+  &.fill {
+    fill-opacity: 1;
+    stroke-width: 0;
   }
 }
