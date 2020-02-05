@@ -2,7 +2,7 @@ svg.icon {
   fill-opacity: 0;
   stroke: black;
   stroke-width: 5;
-  &.power {
+  &.power.off {
     stroke: #ccc;
   }
   &.power.on {

@@ -43,7 +43,8 @@ const App: React.FC = () => {
         <IconAirPurifier />
         <IconEtc />
         <IconPower />
-        <IconPower on />
+        <IconPower on={true} />
+        <IconPower on={false} />
         <IconMinus />
         <IconPlus />
         <IconCross />
