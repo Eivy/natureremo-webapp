@@ -10,10 +10,10 @@ class IconPower extends React.Component<Props> {
 
   render() {
     return (
-      <svg className={['icon', 'power', this.props.on ? 'on' : ''].join(' ')} viewBox="0 0 60 60">
+      <svg className={['icon', 'power', this.props.on ? 'on' : ''].join(' ')} viewBox="0 0 50 50">
         <path d="
-        M 30,3 30,35
-        M 20,15 A20 20 0 1 0 40,15
+        M 25,10 25,30
+        M 20,18 A12 12 0 1 0 30,18
         " />
         Power
       </svg >
