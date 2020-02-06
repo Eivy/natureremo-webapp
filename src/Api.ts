@@ -12,15 +12,15 @@ class Api {
   }
 
   async GetMe(): Promise<RemoAPI.User | null> {
-    return await request.get(url.resolve(this.basePath, 'users/me'), { headers: this.requestHeaders })
+    return JSON.parse(await request.get(url.resolve(this.basePath, 'users/me'), { headers: this.requestHeaders })
       .catch((reason) => {
         console.log(reason)
         return null
-      })
+      }))
   }
 
   async PostMe(nickname: string): Promise<RemoAPI.User | null> {
-    return await request.post(url.resolve(this.basePath, 'users/me'),
+    return JSON.parse(await request.post(url.resolve(this.basePath, 'users/me'),
       {
         headers: this.requestHeaders,
         form: { nickname: nickname }
@@ -28,7 +28,7 @@ class Api {
       .catch((reason) => {
         console.log(reason)
         return null
-      })
+      }))
   }
 
 }
