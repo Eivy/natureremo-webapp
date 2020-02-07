@@ -1,24 +1,42 @@
-import Api from './Api';
-import request from 'request-promise-native';
+import * as cp from 'child_process'
+import * as path from 'path'
+import Api from './Api'
 
-jest.mock('request');
+const sleep = (msec: number) => new Promise((resolve: Function) => setTimeout(resolve, msec))
 
-let api = new Api('', 'http://localhost:8000//1/');
+describe('API test', () => {
 
-test('get user', () => {
-  const resp = {
-    'id': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-    'nickname': 'string'
-  }
-  request.get.mockResolvedValue(JSON.stringify(resp))
-  api.GetMe().then((res) => expect(res).toBe(resp))
-});
+  let api = new Api('', 'http://localhost:8000//1/')
+  let server: cp.ChildProcessWithoutNullStreams
+  beforeAll(async () => {
+    server = cp.spawn('node', [path.resolve(__dirname, '..', 'mock/mock.js')])
+    server.stdout.setEncoding('utf-8')
+    server.stdout.on('data', (data) => {
+      console.log(data)
+    })
+    await sleep(400)
+  }, 500)
 
-test('update user nickname', () => {
-  const resp = {
-    'id': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-    'nickname': 'test'
-  }
-  request.post.mockResolvedValue(JSON.stringify(resp))
-  api.PostMe('test').then((res) => expect(res).toBe(resp))
-});
+  afterAll(() => {
+    server.kill()
+  })
+
+  test('get user', async () => {
+    const resp = {
+      'id': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      'nickname': 'string'
+    }
+    let res = await api.GetMe()
+    expect(res).toStrictEqual(resp)
+  })
+
+  test('update user nickname', async () => {
+    const resp = {
+      'id': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      'nickname': 'test'
+    }
+    let res = await api.PostMe('test')
+    expect(res).toStrictEqual(resp)
+  })
+
+})
