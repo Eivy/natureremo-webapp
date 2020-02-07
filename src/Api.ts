@@ -31,6 +31,30 @@ class Api {
       }))
   }
 
+  async GetDevices(): Promise<Array<RemoAPI.Device> | null> {
+    return JSON.parse(await request.get(
+      url.resolve(this.basePath, 'devices'),
+      {
+        headers: this.requestHeaders,
+      })
+      .catch((reason) => {
+        console.log(reason)
+        return null
+      }))
+  }
+
+  async GetAppliances(): Promise<Array<RemoAPI.Appliance> | null> {
+    return JSON.parse(await request.get(
+      url.resolve(this.basePath, 'appliances'),
+      {
+        headers: this.requestHeaders,
+      })
+      .catch((reason) => {
+        console.log(reason)
+        return null
+      }))
+  }
+
 }
 
 export default Api
