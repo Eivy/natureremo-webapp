@@ -76,6 +76,11 @@ paths:
           description: User information
           schema:
             $ref: '#/definitions/User'
+          headers:
+            X-Rate-Limit-Remaining:
+              default: 3
+              schema:
+                type: integer
     post:
       description: Update authenticated user's information.
       security:
