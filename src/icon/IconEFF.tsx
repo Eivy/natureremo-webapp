@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-class IconERewind extends React.Component {
+class IconEFF extends React.Component {
 
   render() {
     return (
@@ -10,11 +10,11 @@ class IconERewind extends React.Component {
         M 100,60 l60,40 l-60,40 z
         " />
         <rect x="160" y="60" height="80" width="10" />
-        ⏮
+        ⏭
       </svg>
     )
   }
 
 }
 
-export default IconERewind;
+export default IconEFF;

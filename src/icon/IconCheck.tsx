@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-class IconCross extends React.Component {
+class IconCheck extends React.Component {
 
   render() {
     return (
@@ -16,4 +16,4 @@ class IconCross extends React.Component {
 
 }
 
-export default IconCross;
+export default IconCheck;
