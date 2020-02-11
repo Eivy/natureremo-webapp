@@ -1,31 +1,33 @@
 import React from 'react';
 import './App.scss';
-import './icon/Icon.scss';
-import IconPower from './icon/IconPower';
-import IconAV from './icon/IconAV';
-import IconAirCon1 from './icon/IconAirCon1';
-import IconAirCon2 from './icon/IconAirCon2';
-import IconAirPurifier from './icon/IconAirPurifier';
-import IconAudio from './icon/IconAudio';
-import IconCurtain from './icon/IconCurtain';
-import IconEtc from './icon/IconEtc';
-import IconFan from './icon/IconFan';
-import IconLight from './icon/IconLight';
-import IconTV from './icon/IconTV';
-import IconVacuum from './icon/IconVacuum';
-import IconText from './icon/IconText';
-import IconMinus from './icon/IconMinus';
-import IconPlus from './icon/IconPlus';
-import IconCross from './icon/IconCross';
-import IconCheck from './icon/IconCheck';
-import IconPlay from './icon/IconPlay';
-import IconPause from './icon/IconPause';
-import IconStop from './icon/IconStop';
-import IconRecord from './icon/IconRecord';
-import IconFF from './icon/IconFF';
-import IconEFF from './icon/IconEFF';
-import IconRewind from './icon/IconRewind';
-import IconERewind from './icon/IconERewind';
+import './Icons.scss';
+import {
+IconPower,
+IconAV,
+IconAirCon1,
+IconAirCon2,
+IconAirPurifier,
+IconAudio,
+IconCurtain,
+IconEtc,
+IconFan,
+IconLight,
+IconTV,
+IconVacuum,
+IconText,
+IconMinus,
+IconPlus,
+IconCross,
+IconCheck,
+IconPlay,
+IconPause,
+IconStop,
+IconRecord,
+IconFF,
+IconEFF,
+IconRewind,
+IconERewind,
+} from './Icons'
 
 const App: React.FC = () => {
   return (
