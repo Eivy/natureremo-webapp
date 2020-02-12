@@ -1,0 +1,62 @@
+$border-size: .5rem;
+.appliance {
+  position: relative;
+  background: inherit;
+  margin: 5px;
+  svg {
+    display: block;
+  }
+  button {
+    display: block;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    &.main {
+      background: inherit;
+      border-radius: 20%;
+      position: relative;
+      border: 1px gray solid;
+      filter: drop-shadow(3px 3px 3px black);
+      &.circle::after {
+        position: absolute;
+        content: "";
+        padding: 0;
+        border: $border-size solid;
+        border-radius: 50%;
+        border-color: gray;
+        height: 80%;
+        width: 80%;
+        top: calc(10% - #{$border-size});
+        left: calc(10% - #{$border-size});
+        animation: circle-spin infinite 3s linear;
+      }
+      &.circle.on::after {
+        border-color: white white #61dafb #61dafb;
+      }
+    }
+    &.power {
+      position: absolute;
+      background: transparent;
+      top: 0;
+      right: 0;
+      height: 30%;
+      width: 30%;
+      svg {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+  .label {
+    text-align: center;
+  }
+}
+
+@keyframes circle-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
