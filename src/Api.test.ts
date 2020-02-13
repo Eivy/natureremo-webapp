@@ -139,8 +139,8 @@ describe('API test', () => {
     server.stdout.on('data', (data) => {
       console.log(data)
     })
-    await sleep(400)
-  }, 500)
+    await sleep(3000)
+  }, 5000)
 
   afterAll(() => {
     server.kill()
