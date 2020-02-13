@@ -1,82 +1,56 @@
 import React from 'react';
 import './App.scss';
 import './Icons.scss';
-import {
-IconPower,
-IconAV,
-IconAirCon1,
-IconAirCon2,
-IconAirPurifier,
-IconAudio,
-IconCurtain,
-IconEtc,
-IconFan,
-IconLight,
-IconTV,
-IconVacuum,
-IconText,
-IconMinus,
-IconPlus,
-IconCross,
-IconCheck,
-IconPlay,
-IconPause,
-IconStop,
-IconRecord,
-IconFF,
-IconEFF,
-IconRewind,
-IconERewind,
-} from './Icons'
+import * as Icons from './Icons'
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <IconAirCon1 />
-        <IconAirCon2 />
-        <IconTV />
-        <IconLight />
-        <IconAV />
-        <IconFan />
-        <IconVacuum />
-        <IconAudio />
-        <IconCurtain />
-        <IconAirPurifier />
-        <IconEtc />
-        <IconPower />
-        <IconPower on={true} />
-        <IconPower on={false} />
-        <IconMinus />
-        <IconPlus />
-        <IconCross />
-        <IconCheck />
-        <IconPlay />
-        <IconFF />
-        <IconEFF />
-        <IconRewind />
-        <IconERewind />
-        <IconPause />
-        <IconStop />
-        <IconRecord />
-        <IconText value="0" />
-        <IconText value="1" />
-        <IconText value="2" />
-        <IconText value="3" />
-        <IconText value="4" />
-        <IconText value="5" />
-        <IconText value="6" />
-        <IconText value="7" />
-        <IconText value="8" />
-        <IconText value="9" />
-        <IconText value="10" />
-        <IconText value="11" />
-        <IconText value="12" />
-        <IconText value="CLOSE" />
-        <IconText value="OPEN" />
-        <IconText value="STOP" />
-        <IconText value="ON" />
-        <IconText value="OFF" />
+        <Icons.AirCon1 />
+        <Icons.AirCon2 />
+        <Icons.TV />
+        <Icons.Light />
+        <Icons.AV />
+        <Icons.Fan />
+        <Icons.Vacuum />
+        <Icons.Audio />
+        <Icons.Curtain />
+        <Icons.AirPurifier />
+        <Icons.Etc />
+        <Icons.Power />
+        <Icons.Power on={true} />
+        <Icons.Power on={false} />
+        <Icons.Minus />
+        <Icons.Plus />
+        <Icons.Cross />
+        <Icons.Check />
+        <Icons.Play />
+        <Icons.FF />
+        <Icons.EFF />
+        <Icons.Rewind />
+        <Icons.ERewind />
+        <Icons.Pause />
+        <Icons.Stop />
+        <Icons.Record />
+        <Icons.Text value="0" />
+        <Icons.Text value="1" />
+        <Icons.Text value="2" />
+        <Icons.Text value="3" />
+        <Icons.Text value="4" />
+        <Icons.Text value="5" />
+        <Icons.Text value="6" />
+        <Icons.Text value="7" />
+        <Icons.Text value="8" />
+        <Icons.Text value="9" />
+        <Icons.Text value="10" />
+        <Icons.Text value="11" />
+        <Icons.Text value="12" />
+        <Icons.Text value="CLOSE" />
+        <Icons.Text value="OPEN" />
+        <Icons.Text value="STOP" />
+        <Icons.Text value="ON" />
+        <Icons.Text value="OFF" />
       </header>
     </div>
   );

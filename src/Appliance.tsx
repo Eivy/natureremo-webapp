@@ -3,33 +3,20 @@ import React from 'react'
 import './Appliance.scss'
 import './Icons.scss'
 
-import {
-  IconAV,
-  IconAirCon1,
-  IconAirCon2,
-  IconAirPurifier,
-  IconAudio,
-  IconCurtain,
-  IconEtc,
-  IconFan,
-  IconLight,
-  IconTV,
-  IconVacuum,
-  IconPower,
-} from './Icons'
+import * as Icons from './Icons'
 
 const components: any = {
-  "ico_av": IconAV,
-  "ico_ac_1": IconAirCon1,
-  "ico_ac_2": IconAirCon2,
-  "ico_air_purifier": IconAirPurifier,
-  "ico_audio": IconAudio,
-  "ico_curtain": IconCurtain,
-  "ico_etc": IconEtc,
-  "ico_fan": IconFan,
-  "ico_light": IconLight,
-  "ico_tv": IconTV,
-  "ico_vacuum": IconVacuum,
+  "ico_av": Icons.AV,
+  "ico_ac_1": Icons.AirCon1,
+  "ico_ac_2": Icons.AirCon2,
+  "ico_air_purifier": Icons.AirPurifier,
+  "ico_audio": Icons.Audio,
+  "ico_curtain": Icons.Curtain,
+  "ico_etc": Icons.Etc,
+  "ico_fan": Icons.Fan,
+  "ico_light": Icons.Light,
+  "ico_tv": Icons.TV,
+  "ico_vacuum": Icons.Vacuum,
 }
 
 interface Props {
@@ -49,13 +36,13 @@ class Appliance extends React.Component<Props, State> {
     let Icon
     let mainClassName = ["main"]
     try {
-      Icon = components.hasOwnProperty(this.props.icon) ? components[this.props.icon] : IconEtc
+      Icon = components.hasOwnProperty(this.props.icon) ? components[this.props.icon] : Icons.Etc
     }
     catch {
-      Icon = IconEtc
+      Icon = Icons.Etc
     }
     if (this.props.type === 'LIGHT' || this.props.type === 'AC') {
-      power = (<button className="power"><IconPower /></button>)
+      power = (<button className="power"><Icons.Power /></button>)
       mainClassName.push("circle")
       if (this.props.status === "on") {
         mainClassName.push("on")

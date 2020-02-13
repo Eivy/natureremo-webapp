@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class IconAV extends React.Component {
+export class AV extends React.Component {
   render() {
     return (
       <svg className="icon av" viewBox="0 0 200 200">
@@ -15,7 +15,7 @@ export class IconAV extends React.Component {
 }
 
 
-export class IconAirCon1 extends React.Component {
+export class AirCon1 extends React.Component {
   render() {
     return (
       <svg className="icon aircon1" viewBox="0 0 200 200">
@@ -29,7 +29,7 @@ export class IconAirCon1 extends React.Component {
 }
 
 
-export class IconAirCon2 extends React.Component {
+export class AirCon2 extends React.Component {
   render() {
     return (
       <svg className="icon av" viewBox="0 0 200 200">
@@ -52,7 +52,7 @@ export class IconAirCon2 extends React.Component {
 }
 
 
-export class IconAirPurifier extends React.Component {
+export class AirPurifier extends React.Component {
   render() {
     return (
       <svg className="icon airpurifier" viewBox="0 0 200 200">
@@ -70,7 +70,7 @@ export class IconAirPurifier extends React.Component {
 }
 
 
-export class IconAudio extends React.Component {
+export class Audio extends React.Component {
   render() {
     return (
       <svg className="icon audio" viewBox="0 0 200 200">
@@ -86,7 +86,7 @@ export class IconAudio extends React.Component {
 }
 
 
-export class IconCheck extends React.Component {
+export class Check extends React.Component {
 
   render() {
     return (
@@ -103,7 +103,7 @@ export class IconCheck extends React.Component {
 }
 
 
-export class IconCross extends React.Component {
+export class Cross extends React.Component {
 
   render() {
     return (
@@ -120,7 +120,7 @@ export class IconCross extends React.Component {
 }
 
 
-export class IconCurtain extends React.Component {
+export class Curtain extends React.Component {
   render() {
     return (
       <svg className="icon curtain" viewBox="0 0 200 200">
@@ -139,7 +139,7 @@ export class IconCurtain extends React.Component {
 }
 
 
-export class IconEFF extends React.Component {
+export class EFF extends React.Component {
 
   render() {
     return (
@@ -157,7 +157,7 @@ export class IconEFF extends React.Component {
 }
 
 
-export class IconERewind extends React.Component {
+export class ERewind extends React.Component {
 
   render() {
     return (
@@ -177,7 +177,7 @@ export class IconERewind extends React.Component {
 }
 
 
-export class IconEtc extends React.Component {
+export class Etc extends React.Component {
   render() {
     return (
       <svg className="icon etc" viewBox="0 0 200 200">
@@ -193,7 +193,7 @@ export class IconEtc extends React.Component {
   }
 }
 
-export class IconFF extends React.Component {
+export class FF extends React.Component {
 
   render() {
     return (
@@ -210,7 +210,7 @@ export class IconFF extends React.Component {
 }
 
 
-export class IconFan extends React.Component {
+export class Fan extends React.Component {
   render() {
     return (
       <svg className="icon fan" viewBox="0 0 200 200">
@@ -231,7 +231,7 @@ export class IconFan extends React.Component {
 }
 
 
-export class IconLight extends React.Component {
+export class Light extends React.Component {
   render() {
     return (
       <svg className="icon light" viewBox="0 0 200 200">
@@ -248,7 +248,7 @@ export class IconLight extends React.Component {
 }
 
 
-export class IconMinus extends React.Component {
+export class Minus extends React.Component {
 
   render() {
     return (
@@ -262,7 +262,7 @@ export class IconMinus extends React.Component {
 }
 
 
-export class IconPause extends React.Component {
+export class Pause extends React.Component {
 
   render() {
     return (
@@ -277,7 +277,7 @@ export class IconPause extends React.Component {
 }
 
 
-export class IconPlay extends React.Component {
+export class Play extends React.Component {
 
   render() {
     return (
@@ -293,7 +293,7 @@ export class IconPlay extends React.Component {
 }
 
 
-export class IconPlus extends React.Component {
+export class Plus extends React.Component {
 
   render() {
     return (
@@ -312,7 +312,7 @@ interface PowerProps {
   on: boolean | null,
 }
 
-export class IconPower extends React.Component<PowerProps> {
+export class Power extends React.Component<PowerProps> {
 
   public static defaultProps: PowerProps = { on: null };
 
@@ -331,7 +331,7 @@ export class IconPower extends React.Component<PowerProps> {
 }
 
 
-export class IconRecord extends React.Component {
+export class Record extends React.Component {
 
   render() {
     return (
@@ -345,7 +345,7 @@ export class IconRecord extends React.Component {
 }
 
 
-export class IconRewind extends React.Component {
+export class Rewind extends React.Component {
 
   render() {
     return (
@@ -364,7 +364,7 @@ export class IconRewind extends React.Component {
 }
 
 
-export class IconStop extends React.Component {
+export class Stop extends React.Component {
 
   render() {
     return (
@@ -378,7 +378,7 @@ export class IconStop extends React.Component {
 }
 
 
-export class IconTV extends React.Component {
+export class TV extends React.Component {
 
   render() {
     return (
@@ -397,7 +397,7 @@ interface TextProps {
   value: string,
 }
 
-export class IconText extends React.Component<TextProps> {
+export class Text extends React.Component<TextProps> {
 
   private ref = React.createRef<SVGSVGElement>();
 
@@ -423,7 +423,7 @@ export class IconText extends React.Component<TextProps> {
 }
 
 
-export class IconVacuum extends React.Component {
+export class Vacuum extends React.Component {
   render() {
     return (
       <svg className="icon vacuum" viewBox="0 0 200 200">
