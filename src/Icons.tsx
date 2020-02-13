@@ -309,16 +309,14 @@ export class Plus extends React.Component {
 
 
 interface PowerProps {
-  on: boolean | null,
+  power?: 'on' | 'off',
 }
 
 export class Power extends React.Component<PowerProps> {
 
-  public static defaultProps: PowerProps = { on: null };
-
   render() {
     return (
-      <svg className={['icon', 'power', this.props.on === null ? '' : this.props.on ? 'on' : 'off'].join(' ')} viewBox="0 0 50 50">
+      <svg className={['icon', 'power', this.props.power].join(' ')} viewBox="0 0 50 50">
         <path d="
         M 25,10 25,30
         M 20,18 A12 12 0 1 0 30,18
