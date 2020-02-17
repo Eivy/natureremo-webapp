@@ -19,8 +19,8 @@ const App: React.FC = () => {
         <Icons.AirPurifier />
         <Icons.Etc />
         <Icons.Power />
-        <Icons.Power on={true} />
-        <Icons.Power on={false} />
+        <Icons.Power power="on" />
+        <Icons.Power power="off" />
         <Icons.Minus />
         <Icons.Plus />
         <Icons.Cross />
