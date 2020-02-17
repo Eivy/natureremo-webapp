@@ -10,10 +10,12 @@ $border-size: .25rem;
     padding: 0;
     border: 0;
     font: inherit;
-    height: 100%;
-    width: 100%;
     background: inherit;
     &.main {
+      position: absolute;
+      left: 1em;
+      height: calc(100% - 2em);;
+      width: calc(100% - 2em);;
       background: inherit;
       border-radius: 20%;
       position: relative;
@@ -48,7 +50,7 @@ $border-size: .25rem;
       position: absolute;
       background: transparent;
       top: 0;
-      right: 0;
+      right: 1em;
       height: 30%;
       width: 30%;
       svg {
@@ -58,7 +60,8 @@ $border-size: .25rem;
     }
   }
   .label {
-    text-align: center;
+    display: inline-block;
+    margin-top: .2em;
   }
 }
 
