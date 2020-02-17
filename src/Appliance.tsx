@@ -49,9 +49,9 @@ class Appliance extends React.Component<Props, State> {
     }
     return (
         <div className="appliance">
-        <button className={mainClassName.join(" ")}><Icon /></button>
-        <span className="label">{this.props.data.nickname}</span>
-        {power}
+          <button className={mainClassName.join(" ")}><Icon /></button>
+          <span className="label">{this.props.data.nickname}</span>
+          {power}
         </div>
         )
   }

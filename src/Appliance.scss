@@ -1,23 +1,32 @@
-$border-size: .5rem;
+$border-size: .25rem;
 .appliance {
   display: inline-block;
   position: relative;
   background: inherit;
   margin: 5px;
-  svg {
-    display: block;
-  }
+  font-size: 50%;
   button {
     display: block;
     padding: 0;
     border: 0;
     font: inherit;
+    height: 100%;
+    width: 100%;
+    background: inherit;
     &.main {
       background: inherit;
       border-radius: 20%;
       position: relative;
       border: 1px gray solid;
       filter: drop-shadow(3px 3px 3px black);
+      svg {
+        position: absolute;
+        display: block;
+        width: 44%;
+        height: 44%;
+        top: 28%;
+        left: 28%;
+      }
       &.circle::after {
         position: absolute;
         content: "";
@@ -25,10 +34,10 @@ $border-size: .5rem;
         border: $border-size solid;
         border-radius: 50%;
         border-color: gray;
-        height: 80%;
-        width: 80%;
-        top: calc(10% - #{$border-size});
-        left: calc(10% - #{$border-size});
+        height: 50%;
+        width: 50%;
+        top: calc(25% - #{$border-size});
+        left: calc(25% - #{$border-size});
         animation: circle-spin infinite 3s linear;
       }
       &.circle.on::after {
