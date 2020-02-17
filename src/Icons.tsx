@@ -186,7 +186,7 @@ export const Fan: React.FC = () => {
       M 110,120 v30
       M 80,160 h40 v-5 a5 5 1 0 0 -5,-5 h-30 a 5 5 1 0 0 -5,5 v5 z
       " />
-      ➡
+      Fan
     </svg>
   );
 }
@@ -327,13 +327,14 @@ export const Text: React.FC<TextProps> = React.memo((props) => {
   )
 })
 
-export const Vacuum: React.FC = () => {
+export const Robot: React.FC = () => {
   return (
-    <svg className="icon vacuum" viewBox="0 0 200 200">
+    <svg className="icon robot" viewBox="0 0 200 200">
       <circle r="80" cx="100" cy="100" />
       <path d="M35,100 A60 60 1 0 1 165,100" />
       <circle r="50" cx="100" cy="100" />
       <circle r="25" cx="100" cy="100" />
+      Robot
     </svg>
   );
 }

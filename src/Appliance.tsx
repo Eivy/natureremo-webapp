@@ -16,7 +16,7 @@ const components: any = {
   "ico_fan": Icons.Fan,
   "ico_light": Icons.Light,
   "ico_tv": Icons.TV,
-  "ico_robot": Icons.Vacuum,
+  "ico_robot": Icons.Robot,
 }
 
 interface Props {
