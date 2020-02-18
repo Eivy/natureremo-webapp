@@ -320,7 +320,7 @@ export const Text: React.FC<TextProps> = React.memo((props) => {
     t.style.fontSize = el.clientWidth / (isNum ? 6: 2) + 'px';
   })
   return (
-    <svg className="icon num1" viewBox="0 0 50 50" ref={ref}>
+    <svg className="icon text" viewBox="0 0 50 50" ref={ref}>
       <text x="50%" y="50%" dominantBaseline="central" textAnchor="middle">{props.value}</text>
       {props.value}
     </svg >
