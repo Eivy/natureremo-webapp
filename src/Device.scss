@@ -1,50 +1,78 @@
 $margin: 1rem;
-$padding: .5em;
-$nicknameWidth: 5em;
+$padding: .5rem;
+$sensorWidth: 5rem;
+$half: calc(50vmin - (#{$margin} + #{$padding}) * 2);
+$aThird: calc(33vmin - (#{$margin} - #{$padding}) * 2);
+@mixin nallow {
+  @media screen and (min-width: 0px) and (max-width: 800px) {
+    @content;
+  }
+}
+@mixin broad {
+  @media screen and (min-width: 800px) {
+    @content;
+  }
+}
 .device {
   border: 1px solid;
   border-radius: 1rem;
   margin: $margin $margin 0 $margin;
   padding: $padding;
   background: inherit;
+  @include nallow {
+    max-width: calc(#{$half} * 2);
+  }
+  @include broad {
+    max-width: calc(#{$aThird} *3);
+  }
+  header {
+    width: 100%;
+  }
   .nickname {
     display:inline-block;
     font-size: 200%;
-    padding: 0 $padding 0 $padding;
-    width: $nicknameWidth;
     text-overflow:: ellipsis;
     text-align: left;
+    overflow: hidden;
+    white-space:nowrap;
+    max-width: calc(100% - (#{$sensorWidth} + #{$padding} * 2));
   }
   .sensor {
     font-size: 50%;
     display: inline-block;
-    padding: 0 1em 0 1em;
-    max-width: calc(100% - #{$nicknameWidth});
+    width: $sensorWidth;
     text-align: left;
-    &>span {
+    vertical-align: top;
+    span {
       display: block;
+      white-space: nowrap;
     }
     .value {
+      display: inline-block;
       text-align: right;
+      vertical-align: top;
+      text-overflow: ellipsis;
+      overflow:hidden;
+      padding-right: 5px;
+      max-width: 3em;
     }
   }
   .appliances {
     display: flex;
     flex-wrap: wrap;
     background: inherit;
-    @media screen and (min-width: 0px) and (max-width: 800px) {
-      max-width: calc((50vmin - #{$margin} - #{$padding}) * 2);
+    @include nallow {
+      max-width: calc(#{$half} * 2);
       .appliance {
-        height: calc(50vmin - (#{$margin} + #{$padding}) * 2);
-        width: calc(50vmin - (#{$margin} + #{$padding}) * 2);
+        height: $half;
+        width: $half;
       }
     }
-    @media screen and (min-width: 800px) {
-      width: calc((33vmin - #{$margin} - #{$padding}) * 3);
-      max-width: calc(600px);
+    @include broad {
+      max-width: calc(#{$aThird} * 3);
       .appliance {
-        height: calc(33vmin - #{$margin} - #{$padding});
-        width: calc(33vmin - #{$margin} - #{$padding});
+        height: $aThird;
+        width: $aThird;
         max-width: 200px;
         max-height: 200px;
       }

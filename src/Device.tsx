@@ -14,7 +14,7 @@ const Device: React.FC<Props> = React.memo((props) => {
         <header>
           <span className="nickname">{props.device.name}</span>
           <span className="sensor">
-            {props.device.newest_events?.te && <span>温度:{props.device.newest_events!.te!.val}℃</span>}
+            {props.device.newest_events?.te && <span>温度:<span className="value">{props.device.newest_events!.te!.val}</span>℃</span>}
             {props.device.newest_events?.hu && <span className="humid">湿度:<span className="value">{props.device.newest_events!.hu!.val}</span>%</span>}
             {props.device.newest_events?.il && <span className="illumi">明るさ:<span className="value">{props.device.newest_events!.il!.val}</span></span>}
           </span>
