@@ -7,7 +7,6 @@ $nicknameWidth: 5em;
   margin: $margin $margin 0 $margin;
   padding: $padding;
   background: inherit;
-  max-width: calc(100% - #{$margin} * 2);
   .nickname {
     display:inline-block;
     font-size: 200%;
@@ -33,16 +32,21 @@ $nicknameWidth: 5em;
     display: flex;
     flex-wrap: wrap;
     background: inherit;
-    @media screen and (max-width: 900px), screen and (max-height: 900px) {
+    @media screen and (min-width: 0px) and (max-width: 800px) {
+      max-width: calc((50vmin - #{$margin} - #{$padding}) * 2);
       .appliance {
-        height: calc(50vmin - #{$margin} * 2 - #{$padding});
-        width: calc(50vmin - #{$margin} * 2 - #{$padding});
+        height: calc(50vmin - (#{$margin} + #{$padding}) * 2);
+        width: calc(50vmin - (#{$margin} + #{$padding}) * 2);
       }
     }
-    @media screen and (min-width: 900px), screen and (min-height: 900px) {
+    @media screen and (min-width: 800px) {
+      width: calc((33vmin - #{$margin} - #{$padding}) * 3);
+      max-width: calc(600px);
       .appliance {
-        height: calc(33vmin - #{$margin} * 2 - #{$padding});
-        width: calc(33vmin - #{$margin} * 2 - #{$padding});
+        height: calc(33vmin - #{$margin} - #{$padding});
+        width: calc(33vmin - #{$margin} - #{$padding});
+        max-width: 200px;
+        max-height: 200px;
       }
     }
   }
