@@ -1,4 +1,4 @@
-$margin: 1rem;
+$margin: .5rem;
 $padding: .5rem;
 $sensorWidth: 5rem;
 $half: calc(50vmin - (#{$margin} + #{$padding}) * 2);
@@ -30,15 +30,14 @@ $aThird: calc(33vmin - (#{$margin} - #{$padding}) * 2);
   }
   .nickname {
     display:inline-block;
-    font-size: 200%;
     text-overflow:: ellipsis;
     text-align: left;
     overflow: hidden;
     white-space:nowrap;
-    max-width: calc(100% - (#{$sensorWidth} + #{$padding} * 2));
+    width: calc(100% - (#{$sensorWidth} + #{$padding} * 2));
   }
   .sensor {
-    font-size: 50%;
+    font-size: .5em;
     display: inline-block;
     width: $sensorWidth;
     text-align: left;
