@@ -129,9 +129,9 @@ let sampleAppliances: Array<RemoAPI.Appliance> = [{
     ]
   }
 }]
-describe('API test', () => {
+describe('Api test', () => {
 
-  let api = new Api('', 'http://localhost:8000//1/')
+  Api.setApi('http://localhost:8000//1/')
   let server: cp.ChildProcessWithoutNullStreams
   beforeAll(async () => {
     server = cp.spawn('node', [path.resolve(__dirname, '..', 'mock/mock.js')])
@@ -147,8 +147,8 @@ describe('API test', () => {
   })
 
   test('check remaining', async () => {
-    await api.GetMe()
-    expect(api.remaining).toBe(3)
+    await Api.GetMe()
+    expect(Api.getRemaining()).toBe(3)
   })
 
   test('get user', async () => {
@@ -156,7 +156,7 @@ describe('API test', () => {
       'id': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       'nickname': 'string'
     }
-    let res = await api.GetMe()
+    let res = await Api.GetMe()
     expect(res).toStrictEqual(resp)
   })
 
@@ -165,17 +165,17 @@ describe('API test', () => {
       'id': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       'nickname': 'test'
     }
-    let res = await api.PostMe('test')
+    let res = await Api.PostMe('test')
     expect(res).toStrictEqual(resp)
   })
 
   test('get devices', async () => {
-    let res = await api.GetDevices()
+    let res = await Api.GetDevices()
     expect(res).toStrictEqual(sampleDevices)
   })
 
   test('get appliances', async () => {
-    let res = await api.GetAppliances()
+    let res = await Api.GetAppliances()
     expect(res).toStrictEqual(sampleAppliances)
   })
 

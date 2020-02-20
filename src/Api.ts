@@ -3,42 +3,49 @@ import request from 'request-promise-native'
 import * as url from 'url'
 
 class Api {
-  private basePath: string
-  private requestHeaders: any
-  remaining: number = 0
+  private static basePath: string = "https://api.nature.global/1/";
+  private static requestHeaders: any;
+  private static remaining: number = 0;
 
-  constructor(token: string, server = "https://api.nature.global/1/") {
-    this.basePath = server
-    this.requestHeaders = { 'Authorization': 'Bearer ' + token }
+  static setApi(server: string) {
+    Api.basePath = server
   }
 
-  async GetMe(): Promise<RemoAPI.User | null> {
-    return this.get('users/me')
+  static setToken(token: string) {
+    Api.requestHeaders = { 'Authorization': 'Bearer ' + token };
   }
 
-  async PostMe(nickname: string): Promise<RemoAPI.User | null> {
-    return this.post('users/me', { nickname: nickname })
+  static getRemaining(): number {
+    return Api.remaining;
   }
 
-  async GetDevices(): Promise<Array<RemoAPI.Device> | null> {
-    return this.get('devices')
+  static async GetMe(): Promise<RemoAPI.User | null> {
+    return Api.get('users/me');
   }
 
-  async GetAppliances(): Promise<Array<RemoAPI.Appliance> | null> {
-    return this.get('appliances')
+  static async PostMe(nickname: string): Promise<RemoAPI.User | null> {
+    return Api.post('users/me', { nickname: nickname });
   }
 
-  private updateRemaining(remaining: number) {
-    this.remaining = remaining
+  static async GetDevices(): Promise<Array<RemoAPI.Device> | null> {
+    return Api.get('devices');
   }
 
-  private async get(path: string): Promise<any> {
+  static async GetAppliances(): Promise<Array<RemoAPI.Appliance> | null> {
+    return Api.get('appliances');
+  }
+
+  private static updateRemaining(remaining: number) {
+    Api.remaining = remaining;
+  }
+
+  private static async get(path: string): Promise<any> {
     return JSON.parse(
       await request.get(
-        url.resolve(this.basePath, path),
-        { headers: this.requestHeaders },
+        url.resolve(Api.basePath, path),
+        { headers: Api.requestHeaders },
         (err, res, body) => {
-          this.updateRemaining(parseInt(res?.headers['x-rate-limit-remaining'] as string))
+          Api.updateRemaining(parseInt(res?.headers['x-rate-limit-remaining'] as string));
           return body;
         }
       )
@@ -46,19 +53,19 @@ class Api {
           console.log(reason)
           return null
         })
-    )
+    );
   }
 
-  private async post(path: string, form: any): Promise<any> {
+  private static async post(path: string, form: any): Promise<any> {
     return JSON.parse(
       await request.post(
-        url.resolve(this.basePath, path),
+        url.resolve(Api.basePath, path),
         {
-          headers: this.requestHeaders,
+          headers: Api.requestHeaders,
           form: form,
         },
         (err, res, body) => {
-          this.updateRemaining(parseInt(res?.headers['x-rate-limit-remaining'] as string))
+          Api.updateRemaining(parseInt(res?.headers['x-rate-limit-remaining'] as string))
           return body;
         }
       )
@@ -66,9 +73,9 @@ class Api {
           console.log(reason)
           return null
         })
-    )
+    );
   }
 
 }
 
-export default Api
+export default Api;
