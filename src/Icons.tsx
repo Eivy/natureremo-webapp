@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
+import styles from './Icons.module.scss';
 
 export const AV: React.FC = () => {
   return (
-    <svg className="icon av" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.av}`} viewBox="0 0 200 200">
       <rect x="20" y="70" height="60" width="160" rx="5" ry="5" />
       <rect x="40" y="80" height="20" width="80" rx="5" ry="5" />
       <circle r="15" cx="150" cy="100" />
@@ -12,10 +13,9 @@ export const AV: React.FC = () => {
   );
 }
 
-
 export const AirCon1: React.FC = () => {
   return (
-    <svg className="icon aircon1" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.aircon1}`} viewBox="0 0 200 200">
       <rect x="10" y="75" width="180" height="50" rx="5" ry="5" />
       <path d="m 170,115 h10" />
       <path d="M20,125 v5 A5 5 0 0 0 25,135 H175 A5 5 0 0 0 180,130 v-5" />
@@ -24,10 +24,9 @@ export const AirCon1: React.FC = () => {
   );
 }
 
-
 export const AirCon2: React.FC = () => {
   return (
-    <svg className="icon av" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.av}`} viewBox="0 0 200 200">
       <rect x="20" y="50" height="100" width="160" rx="5" ry="5" />
       <rect x="40" y="85" height="30" width="10" rx="5" ry="5" />
       <circle r="5" cx="45" cy="130" />
@@ -45,10 +44,9 @@ export const AirCon2: React.FC = () => {
   );
 }
 
-
 export const AirPurifier: React.FC = () => {
   return (
-    <svg className="icon airpurifier" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.airpurifier}`} viewBox="0 0 200 200">
       <rect x="50" y="30" height="140" width="100" rx="10" ry="10" />
       <circle r="10" cx="100" cy="60" />
       <path d="
@@ -61,10 +59,9 @@ export const AirPurifier: React.FC = () => {
   );
 }
 
-
 export const Audio: React.FC = () => {
   return (
-    <svg className="icon audio" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.audio}`} viewBox="0 0 200 200">
       <rect x="60" y="40" height="120" width="80" rx="10" ry="10" />
       <circle r="15" cx="100" cy="70" />
       <circle r="2.5" cx="100" cy="70" />
@@ -75,10 +72,9 @@ export const Audio: React.FC = () => {
   );
 }
 
-
 export const Check: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <g transform="rotate(45,100,100)">
         <rect x="60" y="140" width="40" height="20" />
         <rect x="100" y="40" width="20" height="120" />
@@ -88,10 +84,9 @@ export const Check: React.FC = () => {
   )
 }
 
-
 export const Cross: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <g transform="rotate(45,100,100)">
         <rect x="90" y="30" width="20" height="140" />
         <rect x="30" y="90" width="140" height="20" />
@@ -103,7 +98,7 @@ export const Cross: React.FC = () => {
 
 export const Curtain: React.FC = () => {
   return (
-    <svg className="icon curtain" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.curtain}`} viewBox="0 0 200 200">
       <path d="
       M 10,10 h180 z
       M 10,10 v140 a 20 20 1 1 0 40,0 v-140
@@ -119,7 +114,7 @@ export const Curtain: React.FC = () => {
 
 export const EFF: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <path d="
       M 40,60 l60,40 l-60,40 z
       M 100,60 l60,40 l-60,40 z
@@ -133,7 +128,7 @@ export const EFF: React.FC = () => {
 
 export const ERewind: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <g transform="rotate(180,100,100)">
         <path d="
         M 40,60 l60,40 l-60,40 z
@@ -149,7 +144,7 @@ export const ERewind: React.FC = () => {
 
 export const Etc: React.FC = () => {
   return (
-    <svg className="icon etc" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.etc}`} viewBox="0 0 200 200">
       <rect x="40" y="70" height="60" width="120" rx="10" ry="10" />
       <rect x="70" y="80" height="40" width="60" rx="10" ry="10" />
       <path d="
@@ -163,7 +158,7 @@ export const Etc: React.FC = () => {
 
 export const FF: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <path d="
       M 40,60 l60,40 l-60,40 z
       M 100,60 l60,40 l-60,40 z
@@ -175,7 +170,7 @@ export const FF: React.FC = () => {
 
 export const Fan: React.FC = () => {
   return (
-    <svg className="icon fan" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fan}`} viewBox="0 0 200 200">
       <circle r="40" cx="100" cy="80" />
       <circle r="5" cx="100" cy="80" />
       <path d="
@@ -193,7 +188,7 @@ export const Fan: React.FC = () => {
 
 export const Light: React.FC = () => {
   return (
-    <svg className="icon light" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.light}`} viewBox="0 0 200 200">
       <path d="
       M 70,35 h60 v10 a5 5 1 0 1 -5,5 h-50 a5 5 1 0 1 -5,-5 v-10 z
       M 80,50 a20 20 1 0 0 40,0
@@ -207,7 +202,7 @@ export const Light: React.FC = () => {
 
 export const Minus: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <rect x="30" y="90" width="140" height="20" />
       -
     </svg>
@@ -216,7 +211,7 @@ export const Minus: React.FC = () => {
 
 export const Pause: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <rect x="60" y="40" height="120" width="20" />
       <rect x="120" y="40" height="120" width="20" />
       ⏸
@@ -226,7 +221,7 @@ export const Pause: React.FC = () => {
 
 export const Play: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
         <path d="
         M 40,40 L160,100 L40,160 z
         " />
@@ -238,7 +233,7 @@ export const Play: React.FC = () => {
 
 export const Plus: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <rect x="90" y="30" width="20" height="140" />
       <rect x="30" y="90" width="140" height="20" />
       +
@@ -252,7 +247,7 @@ interface PowerProps {
 
 export const Power: React.FC<PowerProps> = React.memo((props) => {
   return (
-    <svg className={['icon', 'power', props.power].join(' ')} viewBox="0 0 50 50">
+    <svg className={[styles.icon, styles.power, styles[props!.power as string]].join(' ')} viewBox="0 0 50 50">
       <path d="
       M 25,10 25,30
       M 20,18 A12 12 0 1 0 30,18
@@ -264,7 +259,7 @@ export const Power: React.FC<PowerProps> = React.memo((props) => {
 
 export const Record: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <circle r="60" cx="100" cy="100" />
       ⏺
     </svg>
@@ -273,7 +268,7 @@ export const Record: React.FC = () => {
 
 export const Rewind: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <g transform="rotate(180, 100, 100)">
         <path d="
         M 40,60 l60,40 l-60,40 z
@@ -287,7 +282,7 @@ export const Rewind: React.FC = () => {
 
 export const Stop: React.FC = () => {
   return (
-    <svg className="icon fill" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.fill}`} viewBox="0 0 200 200">
       <rect x="40" y="40" height="120" width="120" />
       ⏹
     </svg>
@@ -296,7 +291,7 @@ export const Stop: React.FC = () => {
 
 export const TV: React.FC = () => {
   return (
-    <svg className="icon tv" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.tv}`} viewBox="0 0 200 200">
       <rect x="20" y="55" width="160" height="90" rx="5" ry="5" />
       <path d="M 40,160 h120" />
       TV
@@ -320,7 +315,7 @@ export const Text: React.FC<TextProps> = React.memo((props) => {
     t.style.fontSize = el.clientWidth / (isNum ? 6: 2) + 'px';
   })
   return (
-    <svg className="icon text" viewBox="0 0 50 50" ref={ref}>
+    <svg className={`${styles.icon} ${styles.text}`} viewBox="0 0 50 50" ref={ref}>
       <text x="50%" y="50%" dominantBaseline="central" textAnchor="middle">{props.value}</text>
       {props.value}
     </svg >
@@ -329,7 +324,7 @@ export const Text: React.FC<TextProps> = React.memo((props) => {
 
 export const Robot: React.FC = () => {
   return (
-    <svg className="icon robot" viewBox="0 0 200 200">
+    <svg className={`${styles.icon} ${styles.robot}`} viewBox="0 0 200 200">
       <circle r="80" cx="100" cy="100" />
       <path d="M35,100 A60 60 1 0 1 165,100" />
       <circle r="50" cx="100" cy="100" />

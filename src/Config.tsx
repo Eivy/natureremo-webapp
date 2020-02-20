@@ -1,5 +1,5 @@
 import * as React from 'react'
-import './Config.scss'
+import styles from './Config.module.scss'
 
 interface Props {
 }
@@ -26,7 +26,7 @@ class Config extends React.Component<Props, State> {
   render() {
     let token = this.state.token
     return (
-      <div className="config">
+      <div className={styles.config}>
         <label>Access Token
         <input value={token} onChange={this.onTokenChange} />
         </label>

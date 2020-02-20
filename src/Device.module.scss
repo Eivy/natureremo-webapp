@@ -62,14 +62,14 @@ $aThird: calc(33vmin - (#{$margin} - #{$padding}) * 2);
     background: inherit;
     @include nallow {
       max-width: calc(#{$half} * 2);
-      .appliance {
+      &>div {
         height: $half;
         width: $half;
       }
     }
     @include broad {
       max-width: calc(#{$aThird} * 3);
-      .appliance {
+      &>div {
         height: $aThird;
         width: $aThird;
         max-width: 200px;

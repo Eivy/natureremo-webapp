@@ -1,7 +1,6 @@
 /// <reference path="schema.d.ts" />
 import React from 'react'
-import './Appliance.scss'
-import './Icons.scss'
+import styles from './Appliance.module.scss'
 
 import * as Icons from './Icons'
 
@@ -27,7 +26,7 @@ const Appliance: React.FC<Props> = React.memo((props) => {
 
   let power
   let Icon
-  let mainClassName = ["main"]
+  let mainClassName = [styles.main]
   try {
     Icon = components.hasOwnProperty(props.data.image) ? components[props.data.image!] : Icons.Etc
   }
@@ -35,18 +34,18 @@ const Appliance: React.FC<Props> = React.memo((props) => {
     Icon = Icons.Etc
   }
   if (props.data.type === 'LIGHT') {
-    power = (<button className="power"><Icons.Power power={props.data.light!.state!.power!} /></button>)
-    mainClassName.push("circle")
-    mainClassName.push(props.data.light!.state!.power!)
+    power = (<button className={styles.power}><Icons.Power power={props.data.light!.state!.power!} /></button>)
+    mainClassName.push(styles.circle)
+    mainClassName.push(styles[props.data.light!.state!.power!])
   } else if (props.data.type === 'AC') {
-    power = (<button className="power"><Icons.Power power={props.data.settings!.button!.replace(/power-/, '') === 'on' ? 'on' : 'off'} /></button>)
-    mainClassName.push("circle")
-    mainClassName.push(props.data.settings!.button!.replace(/power-/, ''))
+    power = (<button className={styles.power}><Icons.Power power={props.data.settings!.button!.replace(/power-/, '') === 'on' ? 'on' : 'off'} /></button>)
+    mainClassName.push(styles.circle)
+    mainClassName.push(styles[props.data.settings!.button!.replace(/power-/, '')])
   }
   return (
-      <div className="appliance">
+      <div className={styles.appliance}>
         <button className={mainClassName.join(" ")}><Icon /></button>
-        <span className="label">{props.data.nickname}</span>
+        <span className={styles.label}>{props.data.nickname}</span>
         {power}
       </div>
       );

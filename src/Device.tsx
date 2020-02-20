@@ -1,6 +1,6 @@
 ///<reference path="schema.d.ts" />
 import React from 'react';
-import './Device.scss';
+import styles from './Device.module.scss';
 import Appliance from './Appliance';
 
 interface Props {
@@ -10,16 +10,16 @@ interface Props {
 
 const Device: React.FC<Props> = React.memo((props) => {
     return (
-      <div className="device">
+      <div className={styles.device}>
         <header>
-          <span className="nickname">{props.device.name}</span>
-          <span className="sensor">
-            {props.device.newest_events?.te && <span>温度:<span className="value">{props.device.newest_events!.te!.val}</span>℃</span>}
-            {props.device.newest_events?.hu && <span className="humid">湿度:<span className="value">{props.device.newest_events!.hu!.val}</span>%</span>}
-            {props.device.newest_events?.il && <span className="illumi">明るさ:<span className="value">{props.device.newest_events!.il!.val}</span></span>}
+          <span className={styles.nickname}>{props.device.name}</span>
+          <span className={styles.sensor}>
+            {props.device.newest_events?.te && <span>温度:<span className={styles.value}>{props.device.newest_events!.te!.val}</span>℃</span>}
+            {props.device.newest_events?.hu && <span className={styles.humid}>湿度:<span className={styles.value}>{props.device.newest_events!.hu!.val}</span>%</span>}
+            {props.device.newest_events?.il && <span className={styles.illumi}>明るさ:<span className={styles.value}>{props.device.newest_events!.il!.val}</span></span>}
           </span>
         </header>
-        <div className="appliances">
+        <div className={styles.appliances}>
           {props.appliances.map((v) => <Appliance key={v.id} data={v} />)}
         </div>
       </div>

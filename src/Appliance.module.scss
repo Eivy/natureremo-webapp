@@ -21,7 +21,7 @@ $border-size: .2rem;
       position: relative;
       border: 1px gray solid;
       filter: drop-shadow(3px 3px 3px black);
-      .icon {
+      svg {
         position: absolute;
         display: block;
         width: 44%;
@@ -40,10 +40,10 @@ $border-size: .2rem;
         width: 50%;
         top: calc(25% - #{$border-size});
         left: calc(25% - #{$border-size});
-        animation: circle-spin infinite 3s linear;
       }
       &.circle.on::after {
         border-color: white white #61dafb #61dafb;
+        animation: circle-spin infinite 3s linear;
       }
     }
     &.power {
