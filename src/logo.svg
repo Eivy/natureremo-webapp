@@ -6,7 +6,6 @@
         <stop offset="100%" stop-color="#61DAFB" stop-opacity="60%" />
       </linearGradient>
     </defs>
-    <rect height="100%" width="100%" fill="black" />
     <g fill-opacity="0" stroke="url(#gradient)" stroke-width="20">
         <circle cx="100" cy="100" r="70"/>
     </g>
