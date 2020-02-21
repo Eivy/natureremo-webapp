@@ -61,7 +61,8 @@ $border-size: .2rem;
     }
   }
   .label {
-    display: inline-block;
+    display: block;
+    text-align: center;
     margin-top: .5em;
     font-size: 75%;
   }
