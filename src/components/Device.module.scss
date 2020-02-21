@@ -4,12 +4,12 @@ $sensorWidth: 5rem;
 $half: calc(50vmin - (#{$margin} + #{$padding}) * 2);
 $aThird: calc(33vmin - (#{$margin} - #{$padding}) * 2);
 @mixin nallow {
-  @media screen and (min-width: 0px) and (max-width: 800px) {
+  @media screen and (min-width: 0px) and (max-width: 500px) {
     @content;
   }
 }
 @mixin broad {
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 500px) {
     @content;
   }
 }
