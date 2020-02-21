@@ -1,6 +1,10 @@
 body {
-  background-color: #282c34;
-  color: white;
+  background-color: white;
+  color: #555;
+  @media (prefers-color-scheme: dark) {
+    background-color: #282c34;
+    color: #ccc;
+  }
 }
 #root {
   background: inherit;

@@ -21,7 +21,10 @@ $border-size: .2rem;
       border-radius: 20%;
       position: relative;
       border: 1px gray solid;
-      filter: drop-shadow(3px 3px 3px black);
+      filter: drop-shadow(2px 2px 2px gray);
+      @media (prefers-color-scheme: dark) {
+        filter: drop-shadow(2px 2px 2px black);
+      }
       svg {
         position: absolute;
         display: block;

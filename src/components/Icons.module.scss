@@ -1,6 +1,9 @@
 .icon {
   fill-opacity: 0;
-  stroke: black;
+  stroke: #555;
+  @media (prefers-color-scheme: dark) {
+    stroke: #ccc;
+  }
   stroke-width: 5;
   &.power.off {
     stroke: #ccc;
