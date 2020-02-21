@@ -334,3 +334,27 @@ export const Robot: React.FC = () => {
   );
 }
 
+export const Gear: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.gear].join(" ")} viewBox="0 0 200 200">
+      <g strokeWidth="30">
+        <circle r="40" cx="100" cy="100" />
+        <path d="
+          M100,60 v-30
+          M100,140 v30
+          M60,100 h-30
+          M140,100 h30
+        " />
+        <g transform="rotate(45, 100, 100)">
+          <path d="
+            M100,60 v-30
+            M100,140 v30
+            M60,100 h-30
+            M140,100 h30
+          " />
+        </g>
+      </g>
+      Gear
+    </svg>
+  );
+};
