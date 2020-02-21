@@ -1,8 +1,9 @@
 import * as React from 'react'
+import { withRouter } from 'react-router';
+import {RouteComponentProps} from 'react-router-dom';
 import styles from './Config.module.scss'
 
-interface Props {
-}
+interface Props extends RouteComponentProps{}
 
 interface State {
   token?: string,
@@ -11,30 +12,38 @@ interface State {
 class Config extends React.Component<Props, State> {
 
   constructor(props: Props) {
-    super(props)
+    super(props);
     this.state = {
       token: localStorage.getItem("access_token") as string || ''
-    }
-    this.onTokenChange = this.onTokenChange.bind(this)
+    };
+    this.onTokenChange = this.onTokenChange.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   onTokenChange(event: any) {
-    localStorage.setItem('access_token', event.target.value)
-    this.setState({ token: event.target.value })
+    this.setState({token: event.target.value});
+  }
+
+  onClick(event: any) {
+    if (this.state.token && this.state.token.length > 0) {
+      localStorage.setItem('access_token', this.state.token);
+    } else {
+      localStorage.removeItem('access_token');
+    }
+    this.props.history.push('/');
   }
 
   render() {
-    let token = this.state.token
     return (
       <div className={styles.config}>
         <label>Access Token
-        <input value={token} onChange={this.onTokenChange} />
+        <input value={this.state.token} autoFocus onChange={this.onTokenChange}/>
         </label>
-        <button>Save</button>
+        <button onClick={this.onClick}>Save</button>
       </div>
     )
   }
 
 }
 
-export default Config
+export default withRouter(Config);
