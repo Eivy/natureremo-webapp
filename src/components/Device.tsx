@@ -1,4 +1,3 @@
-///<reference path="schema.d.ts" />
 import React from 'react';
 import styles from './Device.module.scss';
 import Appliance from './Appliance';
