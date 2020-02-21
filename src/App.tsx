@@ -1,59 +1,63 @@
 import React from 'react';
 import './App.scss';
-import './Icons.scss';
-import * as Icons from './Icons'
+import Api from './Api';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import history from 'history/createBrowserHistory';
+import Top from './pages/Top';
+import Config from './pages/Config';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Icons.AirCon1 />
-        <Icons.AirCon2 />
-        <Icons.TV />
-        <Icons.Light />
-        <Icons.AV />
-        <Icons.Fan />
-        <Icons.Vacuum />
-        <Icons.Audio />
-        <Icons.Curtain />
-        <Icons.AirPurifier />
-        <Icons.Etc />
-        <Icons.Power />
-        <Icons.Power power="on" />
-        <Icons.Power power="off" />
-        <Icons.Minus />
-        <Icons.Plus />
-        <Icons.Cross />
-        <Icons.Check />
-        <Icons.Play />
-        <Icons.FF />
-        <Icons.EFF />
-        <Icons.Rewind />
-        <Icons.ERewind />
-        <Icons.Pause />
-        <Icons.Stop />
-        <Icons.Record />
-        <Icons.Text value="0" />
-        <Icons.Text value="1" />
-        <Icons.Text value="2" />
-        <Icons.Text value="3" />
-        <Icons.Text value="4" />
-        <Icons.Text value="5" />
-        <Icons.Text value="6" />
-        <Icons.Text value="7" />
-        <Icons.Text value="8" />
-        <Icons.Text value="9" />
-        <Icons.Text value="10" />
-        <Icons.Text value="11" />
-        <Icons.Text value="12" />
-        <Icons.Text value="CLOSE" />
-        <Icons.Text value="OPEN" />
-        <Icons.Text value="STOP" />
-        <Icons.Text value="ON" />
-        <Icons.Text value="OFF" />
-      </header>
-    </div>
-  );
+interface Props {
+}
+
+interface State {
+  devices: Array<RemoAPI.Device>;
+  appliances: Array<RemoAPI.Appliance>;
+
+}
+
+class App extends React.Component<Props, State> {
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      devices: [],
+      appliances: [],
+    };
+  }
+
+  componentDidMount() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      history().push('/config');
+      return;
+    }
+    Api.setToken(token);
+    Api.GetDevices().then((v) => {
+      if (v) {
+        this.setState({devices: v});
+      }
+    });
+    Api.GetAppliances().then((v) => {
+      if (v) {
+        this.setState({appliances: v});
+      }
+    });
+  }
+
+  render() {
+    return (
+    <Router>
+      <Switch>
+        <Route path="/config">
+          <Config />
+        </Route>
+        <Route path="/">
+          <Top devices={this.state.devices} appliances={this.state.appliances} />
+        </Route>
+      </Switch>
+    </Router>
+    );
+  }
 }
 
 export default App;
