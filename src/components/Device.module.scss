@@ -37,16 +37,21 @@ $aThird: calc(33vmin - (#{$margin} - #{$padding}) * 2);
     width: calc(100% - (#{$sensorWidth} + #{$padding} * 2));
   }
   .sensor {
+    position: relative;
     font-size: .5em;
     display: inline-block;
     width: $sensorWidth;
     text-align: left;
     vertical-align: top;
+    height: 1em;
+    line-height: 1em;
     span {
       display: block;
       white-space: nowrap;
     }
     .value {
+      position: absolute;
+      right: 0;
       display: inline-block;
       text-align: right;
       vertical-align: top;
