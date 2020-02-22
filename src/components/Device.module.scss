@@ -1,3 +1,4 @@
+$nicknameHeight: 2em;
 $margin: .5rem;
 $padding: .5rem;
 $sensorWidth: 5rem;
@@ -30,6 +31,7 @@ $aThird: calc(33vmin - (#{$margin} - #{$padding}) * 2);
   }
   .nickname {
     display:inline-block;
+    height: $nicknameHeight;
     text-overflow:: ellipsis;
     text-align: left;
     overflow: hidden;
@@ -40,6 +42,7 @@ $aThird: calc(33vmin - (#{$margin} - #{$padding}) * 2);
     position: relative;
     font-size: .5em;
     display: inline-block;
+    height: $nicknameHeight;
     width: $sensorWidth;
     text-align: left;
     vertical-align: top;
