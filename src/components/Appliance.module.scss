@@ -1,4 +1,4 @@
-$border-size: .2rem;
+$border-size: 1px;
 .appliance {
   display: inline-block;
   position: relative;
@@ -20,7 +20,7 @@ $border-size: .2rem;
       background: inherit;
       border-radius: 20%;
       position: relative;
-      border: 1px gray solid;
+      border: .5px gray solid;
       filter: drop-shadow(2px 2px 2px gray);
       @media (prefers-color-scheme: dark) {
         filter: drop-shadow(2px 2px 2px black);
