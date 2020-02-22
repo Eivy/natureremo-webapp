@@ -39,14 +39,14 @@ $border-size: .2rem;
         padding: 0;
         border: $border-size solid;
         border-radius: 50%;
-        border-color: gray;
+        border-color: darkgray;
         height: 50%;
         width: 50%;
         top: calc(25% - #{$border-size});
         left: calc(25% - #{$border-size});
       }
       &.circle.on::after {
-        border-color: white white #61dafb #61dafb;
+        border-color: lightgray lightgray #61dafb #61dafb;
         animation: circle-spin infinite 3s linear;
       }
     }
