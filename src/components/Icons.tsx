@@ -358,3 +358,183 @@ export const Gear: React.FC = () => {
     </svg>
   );
 };
+
+export const Timer: React.FC = () => {
+  return (
+    <svg className={`${styles.icon} ${styles.robot}`} viewBox="0 0 200 200">
+      <circle r="60" cx="100" cy="110" />
+      <path d="
+        M70,30 h60
+        M100,100 v-30
+      " />
+      <g transform="rotate(45, 100, 110)">
+        <path d="
+        M 100,50 v-20
+        " />
+      </g>
+      Timer
+    </svg>
+  );
+}
+
+const Arrow: React.FC = () => {
+  return (
+    <path
+    d="
+      M 40,140 h120
+      Q 165 140 161.6 134.5
+      L 102,60
+      Q 100 57.5 98 60
+      L 38,135
+      Q 35 140 40 140
+    " />
+  );
+};
+
+export const ArrowTop: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.arrowtop].join(" ")} viewBox="0 0 200 200">
+      <Arrow />
+      ArrowTop
+    </svg>
+  );
+};
+
+export const ArrowBottom: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.arrowbottom].join(" ")} viewBox="0 0 200 200">
+      <g transform="rotate(180, 100, 100)">
+        <Arrow />
+      </g>
+      ArrowBottom
+    </svg>
+  );
+};
+
+export const ArrowRight: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.arrowright].join(" ")} viewBox="0 0 200 200">
+      <g transform="rotate(90, 100, 100)">
+        <Arrow />
+      </g>
+      ArrowRight
+    </svg>
+  );
+};
+
+export const ArrowLeft: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.arrowleft].join(" ")} viewBox="0 0 200 200">
+      <g transform="rotate(270, 100, 100)">
+        <Arrow/>
+      </g>
+      ArrowLeft
+    </svg>
+  );
+};
+
+export const LightUp: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.lightup].join(" ")} viewBox="0 0 200 200">
+      <circle r="30" cx="100" cy="100"/>
+      <path d="
+        M 100,50
+        v-30
+        M 100,150
+        v30
+      " />
+      <g transform="rotate(45, 100, 100)">
+        <path d="
+          M 100,50
+          v-30
+          M 100,150
+          v30
+        " />
+      </g>
+      <g transform="rotate(90, 100, 100)">
+        <path d="
+          M 100,50
+          v-30
+          M 100,150
+          v30
+        " />
+      </g>
+      <g transform="rotate(135, 100, 100)">
+        <path d="
+          M 100,50
+          v-30
+          M 100,150
+          v30
+        " />
+      </g>
+      LightUp
+    </svg>
+  );
+};
+
+export const LightDown: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.lightdown].join(" ")} viewBox="0 0 200 200">
+      <circle r="30" cx="100" cy="100"/>
+      <path d="
+        M 100,50
+        v-10
+        M 100,150
+        v10
+      " />
+      <g transform="rotate(45, 100, 100)">
+        <path d="
+          M 100,50
+          v-10
+          M 100,150
+          v10
+        " />
+      </g>
+      <g transform="rotate(90, 100, 100)">
+        <path d="
+          M 100,50
+          v-10
+          M 100,150
+          v10
+        " />
+      </g>
+      <g transform="rotate(135, 100, 100)">
+        <path d="
+          M 100,50
+          v-10
+          M 100,150
+          v10
+        " />
+      </g>
+      LightDown
+    </svg>
+  );
+};
+
+export const Blast: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.blast].join(" ")} viewBox="0 0 200 200">
+      <path d="
+        M 50,80 h50 a 15 15 1 1 0 -15,-15
+        M 50,100 h90 a 15 15 1 1 0 -15,-15
+        M 50,120 h75 a 15 15 1 1 1 -15,15
+      " />
+      Blast
+    </svg>
+  );
+};
+
+export const ModeAuto: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.modeauto,styles.fill].join(" ")} viewBox="0 0 200 200">
+      <path d="
+        M45 45 v100 h-10 v-70 h-10 z
+        M45 155 h100 v10 h-70 v10 z
+        M155 155 v-100 h10 v70 h10 z
+        M155 45 h-100 v-10 h70 v-10 z
+      " />
+      ModeAuto
+    </svg>
+  );
+};
+
