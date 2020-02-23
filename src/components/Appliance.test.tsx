@@ -5,6 +5,40 @@ import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 
+test('appliance which power', () => {
+  const data: RemoAPI.Appliance = {
+    nickname: "light",
+    type: "LIGHT",
+    image: "ico_light",
+    light: {
+      state: {
+        power: "off"
+      }
+    }
+  }
+  const appliance = Enzyme.shallow(<Appliance data={data} />);
+  let circle = appliance.find(".circle");
+  expect(circle.at(0)).not.toBeNull();
+  circle = appliance.find(".circle.on");
+  expect(circle.length).toBe(0);
+});
+
+test('appliance which power on', () => {
+  const data: RemoAPI.Appliance = {
+    nickname: "light",
+    type: "LIGHT",
+    image: "ico_light",
+    light: {
+      state: {
+        power: "on"
+      }
+    }
+  }
+  const appliance = Enzyme.shallow(<Appliance data={data} />);
+  const circle = appliance.find(".circle.on").at(0);
+  expect(circle).not.toBeNull();
+});
+
 test('renders ico_light', () => {
   const appliance: RemoAPI.Appliance = {
     nickname: "light",
@@ -41,41 +75,7 @@ test('renders ico_etc', () => {
   expect(label).toBeInTheDocument();
 });
 
-test('appliance which power', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "light",
-    type: "LIGHT",
-    image: "ico_light",
-    light: {
-      state: {
-        power: "off"
-      }
-    }
-  }
-  const appliance = Enzyme.shallow(<Appliance data={data} />);
-  let circle = appliance.find(".circle");
-  expect(circle.at(0)).not.toBeNull();
-  circle = appliance.find(".circle.on");
-  expect(circle.length).toBe(0);
-});
-
-test('appliance which power on', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "light",
-    type: "LIGHT",
-    image: "ico_light",
-    light: {
-      state: {
-        power: "on"
-      }
-    }
-  }
-  const appliance = Enzyme.shallow(<Appliance data={data} />);
-  const circle = appliance.find(".circle.on").at(0);
-  expect(circle).not.toBeNull();
-});
-
-test('light', () => {
+test('render ico_light', () => {
   const data: RemoAPI.Appliance = {
     nickname: "light",
     type: "IR",
@@ -86,7 +86,7 @@ test('light', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('tv', () => {
+test('render ico_tv', () => {
   const data: RemoAPI.Appliance = {
     nickname: "tv",
     type: "IR",
@@ -97,7 +97,7 @@ test('tv', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('aircon1', () => {
+test('render ico_aircon1', () => {
   const data: RemoAPI.Appliance = {
     nickname: "aircon",
     type: "IR",
@@ -108,7 +108,7 @@ test('aircon1', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('aircon2', () => {
+test('render ico_aircon2', () => {
   const data: RemoAPI.Appliance = {
     nickname: "aircon",
     type: "IR",
@@ -119,7 +119,7 @@ test('aircon2', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('curtain', () => {
+test('render ico_curtain', () => {
   const data: RemoAPI.Appliance = {
     nickname: "curtain",
     type: "IR",
@@ -130,7 +130,7 @@ test('curtain', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('air_purifier', () => {
+test('render ico_air_purifier', () => {
   const data: RemoAPI.Appliance = {
     nickname: "air_purifier",
     type: "IR",
@@ -141,7 +141,7 @@ test('air_purifier', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('robot', () => {
+test('render ico_robot', () => {
   const data: RemoAPI.Appliance = {
     nickname: "robot",
     type: "IR",
@@ -152,7 +152,7 @@ test('robot', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('fan', () => {
+test('render ico_fan', () => {
   const data: RemoAPI.Appliance = {
     nickname: "fan",
     type: "IR",
@@ -163,7 +163,7 @@ test('fan', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('audio', () => {
+test('render ico_audio', () => {
   const data: RemoAPI.Appliance = {
     nickname: "audio",
     type: "IR",
@@ -174,7 +174,7 @@ test('audio', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('av', () => {
+test('render ico_av', () => {
   const data: RemoAPI.Appliance = {
     nickname: "av",
     type: "IR",
@@ -185,7 +185,7 @@ test('av', () => {
   expect(circle).toBeInTheDocument();
 });
 
-test('etc', () => {
+test('render ico_etc', () => {
   const data: RemoAPI.Appliance = {
     nickname: "etc",
     type: "IR",
