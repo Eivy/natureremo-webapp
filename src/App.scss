@@ -36,7 +36,7 @@ $headerHight: 2em;
     padding-top: $headerHight;
     background: inherit;
     display: block;
-    min-height: 100vh;
+    min-height: calc(100vh - #{$headerHight});
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
