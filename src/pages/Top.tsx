@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import {RouteComponentProps} from 'react-router-dom';
 import Api from '../Api';
 import Device from '../components/Device';
@@ -50,4 +49,4 @@ class Top extends React.Component<Props, State> {
 
 }
 
-export default withRouter(Top);
+export default Top;

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { withRouter } from 'react-router';
 import {RouteComponentProps} from 'react-router-dom';
 import styles from './Config.module.scss'
 
@@ -30,7 +29,6 @@ class Config extends React.Component<Props, State> {
     } else {
       localStorage.removeItem('access_token');
     }
-    this.props.history.push('/');
   }
 
   render() {
@@ -46,4 +44,4 @@ class Config extends React.Component<Props, State> {
 
 }
 
-export default withRouter(Config);
+export default Config;

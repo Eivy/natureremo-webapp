@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router';
 import './App.scss';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Top from './pages/Top';
@@ -15,8 +16,8 @@ const App: React.FC = () => {
       </header>
       <div id="main">
         <Switch>
-          <Route path="/config" component={Config} />
-          <Route path="/" component={Top} />
+          <Route path="/config" component={withRouter(Config)} />
+          <Route path="/" component={withRouter(Top)} />
         </Switch>
       </div>
     </Router>
