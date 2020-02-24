@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { render } from '@testing-library/react'
 import Device from './Device';
@@ -39,7 +38,7 @@ test('device humidity', () => {
   expect(el.getByText(/21/)).toBeInTheDocument();
 });
 
-test('device appliances', () => {
+test('child component', () => {
   const appliances: Array<RemoAPI.Appliance> = [
   {
     id: 'test1',
@@ -50,7 +49,6 @@ test('device appliances', () => {
     nickname: 'Appliance2',
   },
   ];
-  const el = render(<Device device={device} appliances={appliances} />)
+  const el = render(<Device device={device} appliances={appliances}><span>Appliance1</span></Device>)
   expect(el.getByText(/Appliance1/)).toBeInTheDocument();
-  expect(el.getByText(/Appliance2/)).toBeInTheDocument();
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import {RouteComponentProps} from 'react-router-dom';
 import Api from '../Api';
 import Device from '../components/Device';
-
+import Appliance from '../components/Appliance';
 
 interface Props extends RouteComponentProps {}
 
@@ -25,8 +25,14 @@ class Top extends React.Component<Props, State> {
     if (!this.state.devices) {
         return;
     }
-    return this.state.devices.map((v: RemoAPI.Device) => <Device key={v.id} device={v} appliances={this.state.appliances.filter((a) => a.device!.id === v.id)} />);
-  }
+    return this.state.devices.map((v: RemoAPI.Device) => {
+      return (
+      <Device key={v.id} device={v}>
+      {this.state.appliances.filter((a) => a.device!.id === v.id).map((v) => <Appliance key={v.id} data={v} />)}
+      </Device>
+        )}
+      )
+    }
 
   componentDidMount() {
     const token = localStorage.getItem('access_token');

@@ -1,10 +1,8 @@
 import React from 'react';
 import styles from './Device.module.scss';
-import Appliance from './Appliance';
 
 interface Props {
   device: RemoAPI.Device,
-  appliances: Array<RemoAPI.Appliance>,
 }
 
 const Device: React.FC<Props> = React.memo((props) => {
@@ -19,7 +17,7 @@ const Device: React.FC<Props> = React.memo((props) => {
           </span>
         </header>
         <div className={styles.appliances}>
-          {props.appliances.map((v) => <Appliance key={v.id} data={v} />)}
+          {props.children}
         </div>
       </div>
     );
