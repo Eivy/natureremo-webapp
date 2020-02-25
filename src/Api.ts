@@ -44,6 +44,10 @@ class Api {
     return Api.post(url.resolve(Api.basePath, path.join('appliances', appliance_id, 'tv')), { button: button });
   }
 
+  static async SendLightButton(appliance_id: string, button: string): Promise<void> {
+    return Api.post(url.resolve(Api.basePath, path.join('appliances', appliance_id, 'light')), { button: button });
+  }
+
   private static updateRemaining(remaining: number) {
     Api.remaining = remaining;
   }

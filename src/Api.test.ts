@@ -192,4 +192,11 @@ describe('Api test', () => {
     expect(r).toBe(null);
   })
 
+  test('send light button', async () => {
+    const appliance_id = 'test';
+    const button = 'on';
+    const r = await Api.SendLightButton(appliance_id, button).then(() => null).catch((reason) => reason);
+    expect(r).toBe(null);
+  })
+
 })
