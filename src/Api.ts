@@ -37,14 +37,7 @@ class Api {
   }
 
   static async SendSignal(signal_id: string): Promise<void> {
-    return request.post(url.resolve(Api.basePath, path.join('signals', signal_id, 'send')),
-      { headers: Api.requestHeaders },
-      (err, res, body) => {
-        if (res.statusCode !== 200) {
-          throw new Error('failed to send signal');
-        }
-        return null;
-      });
+    return Api.post(url.resolve(Api.basePath, path.join('signals', signal_id, 'send')), null);
   }
 
   static async SendTVButton(appliance_id: string, button: string): Promise<void> {
