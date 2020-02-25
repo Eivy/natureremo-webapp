@@ -83,7 +83,7 @@ class Api {
     )
       .catch((reason) => {
         console.log(reason)
-        return null
+        throw reason;
       })
     if (res) {
       return JSON.parse(res);
