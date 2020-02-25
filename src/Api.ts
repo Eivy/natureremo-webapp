@@ -47,6 +47,10 @@ class Api {
       });
   }
 
+  static async SendTVButton(appliance_id: string, button: string): Promise<void> {
+    return Api.post(url.resolve(Api.basePath, path.join('appliances', appliance_id, 'tv')), { button: button });
+  }
+
   private static updateRemaining(remaining: number) {
     Api.remaining = remaining;
   }
@@ -69,23 +73,26 @@ class Api {
   }
 
   private static async post(path: string, form: any): Promise<any> {
-    return JSON.parse(
-      await request.post(
-        url.resolve(Api.basePath, path),
-        {
-          headers: Api.requestHeaders,
-          form: form,
-        },
-        (err, res, body) => {
-          Api.updateRemaining(parseInt(res?.headers['x-rate-limit-remaining'] as string))
-          return body;
-        }
-      )
-        .catch((reason) => {
-          console.log(reason)
-          return null
-        })
-    );
+    const res = await request.post(
+      url.resolve(Api.basePath, path),
+      {
+        headers: Api.requestHeaders,
+        form: form,
+      },
+      (err, res, body) => {
+        Api.updateRemaining(parseInt(res?.headers['x-rate-limit-remaining'] as string))
+        return body;
+      }
+    )
+      .catch((reason) => {
+        console.log(reason)
+        return null
+      })
+    if (res) {
+      return JSON.parse(res);
+    } else {
+      return null;
+    }
   }
 
 }

@@ -185,4 +185,11 @@ describe('Api test', () => {
     expect(r).toBe(null);
   })
 
+  test('send tv button', async () => {
+    const appliance_id = 'test';
+    const button = 'on';
+    const r = await Api.SendTVButton(appliance_id, button).then(() => null).catch((reason) => reason);
+    expect(r).toBe(null);
+  })
+
 })
