@@ -179,4 +179,10 @@ describe('Api test', () => {
     expect(res).toStrictEqual(sampleAppliances)
   })
 
+  test('send signal', async () => {
+    const signal_id = 'test';
+    const r = await Api.SendSignal(signal_id).then(() => null).catch((reason) => reason);
+    expect(r).toBe(null);
+  })
+
 })

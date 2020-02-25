@@ -1,6 +1,7 @@
 /// <reference path="schema.d.ts" />
-import request from 'request-promise-native'
-import * as url from 'url'
+import request from 'request-promise-native';
+import * as path from 'path';
+import * as url from 'url';
 
 class Api {
   private static basePath: string = "https://api.nature.global/1/";
@@ -8,7 +9,7 @@ class Api {
   private static remaining: number = 0;
 
   static setApi(server: string) {
-    Api.basePath = server
+    Api.basePath = server;
   }
 
   static setToken(token: string) {
@@ -33,6 +34,17 @@ class Api {
 
   static async GetAppliances(): Promise<Array<RemoAPI.Appliance> | null> {
     return Api.get('appliances');
+  }
+
+  static async SendSignal(signal_id: string): Promise<void> {
+    return request.post(url.resolve(Api.basePath, path.join('signals', signal_id, 'send')),
+      { headers: Api.requestHeaders },
+      (err, res, body) => {
+        if (res.statusCode !== 200) {
+          throw new Error('failed to send signal');
+        }
+        return null;
+      });
   }
 
   private static updateRemaining(remaining: number) {
