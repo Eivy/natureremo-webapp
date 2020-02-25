@@ -37,15 +37,15 @@ class Api {
   }
 
   static async SendSignal(signal_id: string): Promise<void> {
-    return Api.post(url.resolve(Api.basePath, path.join('signals', signal_id, 'send')), null);
+    return Api.post(path.join('signals', signal_id, 'send'), null);
   }
 
-  static async SendTVButton(appliance_id: string, button: string): Promise<void> {
-    return Api.post(url.resolve(Api.basePath, path.join('appliances', appliance_id, 'tv')), { button: button });
+  static async SendTVButton(appliance_id: string, button: string): Promise<RemoAPI.TVState> {
+    return Api.post(path.join('appliances', appliance_id, 'tv'), { button: button });
   }
 
-  static async SendLightButton(appliance_id: string, button: string): Promise<void> {
-    return Api.post(url.resolve(Api.basePath, path.join('appliances', appliance_id, 'light')), { button: button });
+  static async SendLightButton(appliance_id: string, button: string): Promise<RemoAPI.LIGHTState> {
+    return Api.post(path.join('appliances', appliance_id, 'light'), { button: button });
   }
 
   static async SendAirconSettings(appliance_id: string, options: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }): Promise<void> {

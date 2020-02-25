@@ -269,6 +269,8 @@ paths:
       responses:
         200:
           description: Updated tv state
+          schema:
+            $ref: '#/definitions/TVState'
   /1/appliances/{appliance}/light:
     post:
       description: Send light infrared signal.
@@ -285,6 +287,9 @@ paths:
       responses:
         200:
           description: Updated light state
+          schema:
+            type: object
+            $ref: '#/definitions/LIGHTState'
   /1/appliances/{appliance}/signals:
     get:
       description: Fetch signals registered under this appliance.

@@ -181,56 +181,56 @@ describe('Api test', () => {
 
   test('send signal', async () => {
     const signal_id = 'test';
-    const r = await Api.SendSignal(signal_id).then(() => null).catch((reason) => reason);
+    const r = await Api.SendSignal(signal_id);
     expect(r).toBe(null);
   })
 
   test('send tv button', async () => {
     const appliance_id = 'test';
     const button = 'on';
-    const r = await Api.SendTVButton(appliance_id, button).then(() => null).catch((reason) => reason);
-    expect(r).toBe(null);
+    const r = await Api.SendTVButton(appliance_id, button);
+    expect(r).not.toBe(null);
   })
 
   test('send light button', async () => {
-    const appliance_id = 'test';
+    const appliance_id = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
     const button = 'on';
-    const r = await Api.SendLightButton(appliance_id, button).then(() => null).catch((reason) => reason);
-    expect(r).toBe(null);
+    const r = await Api.SendLightButton(appliance_id, button);
+    expect(r).not.toBe(null);
   })
 
   test('send aircon settings (temp)', async () => {
     const appliance_id = 'test';
     const options = { temperature: "20" };
-    const r = await Api.SendAirconSettings(appliance_id, options).then(() => null).catch((reason) => reason);
+    const r = await Api.SendAirconSettings(appliance_id, options);
     expect(r).toBe(null);
   })
 
   test('send aircon settings (mode)', async () => {
     const appliance_id = 'test';
     const options = { operation_mode: "warm" };
-    const r = await Api.SendAirconSettings(appliance_id, options).then(() => null).catch((reason) => reason);
+    const r = await Api.SendAirconSettings(appliance_id, options);
     expect(r).toBe(null);
   })
 
   test('send aircon settings (vol)', async () => {
     const appliance_id = 'test';
     const options = { air_volume: "20" };
-    const r = await Api.SendAirconSettings(appliance_id, options).then(() => null).catch((reason) => reason);
+    const r = await Api.SendAirconSettings(appliance_id, options);
     expect(r).toBe(null);
   })
 
   test('send aircon settings (dir)', async () => {
     const appliance_id = 'test';
     const options = { air_volume: "swing" };
-    const r = await Api.SendAirconSettings(appliance_id, options).then(() => null).catch((reason) => reason);
+    const r = await Api.SendAirconSettings(appliance_id, options);
     expect(r).toBe(null);
   })
 
   test('send aircon settings (button)', async () => {
     const appliance_id = 'test';
     const options = { button: "power_off" };
-    const r = await Api.SendAirconSettings(appliance_id, options).then(() => null).catch((reason) => reason);
+    const r = await Api.SendAirconSettings(appliance_id, options);
     expect(r).toBe(null);
   })
 
@@ -242,7 +242,7 @@ describe('Api test', () => {
       air_volume: "auto",
       air_direction: "swing",
     };
-    const r = await Api.SendAirconSettings(appliance_id, options).then(() => null).catch((reason) => reason);
+    const r = await Api.SendAirconSettings(appliance_id, options);
     expect(r).toBe(null);
   })
 
