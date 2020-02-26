@@ -19,28 +19,29 @@ class Top extends React.Component<Props, State> {
       devices: [],
       appliances: [],
     };
-  }
-
-  render() {
-    if (!this.state.devices) {
-        return;
-    }
-    return this.state.devices.map((v: RemoAPI.Device) => {
-      return (
-      <Device key={v.id} device={v}>
-      {this.state.appliances.filter((a) => a.device!.id === v.id).map((v) => <Appliance key={v.id} data={v} />)}
-      </Device>
-        )}
-      )
-    }
-
-  componentDidMount() {
     const token = localStorage.getItem('access_token');
     if (!token) {
       this.props.history.push('/config');
       return;
     }
     Api.setToken(token);
+  }
+
+  render() {
+    const devices = this.state.devices.map((v: RemoAPI.Device) => (
+      <Device key={v.id} device={v}>
+      {this.state.appliances.filter((a) => a.device!.id === v.id).map((v) => <Appliance key={v.id} data={v} />)}
+      </Device>
+      )
+    );
+    return (
+      <React.Fragment>
+        { devices }
+      </React.Fragment>
+    );
+  }
+
+  componentDidMount() {
     Api.GetDevices().then((v) => {
       if (v) {
         this.setState({devices: v});
