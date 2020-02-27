@@ -53,15 +53,20 @@ $aThird: calc(33vmin - (#{$margin} - #{$padding}) * 2);
       white-space: nowrap;
     }
     .value {
-      position: absolute;
-      right: 0;
+      float: right;
       display: inline-block;
       text-align: right;
       vertical-align: top;
-      text-overflow: ellipsis;
+      text-overflow: "";
       overflow:hidden;
       padding-right: 5px;
       max-width: 3em;
+    }
+    .measure {
+      float: right;
+      display: inline-block;
+      vertical-align: top;
+      width: 1em;
     }
   }
   .appliances {
