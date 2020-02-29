@@ -9,46 +9,32 @@ const device: RemoAPI.Device = {
 };
 
 test('device name', () => {
-  const appliances: Array<RemoAPI.Appliance> = [];
-  const el = render(<Device device={device} appliances={appliances} />)
+  const el = render(<Device device={device} />)
   expect(el.getByText(/remo/)).toBeInTheDocument();
 });
 
 test('device tempture', () => {
-  const appliances: Array<RemoAPI.Appliance> = [];
   const hu = {val: 19};
   device.newest_events!.hu = hu;
-  const el = render(<Device device={device} appliances={appliances} />)
+  const el = render(<Device device={device} />)
   expect(el.getByText(/19/)).toBeInTheDocument();
 });
 
 test('device illuminance', () => {
-  const appliances: Array<RemoAPI.Appliance> = [];
   const il = {val: 20};
   device.newest_events!.il = il;
-  const el = render(<Device device={device} appliances={appliances} />)
+  const el = render(<Device device={device} />)
   expect(el.getByText(/20/)).toBeInTheDocument();
 });
 
 test('device humidity', () => {
-  const appliances: Array<RemoAPI.Appliance> = [];
   const hu = {val: 21};
   device.newest_events!.hu = hu;
-  const el = render(<Device device={device} appliances={appliances} />)
+  const el = render(<Device device={device} />)
   expect(el.getByText(/21/)).toBeInTheDocument();
 });
 
 test('child component', () => {
-  const appliances: Array<RemoAPI.Appliance> = [
-  {
-    id: 'test1',
-    nickname: 'Appliance1',
-  },
-  {
-    id: 'test2',
-    nickname: 'Appliance2',
-  },
-  ];
-  const el = render(<Device device={device} appliances={appliances}><span>Appliance1</span></Device>)
+  const el = render(<Device device={device}><span>Appliance1</span></Device>)
   expect(el.getByText(/Appliance1/)).toBeInTheDocument();
 });
