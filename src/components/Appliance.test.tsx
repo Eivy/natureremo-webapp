@@ -23,7 +23,7 @@ test('appliance which power', () => {
   expect(circle.length).toBe(0);
 });
 
-test('appliance which power on', () => {
+test('appliance which light power is on', () => {
   const data: RemoAPI.Appliance = {
     nickname: "light",
     type: "LIGHT",
@@ -35,8 +35,36 @@ test('appliance which power on', () => {
     }
   }
   const appliance = Enzyme.shallow(<Appliance data={data} />);
-  const circle = appliance.find(".circle.on").at(0);
-  expect(circle).not.toBeNull();
+  const circle = appliance.find(".circle").get(0);
+  expect(circle.props['className']).toContain('on');
+});
+
+test('appliance which aircon power is on', () => {
+  const data: RemoAPI.Appliance = {
+    nickname: "aircon",
+    type: "AC",
+    image: "ico_ac_1",
+    settings: {
+      button: "",
+    }
+  }
+  const appliance = Enzyme.shallow(<Appliance data={data} />);
+  const circle = appliance.find(".circle").get(0);
+  expect(circle.props['className']).toContain('on');
+});
+
+test('appliance which aircon power is off', () => {
+  const data: RemoAPI.Appliance = {
+    nickname: "aircon",
+    type: "AC",
+    image: "ico_ac_1",
+    settings: {
+      button: "power-off",
+    }
+  }
+  const appliance = Enzyme.shallow(<Appliance data={data} />);
+  const circle = appliance.find(".circle").get(0);
+  expect(circle.props['className']).toContain('off');
 });
 
 test('renders ico_light', () => {

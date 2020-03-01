@@ -19,9 +19,17 @@ const components: any = {
 
 interface Props {
   data: RemoAPI.Appliance,
+  onClick?: (event: any) => void,
+  onPowerClick?: (event: any) => void,
 }
 
 const Appliance: React.FC<Props> = React.memo((props) => {
+   const eventWrapper = (event: any) => {
+    event.stopPropagation();
+    if (props.onPowerClick) {
+      props.onPowerClick(event);
+    }
+  };
 
   let power
   let Icon
@@ -33,16 +41,16 @@ const Appliance: React.FC<Props> = React.memo((props) => {
     Icon = Icons.Etc
   }
   if (props.data.type === 'LIGHT') {
-    power = (<button className={styles.power}><Icons.Power power={props.data.light!.state!.power!} /></button>)
+    power = (<button className={styles.power} onClick={eventWrapper} ><Icons.Power power={props.data.light!.state!.power!} /></button>)
     mainClassName.push(styles.circle)
     mainClassName.push(styles[props.data.light!.state!.power!])
   } else if (props.data.type === 'AC') {
-    power = (<button className={styles.power}><Icons.Power power={props.data.settings!.button!.replace(/power-/, '') === 'on' ? 'on' : 'off'} /></button>)
+    power = (<button className={styles.power} onClick={eventWrapper} ><Icons.Power power={props.data.settings!.button! === '' ? 'on' : 'off'} /></button>)
     mainClassName.push(styles.circle)
-    mainClassName.push(styles[props.data.settings!.button!.replace(/power-/, '')])
+    mainClassName.push(styles[props.data.settings!.button! === '' ? 'on' : 'off'])
   }
   return (
-      <div className={styles.appliance}>
+      <div className={styles.appliance} onClick={props.onClick} >
         <button className={mainClassName.join(" ")}><Icon /></button>
         <span className={styles.label}>{props.data.nickname}</span>
         {power}
