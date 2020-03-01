@@ -1,24 +1,37 @@
 import React from 'react';
 import {RouteComponentProps} from 'react-router-dom';
+import { Action } from 'typescript-fsa';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { AppState } from '../stores';
+import { State } from '../states';
+import { actions } from '../actions';
 import Api from '../Api';
 import Device from '../components/Device';
 import Appliance from '../components/Appliance';
 
-interface Props extends RouteComponentProps {}
-
-interface State {
-  devices: Array<RemoAPI.Device>;
-  appliances: Array<RemoAPI.Appliance>;
+interface Actions {
+  updateDevices: (v: RemoAPI.Device[]) => Action<RemoAPI.Device[]>;
+  updateAppliances: (v: RemoAPI.Appliance[]) => Action<RemoAPI.Appliance[]>;
 }
 
-class Top extends React.Component<Props, State> {
+function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
+  return {
+    updateDevices: (v: RemoAPI.Device[]) => dispatch(actions.updateDevices(v)),
+    updateAppliances: (v: RemoAPI.Appliance[]) => dispatch(actions.updateAppliances(v)),
+  }
+}
+
+function mapStateToProps(appState: AppState) {
+  return Object.assign({}, appState.remo);
+}
+
+type Props = State & Actions & RouteComponentProps;
+
+class Top extends React.Component<Props> {
 
   constructor(props: Props) {
     super(props);
-    this.state = {
-      devices: [],
-      appliances: [],
-    };
     const token = localStorage.getItem('access_token');
     if (!token) {
       this.props.history.push('/config');
@@ -28,9 +41,9 @@ class Top extends React.Component<Props, State> {
   }
 
   render() {
-    const devices = this.state.devices.map((v: RemoAPI.Device) => (
+    const devices = this.props.devices.map((v: RemoAPI.Device) => (
       <Device key={v.id} device={v}>
-      {this.state.appliances.filter((a) => a.device!.id === v.id).map((v) => <Appliance key={v.id} data={v} />)}
+      {this.props.appliances.filter((a) => a.device!.id === v.id).map((v) => <Appliance key={v.id} data={v} />)}
       </Device>
       )
     );
@@ -44,16 +57,16 @@ class Top extends React.Component<Props, State> {
   componentDidMount() {
     Api.GetDevices().then((v) => {
       if (v) {
-        this.setState({devices: v});
+        this.props.updateDevices(v);
       }
     });
     Api.GetAppliances().then((v) => {
       if (v) {
-        this.setState({appliances: v});
+        this.props.updateAppliances(v);
       }
     });
   }
 
 }
 
-export default Top;
+export default connect(mapStateToProps, mapDispatchToProps)(Top);
