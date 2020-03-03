@@ -43,7 +43,26 @@ class Top extends React.Component<Props> {
   render() {
     const devices = this.props.devices.map((v: RemoAPI.Device) => (
       <Device key={v.id} device={v}>
-      {this.props.appliances.filter((a) => a.device!.id === v.id).map((v) => <Appliance key={v.id} data={v} />)}
+      {
+        this.props.appliances.filter((a) => a.device!.id === v.id).map((v) => (
+          <Appliance
+            key={v.id}
+            data={v}
+            onClick={(event) => this.props.history.push('/appliances/' + v.id)}
+            onPowerClick={async (event) => {
+              if (v.type === 'LIGHT') {
+                await Api.SendLightButton(v.id!, v.light!.state!.power === 'on' ? 'off' : 'on');
+              } else if (v.type === 'AC') {
+                await Api.SendAirconSettings(v.id!, {button: v.settings!.button === 'power-off' ? '' : 'power-off'});
+              }
+              const appliances = await Api.GetAppliances();
+              if (appliances) {
+                this.props.updateAppliances(appliances);
+              }
+            }}
+          />
+        ))
+      }
       </Device>
       )
     );
