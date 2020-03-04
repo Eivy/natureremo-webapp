@@ -37,7 +37,6 @@ class Top extends React.Component<Props> {
       this.props.history.push('/config');
       return;
     }
-    Api.setToken(token);
   }
 
   render() {
@@ -71,19 +70,6 @@ class Top extends React.Component<Props> {
         { devices }
       </React.Fragment>
     );
-  }
-
-  componentDidMount() {
-    Api.GetDevices().then((v) => {
-      if (v) {
-        this.props.updateDevices(v);
-      }
-    });
-    Api.GetAppliances().then((v) => {
-      if (v) {
-        this.props.updateAppliances(v);
-      }
-    });
   }
 
 }
