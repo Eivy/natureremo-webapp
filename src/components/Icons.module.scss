@@ -2,8 +2,10 @@ svg {
   &.icon {
     fill-opacity: 0;
     stroke: #555;
+    fill: #555;
     @media (prefers-color-scheme: dark) {
       stroke: #ccc;
+      fill: #ccc;
     }
   }
   stroke-width: 5;
