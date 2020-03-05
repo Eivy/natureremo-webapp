@@ -38,4 +38,12 @@ export const components: { [key: string]: JSX.Element } = {
   "ico_record": <Icons.Record />,
   "ico_stop": <Icons.Stop />,
   "ico_pause": <Icons.Pause />,
+  "ico_display": <Icons.TV />,
+  "ico_home": <Icons.Home />,
+  "ico_option": <Icons.Option />,
+  "ico_subtitle": <Icons.Subtitle />,
+  "ico_color_blue": <Icons.ColorBlue />,
+  "ico_color_green": <Icons.ColorGreen />,
+  "ico_color_red": <Icons.ColorRed />,
+  "ico_color_yellow": <Icons.ColorYellow />,
 };

@@ -32,4 +32,20 @@ svg {
     fill-opacity: 1;
     fill: gray;
   }
+  &.blue {
+    stroke: #5533ff;
+    fill: #5533ff;
+  }
+  &.red {
+    stroke: #cc2233;
+    fill: #cc2233;
+  }
+  &.green {
+    stroke: #22aa22;
+    fill: #22aa22;
+  }
+  &.yellow {
+    stroke: #bbbb00;
+    fill: #bbbb00;
+  }
 }

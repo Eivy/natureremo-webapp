@@ -525,7 +525,7 @@ export const Blast: React.FC = () => {
 
 export const ModeAuto: React.FC = () => {
   return (
-    <svg className={[styles.icon, styles.modeauto,styles.fill].join(" ")} viewBox="0 0 200 200">
+    <svg className={[styles.icon, styles.modeauto, styles.fill].join(" ")} viewBox="0 0 200 200">
       <path d="
         M45 45 v100 h-10 v-70 h-10 z
         M45 155 h100 v10 h-70 v10 z
@@ -533,6 +533,85 @@ export const ModeAuto: React.FC = () => {
         M155 45 h-100 v-10 h70 v-10 z
       " />
       ModeAuto
+    </svg>
+  );
+};
+
+export const Option: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.option, styles.fill].join(" ")} viewBox="0 0 200 200">
+      <circle r="10" cx="70" cy="100" />
+      <circle r="10" cx="100" cy="100" />
+      <circle r="10" cx="130" cy="100" />
+      Options
+    </svg>
+  );
+};
+
+export const Home: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.home].join(" ")} viewBox="0 0 200 200">
+      <path d="
+        M50 60 v100 h100 v-100 L100,40 z
+      " />
+      <path d="
+        M90,160 v-40 h20 v40 z
+      " fillOpacity="1"/>
+      Home
+    </svg>
+  );
+};
+
+export const Subtitle: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.home].join(" ")} viewBox="0 0 200 200">
+      <rect x="30" y="50" width="140" height="100" rx="5" ry="5" />
+      <circle r="7" cx="70" cy="120" fillOpacity="1" />
+      <circle r="7" cx="100" cy="120" fillOpacity="1" />
+      <circle r="7" cx="130" cy="120" fillOpacity="1" />
+      Subtitle
+    </svg>
+  );
+};
+
+const Color: React.FC = () => {
+  return (
+    <rect x="50" y="50" width="100" height="100" rx="10" ry="10" />
+  );
+};
+
+export const ColorBlue: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.blue, styles.fill].join(" ")} viewBox="0 0 200 200">
+      <Color />
+      ColorBlue
+    </svg>
+  );
+};
+
+export const ColorYellow: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.yellow, styles.fill].join(" ")} viewBox="0 0 200 200">
+      <Color />
+      ColorYellow
+    </svg>
+  );
+};
+
+export const ColorRed: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.red, styles.fill].join(" ")} viewBox="0 0 200 200">
+      <Color />
+      ColorRed
+    </svg>
+  );
+};
+
+export const ColorGreen: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.green, styles.fill].join(" ")} viewBox="0 0 200 200">
+      <Color />
+      ColorGreen
     </svg>
   );
 };
