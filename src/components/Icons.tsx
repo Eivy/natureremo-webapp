@@ -309,10 +309,9 @@ export const Text: React.FC<TextProps> = React.memo((props) => {
     if (!ref.current) {
       return;
     }
-    const isNum = isNaN(parseInt(props.value));
     const el = ref.current!;
     const t = el.querySelector("text")!;
-    t.style.fontSize = el.clientWidth / (isNum ? 6: 2) + 'px';
+    t.style.fontSize = el.clientWidth / 6 + 'px';
   })
   return (
     <svg className={`${styles.icon} ${styles.text}`} viewBox="0 0 50 50" ref={ref}>
