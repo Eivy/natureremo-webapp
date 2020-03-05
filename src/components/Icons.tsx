@@ -393,7 +393,7 @@ const Arrow: React.FC = () => {
 
 export const ArrowTop: React.FC = () => {
   return (
-    <svg className={[styles.icon, styles.arrowtop].join(" ")} viewBox="0 0 200 200">
+    <svg className={[styles.icon, styles.arrowtop, styles.fill].join(" ")} viewBox="0 0 200 200">
       <Arrow />
       ArrowTop
     </svg>
@@ -402,7 +402,7 @@ export const ArrowTop: React.FC = () => {
 
 export const ArrowBottom: React.FC = () => {
   return (
-    <svg className={[styles.icon, styles.arrowbottom].join(" ")} viewBox="0 0 200 200">
+    <svg className={[styles.icon, styles.arrowbottom, styles.fill].join(" ")} viewBox="0 0 200 200">
       <g transform="rotate(180, 100, 100)">
         <Arrow />
       </g>
@@ -413,7 +413,7 @@ export const ArrowBottom: React.FC = () => {
 
 export const ArrowRight: React.FC = () => {
   return (
-    <svg className={[styles.icon, styles.arrowright].join(" ")} viewBox="0 0 200 200">
+    <svg className={[styles.icon, styles.arrowright, styles.fill].join(" ")} viewBox="0 0 200 200">
       <g transform="rotate(90, 100, 100)">
         <Arrow />
       </g>
@@ -424,7 +424,7 @@ export const ArrowRight: React.FC = () => {
 
 export const ArrowLeft: React.FC = () => {
   return (
-    <svg className={[styles.icon, styles.arrowleft].join(" ")} viewBox="0 0 200 200">
+    <svg className={[styles.icon, styles.arrowleft, styles.fill].join(" ")} viewBox="0 0 200 200">
       <g transform="rotate(270, 100, 100)">
         <Arrow/>
       </g>
