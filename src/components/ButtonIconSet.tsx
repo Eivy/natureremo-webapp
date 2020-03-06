@@ -5,7 +5,7 @@ export const components: { [key: string]: JSX.Element } = {
   "ico_lightdown": <Icons.LightDown/>,
   "ico_lightup": <Icons.LightUp/>,
   "ico_minus": <Icons.Minus/>,
-  "ico_mode_auto": <Icons.Text value="AUTO"  />,
+  "ico_mode_auto": <Icons.ModeAuto/>,
   "ico_off": <Icons.Text value="OFF"  />,
   "ico_on": <Icons.Text value="ON"  />,
   "ico_plus": <Icons.Plus />,
@@ -26,6 +26,8 @@ export const components: { [key: string]: JSX.Element } = {
   "ico_tv": <Icons.Text value="TV" />,
   "ico_bs": <Icons.Text value="BS" />,
   "ico_cs": <Icons.Text value="CS" />,
+  "ico_am": <Icons.Text value="AM" />,
+  "ico_fm": <Icons.Text value="FM" />,
   "ico_arrow_top": <Icons.ArrowTop />,
   "ico_arrow_bottom": <Icons.ArrowBottom />,
   "ico_arrow_left": <Icons.ArrowLeft />,
@@ -52,4 +54,5 @@ export const components: { [key: string]: JSX.Element } = {
   "ico_select_audio": <Icons.SelectAudio />,
   "ico_return": <Icons.Return />,
   "ico_d": <Icons.Text value="d" />,
+  "ico_blast": <Icons.Blast />,
 };
