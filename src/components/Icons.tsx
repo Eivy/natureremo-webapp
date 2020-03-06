@@ -249,8 +249,8 @@ export const Power: React.FC<PowerProps> = React.memo((props) => {
   return (
     <svg className={[styles.icon, styles.power, styles[props!.power as string]].join(' ')} viewBox="0 0 50 50">
       <path d="
-      M 25,10 25,30
-      M 20,18 A12 12 0 1 0 30,18
+      M 25,8 25,28
+      M 20,16 A12 12 0 1 0 30,16
       " />
       Power
     </svg >
