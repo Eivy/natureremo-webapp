@@ -55,4 +55,7 @@ export const components: { [key: string]: JSX.Element } = {
   "ico_return": <Icons.Return />,
   "ico_d": <Icons.Text value="d" />,
   "ico_blast": <Icons.Blast />,
+  "ico_light_all": <Icons.LightAll />,
+  "ico_light_night": <Icons.LightNight />,
+  "ico_light_favorite": <Icons.LightFavorite />,
 };

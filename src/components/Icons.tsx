@@ -708,3 +708,48 @@ export const Return: React.FC = () => {
   );
 };
 
+export const LightAll: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.lightall].join(" ")} viewBox="0 0 200 200">
+      <path d="
+        M90,65 h20
+        M90,75 h 20 v10 a 25 25 0 1 1 -20 0 z
+      " />
+      <circle r="2" cx="100" cy="147" fillOpacity="1" />
+      <circle r="2" cx="125" cy="140" fillOpacity="1" />
+      <circle r="2" cx="135" cy="120" fillOpacity="1" />
+      <circle r="2" cx="75" cy="140" fillOpacity="1" />
+      <circle r="2" cx="65" cy="120" fillOpacity="1" />
+      Return
+    </svg>
+  );
+};
+
+export const LightNight: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.lightnight, styles.fill].join(" ")} viewBox="0 0 200 200">
+      <path d="
+        M 90,50
+        a 50 50 0 1 0 60 60
+        a 30 30 0 0 1 -60 -60
+      " />
+      Return
+    </svg>
+  );
+};
+
+export const LightFavorite: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.lightfavorite, styles.fill].join(" ")} viewBox="0 0 200 200">
+      <path d="
+        M 100,35
+        L 145,160
+        L 35,75
+        L 165,75
+        L 55,160 z
+      " />
+      Return
+    </svg>
+  );
+};
+
