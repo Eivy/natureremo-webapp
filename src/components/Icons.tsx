@@ -616,3 +616,95 @@ export const ColorGreen: React.FC = () => {
   );
 };
 
+export const Mute: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.mute].join(" ")} viewBox="0 0 200 200">
+      <path d="
+      M40,80 h30 l30,-30 v100 l-30,-30 h-30 z
+      " fillOpacity="1" />
+      <path d="
+      M130,80 l40,40
+      M130,120 l40,-40
+      " />
+      Mute
+    </svg>
+  );
+};
+
+export const Schedule: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.schedule].join(" ")} viewBox="0 0 200 200">
+      <rect x="25" y="50" width="150" height="100" />
+      <path d="
+      M75,50 v100
+      M125,50 v100
+      M25,117 h50
+      M75,88 h50
+      M125,117 h50
+      " />
+      Schedule
+    </svg>
+  );
+};
+
+export const Input: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.input].join(" ")} viewBox="0 0 200 200">
+      <path d="
+      M30,80
+      v-30
+      a 10 10 0 0 1 10 -10
+      h120
+      a 10 10 0 0 1 10 10
+      v100
+      a 10 10 0 0 1 -10 10
+      h-120
+      a 10 10 0 0 1 -10 -10
+      v-30
+      " />
+      <path d="
+        M30,97.5 h80 v-10 L140,100 L110,112.5 v-10 h-80 z
+      " fillOpacity="1"/>
+      Input
+    </svg>
+  );
+};
+
+export const SelectAudio: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.selectaudio].join(" ")} viewBox="0 0 200 200">
+      <path d="
+      M 80,150
+      L 100,170 L120,150
+      M 80,150
+      h -30
+      a 10 10 0 0 1 -10 -10
+      v -80
+      a 10 10 0 0 1 10 -10
+      h 100
+      a 10 10 0 0 1 10 10
+      v 80
+      a 10 10 0 0 1 -10 10
+      h -30
+      M 60,90 h80
+      M 60,110 h50
+      " />
+      SelectAudio
+    </svg>
+  );
+};
+
+export const Return: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.return, styles.fill].join(" ")} viewBox="0 0 200 200">
+      <path d="
+        M70,90 v15 l-30,-20 l30,-20 v15 h60
+        a 30 30 0 1 1 0 60
+        h-60 v-10 h60
+        a 20 20 0 1 0 0 -40 z
+      " />
+      Return
+    </svg>
+  );
+};
+

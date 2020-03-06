@@ -46,4 +46,10 @@ export const components: { [key: string]: JSX.Element } = {
   "ico_color_green": <Icons.ColorGreen />,
   "ico_color_red": <Icons.ColorRed />,
   "ico_color_yellow": <Icons.ColorYellow />,
+  "ico_mute": <Icons.Mute />,
+  "ico_tv_guide": <Icons.Schedule />,
+  "ico_input": <Icons.Input />,
+  "ico_select_audio": <Icons.SelectAudio />,
+  "ico_return": <Icons.Return />,
+  "ico_d": <Icons.Text value="d" />,
 };
