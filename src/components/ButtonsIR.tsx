@@ -5,6 +5,7 @@ import styles from './ButtonsIR.module.scss';
 
 interface Props {
   appliance: RemoAPI.Appliance,
+  onSignalClick?: (button: RemoAPI.Signal) => {},
 }
 
 const ButtonsIR : React.FC<Props> = React.memo((props) => {
@@ -14,7 +15,7 @@ const ButtonsIR : React.FC<Props> = React.memo((props) => {
   return (
     <div className={styles.buttons_ir}>
       <div className={styles.signals}>
-        { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} />) }
+      { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} onClick={props.onSignalClick ? (event): any => {props.onSignalClick!(v)} : (event): any => {}} />) }
       </div>
     </div>
   )

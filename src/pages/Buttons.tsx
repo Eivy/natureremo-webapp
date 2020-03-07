@@ -9,6 +9,7 @@ import ButtonsLight from '../components/ButtonsLight';
 import ButtonsTV from '../components/ButtonsTV';
 import ButtonsAC from '../components/ButtonsAC';
 import ButtonsIR from '../components/ButtonsIR';
+import Api from '../Api';
 
 interface Actions { }
 
@@ -24,6 +25,18 @@ type Props = State & Actions & RouteComponentProps<{id: string}>;
 
 class Buttons extends React.Component<Props> {
 
+  sendLightButton(button: RemoAPI.Button): any {
+    Api.SendLightButton(this.props.match.params.id, button.name!)
+  }
+
+  sendTVButton(button: RemoAPI.Button): any {
+    Api.SendTVButton(this.props.match.params.id, button.name!)
+  }
+
+  sendSignal(signal: RemoAPI.Signal): any {
+    Api.SendSignal(signal.id!)
+  }
+
   render() {
     const appliances = this.props.appliances.filter((v) => v.id === this.props.match.params.id);
     if (appliances.length < 1) {
@@ -32,11 +45,11 @@ class Buttons extends React.Component<Props> {
     const appliance = appliances[0];
     switch (appliance.type) {
       case "LIGHT":
-        return <ButtonsLight appliance={appliance} />
+        return <ButtonsLight appliance={appliance} onSignalClick={(signal): any => {this.sendSignal(signal)}} onButtonClick={(button): any => {this.sendLightButton(button)}} />
       case "IR":
-        return <ButtonsIR appliance={appliance} />
+        return <ButtonsIR appliance={appliance} onSignalClick={(signal): any => {this.sendSignal(signal)}} />
       case "TV":
-        return <ButtonsTV appliance={appliance} />
+        return <ButtonsTV appliance={appliance} onSignalClick={(signal): any => {this.sendSignal(signal)}} onButtonClick={(button): any => {this.sendTVButton(button)}} />
       case "AC":
         return <ButtonsAC appliance={appliance} />
       default:
