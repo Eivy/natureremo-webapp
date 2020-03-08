@@ -1,13 +1,23 @@
+$margin: .5rem;
+$buttonWidth: calc(20vmin - #{$margin} * 2);
 .button {
+  width: $buttonWidth;
+  height: calc(20vmin + #{$margin} * 3);
+  margin: 0 $margin;
   button {
     border: 0;
-    margin: 1em;
     border-radius: 50%;
     background: rgba(200, 200, 200, 0.5);
-    width: 20vmin;
-    height: 20vmin;
+    width: $buttonWidth;
+    height: $buttonWidth;
+    padding: 0;
   }
   .label {
     text-align: center;
+    word-wrap: break-word;
+    word-break: break-all;
+    @media screen and (max-width: 800px) {
+      font-size: .5rem;
+    }
   }
 }
