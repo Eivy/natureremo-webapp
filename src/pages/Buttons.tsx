@@ -37,6 +37,10 @@ class Buttons extends React.Component<Props> {
     Api.SendSignal(signal.id!)
   }
 
+  sendAriconSettings(id: string,data: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }): void {
+    Api.SendAirconSettings(id, data);
+  }
+
   render() {
     const appliances = this.props.appliances.filter((v) => v.id === this.props.match.params.id);
     if (appliances.length < 1) {
@@ -51,7 +55,7 @@ class Buttons extends React.Component<Props> {
       case "TV":
         return <ButtonsTV appliance={appliance} onSignalClick={(signal): any => {this.sendSignal(signal)}} onButtonClick={(button): any => {this.sendTVButton(button)}} />
       case "AC":
-        return <ButtonsAC appliance={appliance} />
+        return <ButtonsAC appliance={appliance} onChange={(data) => {this.sendAriconSettings(this.props.match.params.id, data)}} />
       default:
         return <div>Wrong data!!</div>
     }
