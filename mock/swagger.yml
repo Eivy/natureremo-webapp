@@ -253,6 +253,8 @@ paths:
       responses:
         200:
           description: Updated air conditioner settings
+          schema:
+            ref: '#/definitions/AirConParams'
   /1/appliances/{appliance}/tv:
     post:
       description: Send tv infrared signal.

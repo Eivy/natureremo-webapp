@@ -48,7 +48,7 @@ class Api {
     return Api.post(path.join('appliances', appliance_id, 'light'), { button: button });
   }
 
-  static async SendAirconSettings(appliance_id: string, options: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }): Promise<void> {
+  static async SendAirconSettings(appliance_id: string, options: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }): Promise<RemoAPI.AirConParams> {
     return Api.post(
       url.resolve(Api.basePath, path.join('appliances', appliance_id, 'aircon_settings')), options);
   }
