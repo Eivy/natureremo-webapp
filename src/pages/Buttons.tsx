@@ -5,16 +5,21 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { AppState } from '../stores';
 import { State } from '../states';
+import { actions } from '../actions';
 import ButtonsLight from '../components/ButtonsLight';
 import ButtonsTV from '../components/ButtonsTV';
 import ButtonsAC from '../components/ButtonsAC';
 import ButtonsIR from '../components/ButtonsIR';
 import Api from '../Api';
 
-interface Actions { }
+interface Actions {
+  updateAppliance: (id: string, appliance: RemoAPI.Appliance) => Action<{id: string, appliance: RemoAPI.Appliance}>;
+}
 
 function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
-  return { };
+  return {
+    updateAppliance: (id: string, appliance: RemoAPI.Appliance) => dispatch(actions.updateAppliance({id, appliance})),
+  };
 }
 
 function mapStateToProps(appState: AppState) {
@@ -25,8 +30,11 @@ type Props = State & Actions & RouteComponentProps<{id: string}>;
 
 class Buttons extends React.Component<Props> {
 
-  sendLightButton(button: RemoAPI.Button): any {
-    Api.SendLightButton(this.props.match.params.id, button.name!)
+  async sendLightButton(button: RemoAPI.Button): Promise<any> {
+    const new_state = await Api.SendLightButton(this.props.match.params.id, button.name!)
+    const tmp = this.props.appliances.filter((v) => v.id === this.props.match.params.id)[0];
+    tmp.light!.state = new_state;
+    this.props.updateAppliance(this.props.match.params.id, tmp);
   }
 
   sendTVButton(button: RemoAPI.Button): any {
@@ -37,8 +45,11 @@ class Buttons extends React.Component<Props> {
     Api.SendSignal(signal.id!)
   }
 
-  sendAriconSettings(id: string,data: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }): void {
-    Api.SendAirconSettings(id, data);
+  async sendAriconSettings(id: string,data: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }): Promise<void> {
+    const new_settings = await Api.SendAirconSettings(id, data);
+    const tmp = this.props.appliances.filter((v) => v.id === this.props.match.params.id)[0];
+    tmp.settings! = new_settings;
+    this.props.updateAppliance(this.props.match.params.id, tmp);
   }
 
   render() {
