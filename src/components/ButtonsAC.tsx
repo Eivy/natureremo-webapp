@@ -47,7 +47,7 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
           <input type="checkbox" defaultChecked={props.appliance.settings!.button![0] === ''} onChange={(event) => {if (props.onChange) props.onChange({button: event.target.checked ? '' : 'power-off'})}} />
           <span>ON</span><span>OFF</span>
         </label>
-        <select defaultValue={props.appliance.settings!.mode}>
+        <select defaultValue={props.appliance.settings!.mode} onChange={(event) => {if (props.onChange) props.onChange({temperature: event.target.value})}} >
           { Object.keys(props.appliance.aircon!.range!.modes!).map((v) => <option value={v} key={v}>{v}</option>) }
         </select>
         { props.appliance.aircon!.range!.modes!.auto && props.appliance.settings!.mode === 'auto' &&  <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.auto} onChange={props.onChange!} />}
