@@ -23,4 +23,8 @@ export const reducer = reducerWithInitialState(initialState)
   .case(actions.updateRemains, (state, remains) => {
     return Object.assign({}, state, { remains });
   })
+  .case(actions.updateAppliance, (state, payload) => {
+    const new_list = state.appliances.map((v) => v.id === payload.id ? payload.appliance : v);
+    return Object.assign({}, state, { appliances: new_list });;
+  })
   ;

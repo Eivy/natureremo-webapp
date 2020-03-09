@@ -13,12 +13,14 @@ import Appliance from '../components/Appliance';
 interface Actions {
   updateDevices: (v: RemoAPI.Device[]) => Action<RemoAPI.Device[]>;
   updateAppliances: (v: RemoAPI.Appliance[]) => Action<RemoAPI.Appliance[]>;
+  updateAppliance: (id: string, appliance: RemoAPI.Appliance) => Action<{id: string, appliance: RemoAPI.Appliance}>;
 }
 
 function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
   return {
     updateDevices: (v: RemoAPI.Device[]) => dispatch(actions.updateDevices(v)),
     updateAppliances: (v: RemoAPI.Appliance[]) => dispatch(actions.updateAppliances(v)),
+    updateAppliance: (id: string, appliance: RemoAPI.Appliance) => dispatch(actions.updateAppliance({id, appliance})),
   }
 }
 
@@ -50,13 +52,13 @@ class Top extends React.Component<Props> {
             onClick={(event) => this.props.history.push('/appliances/' + v.id)}
             onPowerClick={async (event) => {
               if (v.type === 'LIGHT') {
-                await Api.SendLightButton(v.id!, v.light!.state!.power === 'on' ? 'off' : 'on');
+                const newState = await Api.SendLightButton(v.id!, v.light!.state!.power === 'on' ? 'off' : 'on');
+                v.light!.state = newState;
+                this.props.updateAppliance(v.id!, v);
               } else if (v.type === 'AC') {
-                await Api.SendAirconSettings(v.id!, {button: v.settings!.button === 'power-off' ? '' : 'power-off'});
-              }
-              const appliances = await Api.GetAppliances();
-              if (appliances) {
-                this.props.updateAppliances(appliances);
+                const newSettings = await Api.SendAirconSettings(v.id!, {button: v.settings!.button === 'power-off' ? '' : 'power-off'});
+                v.settings = newSettings;
+                this.props.updateAppliance(v.id!, v);
               }
             }}
           />
