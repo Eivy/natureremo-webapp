@@ -58,6 +58,68 @@ describe('test ButtonsAC', () => {
     expect(getByText("Signal1")).toBeInTheDocument();
   });
 
+  test('test default value "on"', () => {
+    const data: RemoAPI.Appliance = {
+      id: "test",
+      type: "AC",
+      aircon: {
+        range: {
+          modes: {
+            warm: {
+              temp: ['18','19','20','21'],
+              vol: ['1','2','3','4','auto',''],
+              dir: ['1','2','3','4','swing','auto',''],
+            },
+          },
+          fixedButtons: ['power-off'],
+        },
+        tempUnit: 'c',
+      },
+      settings: {
+        mode: 'warm',
+        temp: '18',
+        vol: '2',
+        dir: 'auto',
+        button: '',
+      },
+      signals: []
+    };
+    const ac= Enzyme.mount(<ButtonsAC appliance={data} onChange={(data) => console.log(data)} />);
+    const input = ac.find('input[type="checkbox"]');
+    expect(input.get(0).props.defaultChecked).toBe(true);
+  });
+
+  test('test default value "off"', () => {
+    const data: RemoAPI.Appliance = {
+      id: "test",
+      type: "AC",
+      aircon: {
+        range: {
+          modes: {
+            warm: {
+              temp: ['18','19','20','21'],
+              vol: ['1','2','3','4','auto',''],
+              dir: ['1','2','3','4','swing','auto',''],
+            },
+          },
+          fixedButtons: ['power-off'],
+        },
+        tempUnit: 'c',
+      },
+      settings: {
+        mode: 'warm',
+        temp: '18',
+        vol: '2',
+        dir: 'auto',
+        button: 'power-off',
+      },
+      signals: []
+    };
+    const ac= Enzyme.mount(<ButtonsAC appliance={data} onChange={(data) => console.log(data)} />);
+    const input = ac.find('input[type="checkbox"]');
+    expect(input.get(0).props.defaultChecked).toBe(false);
+  });
+
   test('test to change mode value', () => {
     const data: RemoAPI.Appliance = {
       id: "test",

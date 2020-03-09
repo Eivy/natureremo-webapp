@@ -44,7 +44,7 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
     <div>
       <div>
         <label className={styles.button_power}>
-          <input type="checkbox" defaultChecked={props.appliance.settings!.button![0] === ''} onChange={(event) => {if (props.onChange) props.onChange({button: event.target.checked ? '' : 'power-off'})}} />
+          <input type="checkbox" defaultChecked={props.appliance.settings!.button !== 'power-off'} onChange={(event) => {if (props.onChange) props.onChange({button: event.target.checked ? '' : 'power-off'})}} />
           <span>ON</span><span>OFF</span>
         </label>
         <select defaultValue={props.appliance.settings!.mode} onChange={(event) => {if (props.onChange) props.onChange({temperature: event.target.value})}} >
