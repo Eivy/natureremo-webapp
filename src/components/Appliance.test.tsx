@@ -224,3 +224,31 @@ test('render ico_etc', () => {
   expect(circle).toBeInTheDocument();
 });
 
+test('render something', () => {
+  const data: RemoAPI.Appliance = {
+    nickname: "etc",
+    type: "IR",
+    image: "something",
+  }
+  const appliance = render(<Appliance data={data} />);
+  const circle = appliance.getByText("Etc");
+  expect(circle).toBeInTheDocument();
+});
+
+test('event handler', () => {
+  const mockConsole = jest.spyOn(console, 'log')
+  const data: RemoAPI.Appliance = {
+    nickname: "light",
+    type: "LIGHT",
+    image: "ico_light",
+    light: {
+      state: {
+        power: "on"
+      }
+    }
+  }
+  const appliance = Enzyme.shallow(<Appliance data={data} onPowerClick={() => console.log('test')}/>);
+  const button = appliance.find('button');
+  button.at(1).simulate('click', {target: null, stopPropagation: () => {}});
+  expect(mockConsole.mock.calls.length).toBe(1);
+});
