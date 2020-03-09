@@ -34,12 +34,7 @@ const Appliance: React.FC<Props> = React.memo((props) => {
   let power
   let Icon
   let mainClassName = [styles.main]
-  try {
-    Icon = components.hasOwnProperty(props.data.image) ? components[props.data.image!] : Icons.Etc
-  }
-  catch {
-    Icon = Icons.Etc
-  }
+  Icon = components.hasOwnProperty(props.data.image) ? components[props.data.image!] : Icons.Etc
   if (props.data.type === 'LIGHT') {
     power = (<button className={styles.power} onClick={eventWrapper} ><Icons.Power power={props.data.light!.state!.power!} /></button>)
     mainClassName.push(styles.circle)
