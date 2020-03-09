@@ -6,7 +6,7 @@ import {components} from './ButtonIconSet';
 
 interface Props {
   button: RemoAPI.Button,
-  onClick?: (event: any) => {},
+  onClick?: (event: any) => void
 }
 
 const Button: React.FC<Props> = React.memo((props) => {

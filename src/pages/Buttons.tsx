@@ -30,18 +30,18 @@ type Props = State & Actions & RouteComponentProps<{id: string}>;
 
 class Buttons extends React.Component<Props> {
 
-  async sendLightButton(button: RemoAPI.Button): Promise<any> {
+  async sendLightButton(button: RemoAPI.Button): Promise<void> {
     const new_state = await Api.SendLightButton(this.props.match.params.id, button.name!)
     const tmp = this.props.appliances.filter((v) => v.id === this.props.match.params.id)[0];
     tmp.light!.state = new_state;
     this.props.updateAppliance(this.props.match.params.id, tmp);
   }
 
-  sendTVButton(button: RemoAPI.Button): any {
+  sendTVButton(button: RemoAPI.Button): void {
     Api.SendTVButton(this.props.match.params.id, button.name!)
   }
 
-  sendSignal(signal: RemoAPI.Signal): any {
+  sendSignal(signal: RemoAPI.Signal): void {
     Api.SendSignal(signal.id!)
   }
 
@@ -60,11 +60,11 @@ class Buttons extends React.Component<Props> {
     const appliance = appliances[0];
     switch (appliance.type) {
       case "LIGHT":
-        return <ButtonsLight appliance={appliance} onSignalClick={(signal): any => {this.sendSignal(signal)}} onButtonClick={(button): any => {this.sendLightButton(button)}} />
+        return <ButtonsLight appliance={appliance} onSignalClick={(signal) => {this.sendSignal(signal)}} onButtonClick={(button) => {this.sendLightButton(button)}} />
       case "IR":
-        return <ButtonsIR appliance={appliance} onSignalClick={(signal): any => {this.sendSignal(signal)}} />
+        return <ButtonsIR appliance={appliance} onSignalClick={(signal) => {this.sendSignal(signal)}} />
       case "TV":
-        return <ButtonsTV appliance={appliance} onSignalClick={(signal): any => {this.sendSignal(signal)}} onButtonClick={(button): any => {this.sendTVButton(button)}} />
+        return <ButtonsTV appliance={appliance} onSignalClick={(signal) => {this.sendSignal(signal)}} onButtonClick={(button) => {this.sendTVButton(button)}} />
       case "AC":
         return <ButtonsAC appliance={appliance} onChange={(data) => {this.sendAriconSettings(this.props.match.params.id, data)}} />
       default:

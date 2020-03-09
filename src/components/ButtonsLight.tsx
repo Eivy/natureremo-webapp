@@ -6,8 +6,8 @@ import styles from './ButtonsLight.module.scss';
 
 interface Props {
   appliance: RemoAPI.Appliance,
-  onButtonClick?: (button: RemoAPI.Button) => {},
-  onSignalClick?: (button: RemoAPI.Signal) => {},
+  onButtonClick?: (button: RemoAPI.Button) => void,
+  onSignalClick?: (button: RemoAPI.Signal) => void,
 }
 
 const ButtonsLight : React.FC<Props> = React.memo((props) => {
@@ -17,10 +17,10 @@ const ButtonsLight : React.FC<Props> = React.memo((props) => {
   return (
     <div className={styles.buttons_light}>
       <div className={styles.buttons}>
-        { props.appliance.light!.buttons!.map((v: RemoAPI.Button, i: number) => <Button key={i} button={v} onClick={props.onButtonClick ? (event): any => {props.onButtonClick!(v)} : (event): any => {}} />) }
+        { props.appliance.light!.buttons!.map((v: RemoAPI.Button, i: number) => <Button key={i} button={v} onClick={props.onButtonClick ? (event) => {props.onButtonClick!(v)} : (event) => {}} />) }
       </div>
       <div className={styles.signals}>
-        { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} onClick={props.onSignalClick ? (event): any => {props.onSignalClick!(v)} : (event): any => {}} />) }
+        { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} onClick={props.onSignalClick ? (event) => {props.onSignalClick!(v)} : (event) => {}} />) }
       </div>
     </div>
   )
