@@ -19,3 +19,15 @@ test('svg alt text', () => {
   const label = button.getByText("LightUp");
   expect(label).toBeInTheDocument();
 });
+
+test('label something', () => {
+  const data: RemoAPI.Button = {
+    image: "something",
+    label: "明るく",
+    name: "lightup",
+  }
+  const button = render(<Button button={data} />);
+  const label = button.queryAllByText(data.label!);
+  expect(label.length).toBe(3);
+});
+
