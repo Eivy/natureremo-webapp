@@ -14,8 +14,8 @@ test('device name', () => {
 });
 
 test('device tempture', () => {
-  const hu = {val: 19};
-  device.newest_events!.hu = hu;
+  const te = {val: 19};
+  device.newest_events!.te = te;
   const el = render(<Device device={device} />)
   expect(el.getByText(/19/)).toBeInTheDocument();
 });
