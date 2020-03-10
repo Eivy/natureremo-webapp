@@ -30,3 +30,14 @@ test('save token to localStorage', () => {
   button.simulate('click')
   expect(localStorage.getItem('access_token')).toBe(inputValue)
 })
+
+test('remove token to localStorage', () => {
+  const inputValue = 'saved to localStorage';
+  localStorage.setItem('access_token', inputValue);
+  const config = Enzyme.shallow(<Config />);
+  const input = config.find('input').at(0);
+  const button = config.find('button').at(0);
+  input.simulate('change', { target: { value: '' } })
+  button.simulate('click')
+  expect(localStorage.getItem('access_token')).toBe(null)
+})
