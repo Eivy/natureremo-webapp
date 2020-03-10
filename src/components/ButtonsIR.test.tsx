@@ -5,6 +5,10 @@ import Adapter from 'enzyme-adapter-react-16'
 import ButtonsIR from './ButtonsIR';
 
 Enzyme.configure({ adapter: new Adapter() })
+const mockConsole = jest.spyOn(console, 'log');
+beforeEach(() => {
+  mockConsole.mockReset();
+});
 
 test('wrong appliance', () => {
   const data: RemoAPI.Appliance = {
@@ -44,7 +48,6 @@ test('test click', () => {
       }
     ]
   };
-  const mockConsole = jest.spyOn(console, 'log');
   const buttons = Enzyme.mount(<ButtonsIR appliance={data} onSignalClick={(event) => console.log('test')} />);
   const button = buttons.find('button').at(0);
   button.simulate('click');

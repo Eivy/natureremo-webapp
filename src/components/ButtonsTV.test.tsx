@@ -6,6 +6,11 @@ import ButtonsTV from './ButtonsTV';
 
 Enzyme.configure({adapter: new Adapter()});
 
+const mockConsole = jest.spyOn(console, 'log');
+beforeEach(() => {
+  mockConsole.mockReset();
+});
+
 test('wrong appliance', () => {
   const data: RemoAPI.Appliance = {
     id: "test",
@@ -319,8 +324,6 @@ test('test signal click', () => {
       }
     ]
   };
-  const mockConsole = jest.spyOn(console, 'log');
-  mockConsole.mockReset();
   const buttons = Enzyme.mount(<ButtonsTV appliance={data} onSignalClick={() => console.log('test')} />);
   const button = buttons.find('button').at(0);
   button.simulate('click');
@@ -358,8 +361,6 @@ test('test button click', () => {
     ] },
     signals: []
   };
-  const mockConsole = jest.spyOn(console, 'log');
-  mockConsole.mockReset();
   const buttons = Enzyme.mount(<ButtonsTV appliance={data} onButtonClick={() => console.log('test')} />);
   const button = buttons.find('button').at(0);
   button.simulate('click');

@@ -4,6 +4,11 @@ import Appliance from './Appliance';
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
+const mockConsole = jest.spyOn(console, 'log')
+
+beforeEach(() => {
+  mockConsole.mockReset();
+});
 
 test('appliance which power', () => {
   const data: RemoAPI.Appliance = {
@@ -236,7 +241,6 @@ test('render something', () => {
 });
 
 test('event handler', () => {
-  const mockConsole = jest.spyOn(console, 'log')
   const data: RemoAPI.Appliance = {
     nickname: "light",
     type: "LIGHT",
