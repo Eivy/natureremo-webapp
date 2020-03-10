@@ -169,7 +169,7 @@ describe('test ButtonsAC', () => {
     const ac= Enzyme.mount(<ButtonsAC appliance={data} onChange={(data) => console.log(data)} />);
     const selects = ac.find('select');
     selects.at(0).simulate('change', { target: { value: 'cool' } });
-    expect(mockConsole.mock.calls.length).toBe(1);
+    expect(mockConsole.mock.calls[0][0]).toEqual({operation_mode: 'cool'});
   });
 
   test('test click power button', () => {
