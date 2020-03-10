@@ -13,17 +13,17 @@ const AirConSettings : React.FC<ACSettingProps> = React.memo((props) => {
   return (
     <div>
       { props.range.temp &&
-        <select defaultValue={props.setting.temp} onChange={(event) => {if (props.onChange) props.onChange({temperature: event.target.value})}} >
+        <select className={styles.temp} defaultValue={props.setting.temp} onChange={(event) => {if (props.onChange) props.onChange({temperature: event.target.value})}} >
           { props.range.temp!.map((v) => <option value={v} key={v}>{v}</option>) }
         </select>
       }
       { props.range.dir &&
-        <select defaultValue={props.setting.dir} onChange={(event) => {if (props.onChange) props.onChange({air_direction: event.target.value})}} >
+        <select className={styles.dir} defaultValue={props.setting.dir} onChange={(event) => {if (props.onChange) props.onChange({air_direction: event.target.value})}} >
           { props.range.dir!.map((v) => <option value={v} key={v}>{v}</option>) }
         </select>
       }
       {props.range.vol &&
-        <select defaultValue={props.setting.vol} onChange={(event) => {if (props.onChange) props.onChange({air_volume: event.target.value})}} >
+        <select className={styles.vol} defaultValue={props.setting.vol} onChange={(event) => {if (props.onChange) props.onChange({air_volume: event.target.value})}} >
           { props.range.vol!.map((v) => <option value={v} key={v}>{v}</option>) }
         </select>
       }
@@ -41,13 +41,13 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
     return <div>Wrong appliance!!</div>;
   }
   return (
-    <div>
-      <div>
+    <div className={styles.buttons_ac} >
+      <div className={styles.buttons} >
         <label className={styles.button_power}>
           <input type="checkbox" defaultChecked={props.appliance.settings!.button !== 'power-off'} onChange={(event) => {if (props.onChange) props.onChange({button: event.target.checked ? '' : 'power-off'})}} />
           <span>ON</span><span>OFF</span>
         </label>
-        <select defaultValue={props.appliance.settings!.mode} onChange={(event) => {if (props.onChange) props.onChange({operation_mode: event.target.value})}} >
+        <select className={styles.mode} defaultValue={props.appliance.settings!.mode} onChange={(event) => {if (props.onChange) props.onChange({operation_mode: event.target.value})}} >
           { Object.keys(props.appliance.aircon!.range!.modes!).map((v) => <option value={v} key={v}>{v}</option>) }
         </select>
         { props.appliance.aircon!.range!.modes!.auto && props.appliance.settings!.mode === 'auto' &&  <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.auto} onChange={props.onChange!} />}
@@ -56,7 +56,7 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
         { props.appliance.aircon!.range!.modes!.blow && props.appliance.settings!.mode === 'blow' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.blow} onChange={props.onChange!} />}
         { props.appliance.aircon!.range!.modes!.dry && props.appliance.settings!.mode === 'dry' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.dry} onChange={props.onChange!} />}
       </div>
-      <div>
+      <div className={styles.signals} >
         { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} />) }
       </div>
     </div>
