@@ -7,20 +7,14 @@ import { Provider } from 'react-redux';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Top from './Top';
-import Api from '../Api';
 import store from '../stores';
+import { actions } from '../actions';
 
 describe('test top page', () => {
+  Enzyme.configure({ adapter: new Adapter() });
   beforeAll(() => {
-    Enzyme.configure({ adapter: new Adapter() });
-    const mockGetDevice = jest.spyOn(Api, 'GetDevices');
-    mockGetDevice.mockResolvedValue(new Promise((resolve, reject) => {
-      resolve([{"id": "device_id", "name": "test_device", "newest_events": {}}]);
-    }));
-    const mockGetAppliances = jest.spyOn(Api, 'GetAppliances');
-    mockGetAppliances.mockResolvedValue(new Promise((resolve, reject) => {
-      resolve([{"id": "appliance_id", "nickname": "test_appliance", "device": {"id": "device_id"}},{"id": "appliance_id_not_render", "nickname": "test_appliance_not_render", "device": {"id": "device_id_not_contain"}}]);
-    }));
+    store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
+    store.dispatch(actions.updateAppliances([{"id": "appliance_id", "nickname": "test_appliance", "device": {"id": "device_id"}},{"id": "appliance_id_not_render", "nickname": "test_appliance_not_render", "device": {"id": "device_id_not_contain"}}]));
   })
 
   beforeEach(() => {
