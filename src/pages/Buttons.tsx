@@ -1,30 +1,13 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Action } from 'typescript-fsa';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { AppState } from '../stores';
+import { Actions, mapDispatchToProps, mapStateToProps } from '../dispatcher';
 import { State } from '../states';
-import { actions } from '../actions';
 import ButtonsLight from '../components/ButtonsLight';
 import ButtonsTV from '../components/ButtonsTV';
 import ButtonsAC from '../components/ButtonsAC';
 import ButtonsIR from '../components/ButtonsIR';
 import Api from '../Api';
-
-interface Actions {
-  updateAppliance: (id: string, appliance: RemoAPI.Appliance) => Action<{id: string, appliance: RemoAPI.Appliance}>;
-}
-
-function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
-  return {
-    updateAppliance: (id: string, appliance: RemoAPI.Appliance) => dispatch(actions.updateAppliance({id, appliance})),
-  };
-}
-
-function mapStateToProps(appState: AppState) {
-  return Object.assign({}, appState.remo);
-}
 
 type Props = State & Actions & RouteComponentProps<{id: string}>;
 
