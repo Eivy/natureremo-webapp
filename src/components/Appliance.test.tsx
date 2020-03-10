@@ -252,3 +252,19 @@ test('event handler', () => {
   button.at(1).simulate('click', {target: null, stopPropagation: () => {}});
   expect(mockConsole.mock.calls.length).toBe(1);
 });
+
+test('without event handler', () => {
+  const data: RemoAPI.Appliance = {
+    nickname: "light",
+    type: "LIGHT",
+    image: "ico_light",
+    light: {
+      state: {
+        power: "on"
+      }
+    }
+  }
+  const appliance = Enzyme.shallow(<Appliance data={data} />);
+  const button = appliance.find('button');
+  button.at(1).simulate('click', {target: null, stopPropagation: () => {}});
+});

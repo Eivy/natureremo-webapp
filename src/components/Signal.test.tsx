@@ -19,3 +19,15 @@ test('svg alt text', () => {
   const label = button.getByText("LightUp");
   expect(label).toBeInTheDocument();
 });
+
+test('render unmatched icon', () => {
+  const data: RemoAPI.Signal = {
+    image: "something",
+    id: "test_id",
+    name: "lightup",
+  }
+  const button = render(<Signal signal={data} />);
+  const label = button.queryAllByText(data.name!);
+  expect(label.length).toBe(3);
+});
+
