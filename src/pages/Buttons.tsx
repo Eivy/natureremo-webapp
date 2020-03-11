@@ -49,7 +49,7 @@ class Buttons extends React.Component<Props> {
       case "TV":
         return <ButtonsTV appliance={appliance} onSignalClick={(signal) => {this.sendSignal(signal)}} onButtonClick={(button) => {this.sendTVButton(button)}} />
       case "AC":
-        return <ButtonsAC appliance={appliance} onChange={(data) => {this.sendAriconSettings(this.props.match.params.id, data)}} />
+        return <ButtonsAC appliance={appliance} onSignalClick={(signal) => {this.sendSignal(signal)}} onChange={(data) => {this.sendAriconSettings(this.props.match.params.id, data)}} />
       default:
         return <div>Wrong data!!</div>
     }

@@ -58,6 +58,43 @@ describe('test ButtonsAC', () => {
     expect(getByText("Signal1")).toBeInTheDocument();
   });
 
+  test('test click signal', () => {
+    const data: RemoAPI.Appliance = {
+      id: "test",
+      type: "AC",
+      aircon: {
+        range: {
+          modes: {
+            warm: {
+              temp: ['18','19','20','21'],
+              vol: ['1','2','3','4','auto',''],
+              dir: ['1','2','3','4','swing','auto',''],
+            },
+          },
+          fixedButtons: ['power-off'],
+        },
+        tempUnit: 'c',
+      },
+      settings: {
+        mode: 'warm',
+        temp: '18',
+        vol: '2',
+        dir: 'auto',
+        button: '',
+      },
+      signals: [
+        {
+          id: "test_signal",
+          name: "Signal1",
+          image: "ico_lightdown",
+        }
+      ]
+    };
+    const buttons = Enzyme.mount(<ButtonsAC appliance={data} onSignalClick={() => console.log('test')} />);
+    buttons.find('button').at(0).simulate('click');
+    expect(mockConsole.mock.calls.length).toBe(1);
+  });
+
   test('test default value "on"', () => {
     const data: RemoAPI.Appliance = {
       id: "test",

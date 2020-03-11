@@ -34,6 +34,7 @@ const AirConSettings : React.FC<ACSettingProps> = React.memo((props) => {
 interface Props {
   appliance: RemoAPI.Appliance,
   onChange?: (data: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }) => void,
+  onSignalClick?: (button: RemoAPI.Signal) => void,
 }
 
 const ButtonsAC : React.FC<Props> = React.memo((props) => {
@@ -57,7 +58,7 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
         { props.appliance.aircon!.range!.modes!.dry && props.appliance.settings!.mode === 'dry' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.dry} onChange={props.onChange!} />}
       </div>
       <div className={styles.signals} >
-        { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} />) }
+        { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} onClick={props.onSignalClick ? (event) => {props.onSignalClick!(v)} : (event) => {}} />) }
       </div>
     </div>
   )
