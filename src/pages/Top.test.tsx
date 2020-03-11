@@ -90,7 +90,7 @@ describe('test top page', () => {
     );
     store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
     localStorage.setItem('access_token', 'test');
-    mockSendLightButton.mockResolvedValue({power: 'off'});
+    mockSendLightButton.mockResolvedValue(new Promise((resolve, reject) => resolve({power: 'off'})));
     store.dispatch(actions.updateAppliances([{
       "id": "appliance_id",
       "nickname": "test_appliance",
@@ -125,7 +125,7 @@ describe('test top page', () => {
     );
     store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
     localStorage.setItem('access_token', 'test');
-    mockSendLightButton.mockResolvedValue({power: 'on'});
+    mockSendLightButton.mockResolvedValue(new Promise((resolve, reject) => resolve({power: 'on'})));
     store.dispatch(actions.updateAppliances([{
       "id": "appliance_id",
       "nickname": "test_appliance",
@@ -160,7 +160,7 @@ describe('test top page', () => {
     );
     store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
     localStorage.setItem('access_token', 'test');
-    mockSendAirconSettings.mockResolvedValue({button: 'power-off'});
+    mockSendAirconSettings.mockResolvedValue(new Promise((resolve, reject) => resolve({button: 'power-off'})));
     store.dispatch(actions.updateAppliances([{
       "id": "appliance_id",
       "nickname": "test_appliance",
@@ -195,7 +195,7 @@ describe('test top page', () => {
     );
     store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
     localStorage.setItem('access_token', 'test');
-    mockSendAirconSettings.mockResolvedValue({button: ''});
+    mockSendAirconSettings.mockResolvedValue(new Promise((resolve, reject) => resolve({button: ''})));
     store.dispatch(actions.updateAppliances([{
       "id": "appliance_id",
       "nickname": "test_appliance",
