@@ -1,11 +1,10 @@
 /// <reference path="schema.d.ts" />
-import request from 'request-promise-native';
 import * as path from 'path';
 import * as url from 'url';
 
 class Api {
   private static basePath: string = "https://api.nature.global/1/";
-  private static requestHeaders: any;
+  private static requestHeaders: { [key: string]: string } = {};
   private static remaining: number = 0;
 
   static setApi(server: string) {
@@ -58,43 +57,61 @@ class Api {
   }
 
   private static async get(path: string): Promise<any> {
-    return JSON.parse(
-      await request.get(
-        url.resolve(Api.basePath, path),
-        { headers: Api.requestHeaders },
-        (err, res, body) => {
-          Api.updateRemaining(parseInt(res?.headers['x-rate-limit-remaining'] as string));
-          return body;
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url.resolve(Api.basePath, path), true);
+      Object.keys(Api.requestHeaders).forEach((k: string) => xhr.setRequestHeader(k, Api.requestHeaders[k]));
+      xhr.onload = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          Api.updateRemaining(parseInt(xhr.getResponseHeader('x-rate-limit-remaining') as string));
+          if (xhr.responseText) {
+            resolve(JSON.parse(xhr.responseText));
+          } else {
+            resolve(null);
+          }
+        } else {
+          reject(new Error(xhr.statusText));
         }
-      )
-        .catch((reason) => {
-          console.log(reason)
-          return null
-        })
-    );
+      };
+      xhr.onerror = () => reject(new Error(xhr.statusText));
+      xhr.send(null);
+    });
   }
 
   private static async post(path: string, form: any): Promise<any> {
-    const res = await request.post(
-      url.resolve(Api.basePath, path),
-      {
-        headers: Api.requestHeaders,
-        form: form,
-      },
-      (err, res, body) => {
-        Api.updateRemaining(parseInt(res?.headers['x-rate-limit-remaining'] as string))
-        return body;
-      }
-    )
-      .catch((reason) => {
-        console.log(reason)
-        throw reason;
-      })
-    if (res) {
-      return JSON.parse(res);
-    } else {
-      return null;
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', url.resolve(Api.basePath, path), true);
+      Object.keys(Api.requestHeaders).forEach((k: string) => xhr.setRequestHeader(k, Api.requestHeaders[k]));
+      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+      xhr.onload = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          Api.updateRemaining(parseInt(xhr.getResponseHeader('x-rate-limit-remaining') as string));
+          if (xhr.responseText) {
+            resolve(JSON.parse(xhr.responseText));
+          } else {
+            resolve(null);
+          }
+        } else {
+          reject(new Error(xhr.statusText));
+        }
+      };
+      xhr.onerror = () => reject(new Error(xhr.statusText));
+      xhr.send(Api.EncodeHTMLForm(form));
+    });
+  }
+
+  private static EncodeHTMLForm(data: any): string {
+    var params = [];
+
+    for (var name in data) {
+      var value = data[name];
+      var param = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+
+      params.push(param);
     }
+
+    return params.join('&').replace(/%20/g, '+');
   }
 
 }
