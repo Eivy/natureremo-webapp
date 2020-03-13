@@ -1,5 +1,8 @@
 export default {
   translation: {
+    here: 'こちら',
+    product_warning: 'このアプリはNature .Incとは無関係です',
+    get_access_token: 'Natureの公式サイトからアクセストークンを取得してください',
     access_token: 'アクセストークン',
     save: '保存',
     humid: '湿度',

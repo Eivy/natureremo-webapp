@@ -11,8 +11,8 @@ beforeEach(() => {
 })
 
 test('renders config', () => {
-  const { getByText } = render(<Config />)
-  expect(getByText(/access token/i)).toBeInTheDocument()
+  const { getByLabelText } = render(<Config />)
+  expect(getByLabelText(/access token/i)).toBeInTheDocument()
 });
 
 test('default input value', () => {

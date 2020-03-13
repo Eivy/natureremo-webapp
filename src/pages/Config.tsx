@@ -35,6 +35,8 @@ class Config extends React.Component<Props, State> {
   render() {
     return (
       <div className={styles.config}>
+        <div className={styles.warning}>{i18n.t('product_warning')}</div>
+        <div >{i18n.t('get_access_token')} <a href="https://home.nature.global">{i18n.t('here')}</a></div>
         <label>{i18n.t('access_token')}
         <input value={this.state.token} autoFocus onChange={this.onTokenChange}/>
         </label>
