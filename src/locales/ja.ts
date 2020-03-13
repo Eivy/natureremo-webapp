@@ -6,7 +6,7 @@ export default {
     dry: '除湿',
     blow: '送風',
     here: 'こちら',
-    product_warning: 'このアプリはNature .Incとは無関係です',
+    product_warning: 'このアプリはNature Inc.とは無関係です',
     get_access_token: 'Natureの公式サイトからアクセストークンを取得してください',
     access_token: 'アクセストークン',
     save: '保存',

@@ -6,7 +6,7 @@ export default {
     dry: 'Dry',
     blow: 'Blow',
     here: 'Here',
-    product_warning: 'This application has nothing to do with Nature .Inc.',
+    product_warning: 'This application has nothing to do with Nature Inc.',
     get_access_token: 'Get Access Token from Nature\'s official site.',
     access_token: 'Access Token',
     save: 'Save',
