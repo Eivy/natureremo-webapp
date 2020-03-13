@@ -5,7 +5,6 @@ import * as url from 'url';
 class Api {
   private static basePath: string = "https://api.nature.global/1/";
   private static requestHeaders: { [key: string]: string } = {};
-  private static remaining: number = 0;
 
   static setApi(server: string) {
     Api.basePath = server;
@@ -13,10 +12,6 @@ class Api {
 
   static setToken(token: string) {
     Api.requestHeaders = { 'Authorization': 'Bearer ' + token };
-  }
-
-  static getRemaining(): number {
-    return Api.remaining;
   }
 
   static async GetMe(): Promise<RemoAPI.User | null> {
@@ -52,10 +47,6 @@ class Api {
       url.resolve(Api.basePath, path.join('appliances', appliance_id, 'aircon_settings')), options);
   }
 
-  private static updateRemaining(remaining: number) {
-    Api.remaining = remaining;
-  }
-
   private static async get(path: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -63,7 +54,6 @@ class Api {
       Object.keys(Api.requestHeaders).forEach((k: string) => xhr.setRequestHeader(k, Api.requestHeaders[k]));
       xhr.onload = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          Api.updateRemaining(parseInt(xhr.getResponseHeader('x-rate-limit-remaining') as string));
           if (xhr.responseText) {
             resolve(JSON.parse(xhr.responseText));
           } else {
@@ -86,7 +76,6 @@ class Api {
       xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
       xhr.onload = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          Api.updateRemaining(parseInt(xhr.getResponseHeader('x-rate-limit-remaining') as string));
           if (xhr.responseText) {
             resolve(JSON.parse(xhr.responseText));
           } else {

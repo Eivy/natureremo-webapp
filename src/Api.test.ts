@@ -146,11 +146,6 @@ describe('Api test', () => {
     server.kill()
   })
 
-  test('check remaining', async () => {
-    await Api.GetMe()
-    expect(Api.getRemaining()).toBe(3)
-  })
-
   test('get user', async () => {
     const resp = {
       'id': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
