@@ -1,7 +1,9 @@
 /// <reference path="../schema.d.ts" />
 import * as React from 'react';
+import i18n from '../i18n';
 import styles from './ButtonsAC.module.scss';
 import Signal from './Signal';
+import Button from './Button';
 
 interface ACSettingProps {
   setting: RemoAPI.AirConParams,
@@ -48,14 +50,16 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
           <input type="checkbox" defaultChecked={props.appliance.settings!.button !== 'power-off'} onChange={(event) => {if (props.onChange) props.onChange({button: event.target.checked ? '' : 'power-off'})}} />
           <span>ON</span><span>OFF</span>
         </label>
-        <select className={styles.mode} defaultValue={props.appliance.settings!.mode} onChange={(event) => {if (props.onChange) props.onChange({operation_mode: event.target.value})}} >
-          { Object.keys(props.appliance.aircon!.range!.modes!).map((v) => <option value={v} key={v}>{v}</option>) }
-        </select>
-        { props.appliance.aircon!.range!.modes!.auto && props.appliance.settings!.mode === 'auto' &&  <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.auto} onChange={props.onChange!} />}
-        { props.appliance.aircon!.range!.modes!.warm && props.appliance.settings!.mode === 'warm' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.warm} onChange={props.onChange!} />}
-        { props.appliance.aircon!.range!.modes!.cool && props.appliance.settings!.mode === 'cool' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.cool} onChange={props.onChange!} />}
-        { props.appliance.aircon!.range!.modes!.blow && props.appliance.settings!.mode === 'blow' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.blow} onChange={props.onChange!} />}
-        { props.appliance.aircon!.range!.modes!.dry && props.appliance.settings!.mode === 'dry' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.dry} onChange={props.onChange!} />}
+        <div className={styles.mode}>
+          { Object.keys(props.appliance.aircon!.range!.modes!).map((v) => <Button key={v} button={{name: i18n.t(v), image: 'ico_ac_' + v, label: i18n.t(v)}} onClick={(event) => {if(props.onChange) props.onChange({operation_mode: v})}}>{v}</Button>) }
+        </div>
+        <div className={styles.settings}>
+          { props.appliance.aircon!.range!.modes!.auto && props.appliance.settings!.mode === 'auto' &&  <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.auto} onChange={props.onChange!} />}
+          { props.appliance.aircon!.range!.modes!.warm && props.appliance.settings!.mode === 'warm' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.warm} onChange={props.onChange!} />}
+          { props.appliance.aircon!.range!.modes!.cool && props.appliance.settings!.mode === 'cool' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.cool} onChange={props.onChange!} />}
+          { props.appliance.aircon!.range!.modes!.blow && props.appliance.settings!.mode === 'blow' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.blow} onChange={props.onChange!} />}
+          { props.appliance.aircon!.range!.modes!.dry && props.appliance.settings!.mode === 'dry' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.dry} onChange={props.onChange!} />}
+        </div>
       </div>
       <div className={styles.signals} >
         { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} onClick={props.onSignalClick ? (event) => {props.onSignalClick!(v)} : (event) => {}} />) }

@@ -1,4 +1,6 @@
 .buttons_ac {
+  width: 100%;
+  min-height: 100%;
   .button_power {
     input[type=checkbox] {
       display: none;
@@ -45,11 +47,17 @@
     }
   }
   .buttons {
-    .mode {}
-    .temp {}
-    .vol {}
-    .dir {}
+    .button_power {
+    }
+    .mode, .settings {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
   .signals {
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
 }

@@ -1,5 +1,10 @@
 export default {
   translation: {
+    cool: 'Cool',
+    warm: 'Warm',
+    auto: 'Auto',
+    dry: 'Dry',
+    blow: 'Blow',
     here: 'Here',
     product_warning: 'This application has nothing to do with Nature .Inc.',
     get_access_token: 'Get Access Token from Nature\'s official site.',

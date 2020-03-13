@@ -330,7 +330,7 @@ describe('test buttons', () => {
         </Router>
       </Provider>
     );
-    const button = buttons.find('button').at(0);
+    const button = buttons.find('.signals button').at(0);
     button.simulate('click');
     setImmediate(() => {
       expect(mockSendSignal.mock.calls.length).toBe(1);

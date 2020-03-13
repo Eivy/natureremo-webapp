@@ -1,5 +1,10 @@
 export default {
   translation: {
+    cool: '冷房',
+    warm: '暖房',
+    auto: '自動',
+    dry: '除湿',
+    blow: '送風',
     here: 'こちら',
     product_warning: 'このアプリはNature .Incとは無関係です',
     get_access_token: 'Natureの公式サイトからアクセストークンを取得してください',
