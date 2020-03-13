@@ -16,7 +16,7 @@ class Top extends React.Component<Props> {
     super(props);
     const token = localStorage.getItem('access_token');
     if (!token) {
-      this.props.history.push('/config');
+      this.props.history.push('./config');
       return;
     }
   }
