@@ -2,6 +2,7 @@
   "name": "natureremo-webapp",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://eivy.github.io/natureremo-webapp/",
   "dependencies": {
     "@types/node": "^12.12.27",
     "@types/react": "^16.9.19",
