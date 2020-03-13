@@ -36,7 +36,7 @@ class App extends React.Component<Props> {
 
   render() {
     return (
-      <Router>
+      <Router basename="/natureremo-webapp">
         <header>
           <Link to="/" className="logo"><img src={logo} alt="logo"/>RemoWebApp</Link>
           <Link to="/config" className="config"><Gear/></Link>
