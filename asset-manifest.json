@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/natureremo-webapp/static/css/main.d839706e.chunk.css",
+    "main.js": "/natureremo-webapp/static/js/main.5e4f76d9.chunk.js",
+    "main.js.map": "/natureremo-webapp/static/js/main.5e4f76d9.chunk.js.map",
+    "runtime-main.js": "/natureremo-webapp/static/js/runtime-main.e72e7595.js",
+    "runtime-main.js.map": "/natureremo-webapp/static/js/runtime-main.e72e7595.js.map",
+    "static/js/2.c7af11fe.chunk.js": "/natureremo-webapp/static/js/2.c7af11fe.chunk.js",
+    "static/js/2.c7af11fe.chunk.js.map": "/natureremo-webapp/static/js/2.c7af11fe.chunk.js.map",
+    "index.html": "/natureremo-webapp/index.html",
+    "precache-manifest.ba78cb9085fd07c00806e9d8e7426394.js": "/natureremo-webapp/precache-manifest.ba78cb9085fd07c00806e9d8e7426394.js",
+    "service-worker.js": "/natureremo-webapp/service-worker.js",
+    "static/css/main.d839706e.chunk.css.map": "/natureremo-webapp/static/css/main.d839706e.chunk.css.map",
+    "static/js/2.c7af11fe.chunk.js.LICENSE.txt": "/natureremo-webapp/static/js/2.c7af11fe.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/natureremo-webapp/static/media/logo.a7d3cf01.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e72e7595.js",
+    "static/js/2.c7af11fe.chunk.js",
+    "static/css/main.d839706e.chunk.css",
+    "static/js/main.5e4f76d9.chunk.js"
+  ]
+}
