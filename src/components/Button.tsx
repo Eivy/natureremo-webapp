@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './Button.module.scss'
+import i18n from '../i18n';
 
 import * as Icons from './Icons'
 import {components} from './ButtonIconSet';
@@ -15,7 +16,7 @@ const Button: React.FC<Props> = React.memo((props) => {
   return (
     <div className={styles.button} >
     <button onClick={props.onClick}>{Icon}</button>
-    <div className={styles.label}>{props.button.label}</div>
+    <div className={styles.label}>{i18n.t(props.button.label!)}</div>
     </div>
   );
 });

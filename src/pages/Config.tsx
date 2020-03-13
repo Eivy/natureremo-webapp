@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {RouteComponentProps} from 'react-router-dom';
+import i18n from '../i18n';
 import styles from './Config.module.scss'
 
 interface Props extends RouteComponentProps{}
@@ -34,10 +35,10 @@ class Config extends React.Component<Props, State> {
   render() {
     return (
       <div className={styles.config}>
-        <label>Access Token
+        <label>{i18n.t('access_token')}
         <input value={this.state.token} autoFocus onChange={this.onTokenChange}/>
         </label>
-        <button onClick={this.onClick}>Save</button>
+        <button onClick={this.onClick}>{i18n.t('save')}</button>
       </div>
     )
   }
