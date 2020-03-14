@@ -1,32 +1,44 @@
 import * as React from 'react'
 import {RouteComponentProps} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Actions, mapDispatchToProps, mapStateToProps } from '../dispatcher';
+import { State } from '../states';
 import i18n from '../i18n';
+import Api from '../Api';
 import styles from './Config.module.scss'
 
-interface Props extends RouteComponentProps{}
+export type Props = State & Actions & RouteComponentProps;
 
-interface State {
-  token?: string,
-}
+class Config extends React.Component<Props> {
 
-class Config extends React.Component<Props, State> {
+  token: string;
 
   constructor(props: Props) {
     super(props);
-    this.state = {
-      token: localStorage.getItem("access_token") as string || ''
-    };
+    this.token = localStorage.getItem('access_token') || '';
     this.onTokenChange = this.onTokenChange.bind(this);
     this.onClick = this.onClick.bind(this);
   }
 
   onTokenChange(event: any) {
-    this.setState({token: event.target.value});
+    this.token = event.target.value;
   }
 
   onClick(event: any) {
-    if (this.state.token && this.state.token.length > 0) {
-      localStorage.setItem('access_token', this.state.token);
+    if (this.token && this.token.length > 0) {
+      localStorage.setItem('access_token', this.token);
+      this.props.history.push('/');
+      Api.setToken(this.token);
+      Api.GetDevices().then((v) => {
+        if (v) {
+          this.props.updateDevices(v);
+        }
+      });
+      Api.GetAppliances().then((v) => {
+        if (v) {
+          this.props.updateAppliances(v);
+        }
+      });
     } else {
       localStorage.removeItem('access_token');
     }
@@ -38,7 +50,7 @@ class Config extends React.Component<Props, State> {
         <div className={styles.warning}>{i18n.t('product_warning')}</div>
         <div >{i18n.t('get_access_token')} <a href="https://home.nature.global">{i18n.t('here')}</a></div>
         <label>{i18n.t('access_token')}
-        <input value={this.state.token} autoFocus onChange={this.onTokenChange}/>
+        <input defaultValue={this.token} autoFocus onChange={this.onTokenChange}/>
         </label>
         <button onClick={this.onClick}>{i18n.t('save')}</button>
       </div>
@@ -47,4 +59,4 @@ class Config extends React.Component<Props, State> {
 
 }
 
-export default Config;
+export default connect(mapStateToProps, mapDispatchToProps)(Config);
