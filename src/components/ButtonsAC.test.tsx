@@ -372,9 +372,7 @@ describe('test ButtonsAC', () => {
     };
     const ac= Enzyme.mount(<ButtonsAC appliance={data} />);
     const selects = ac.find('select');
-    expect(selects.get(0).props.defaultValue).toBe(data.settings!.temp);
-    expect(selects.get(1).props.defaultValue).toBe(data.settings!.dir);
-    expect(selects.get(2).props.defaultValue).toBe(data.settings!.vol);
+    expect(selects.length).toBe(0);
   });
 
   test('test to change mode value', () => {

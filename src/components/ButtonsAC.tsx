@@ -14,17 +14,17 @@ interface ACSettingProps {
 const AirConSettings : React.FC<ACSettingProps> = React.memo((props) => {
   return (
     <div>
-      { props.range.temp &&
+      {props.range.temp && props.range.temp.filter((v) => v !== '').length > 0 &&
         <select className={styles.temp} defaultValue={props.setting.temp} onChange={(event) => {if (props.onChange) props.onChange({temperature: event.target.value})}} >
           { props.range.temp!.map((v) => <option value={v} key={v}>{v}</option>) }
         </select>
       }
-      { props.range.dir &&
+      {props.range.dir && props.range.dir.filter((v) => v !== '').length > 0 &&
         <select className={styles.dir} defaultValue={props.setting.dir} onChange={(event) => {if (props.onChange) props.onChange({air_direction: event.target.value})}} >
           { props.range.dir!.map((v) => <option value={v} key={v}>{v}</option>) }
         </select>
       }
-      {props.range.vol &&
+      {props.range.vol && props.range.vol.filter((v) => v !== '').length > 0 &&
         <select className={styles.vol} defaultValue={props.setting.vol} onChange={(event) => {if (props.onChange) props.onChange({air_volume: event.target.value})}} >
           { props.range.vol!.map((v) => <option value={v} key={v}>{v}</option>) }
         </select>
