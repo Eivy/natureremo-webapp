@@ -46,11 +46,8 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
   return (
     <div className={styles.buttons_ac} >
       <div className={styles.buttons} >
-        <label className={styles.button_power}>
-          <input type="checkbox" defaultChecked={props.appliance.settings!.button !== 'power-off'} onChange={(event) => {if (props.onChange) props.onChange({button: event.target.checked ? '' : 'power-off'})}} />
-          <span>ON</span><span>OFF</span>
-        </label>
         <div className={styles.mode}>
+          <Button button={{name: i18n.t('power'), image: '', label: i18n.t('OFF')}} onClick={(event) => {if (props.onChange) props.onChange({button: 'power-off'})}} />
           { Object.keys(props.appliance.aircon!.range!.modes!).map((v) => <Button key={v} button={{name: i18n.t(v), image: 'ico_ac_' + v, label: i18n.t(v)}} onClick={(event) => {if(props.onChange) props.onChange({operation_mode: v})}}>{v}</Button>) }
         </div>
         <div className={styles.settings}>

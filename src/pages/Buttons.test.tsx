@@ -182,8 +182,8 @@ describe('test buttons', () => {
         </Router>
       </Provider>
     );
-    const button = buttons.find('input').at(0);
-    button.simulate('change', {target: {checked: true}});
+    const button = buttons.find('button').at(0);
+    button.simulate('click');
     setImmediate(() => {
       expect(mockSendAirconSettings.mock.calls.length).toBe(1);
     });

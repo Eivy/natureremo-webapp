@@ -95,68 +95,6 @@ describe('test ButtonsAC', () => {
     expect(mockConsole.mock.calls.length).toBe(1);
   });
 
-  test('test default value "on"', () => {
-    const data: RemoAPI.Appliance = {
-      id: "test",
-      type: "AC",
-      aircon: {
-        range: {
-          modes: {
-            warm: {
-              temp: ['18','19','20','21'],
-              vol: ['1','2','3','4','auto',''],
-              dir: ['1','2','3','4','swing','auto',''],
-            },
-          },
-          fixedButtons: ['power-off'],
-        },
-        tempUnit: 'c',
-      },
-      settings: {
-        mode: 'warm',
-        temp: '18',
-        vol: '2',
-        dir: 'auto',
-        button: '',
-      },
-      signals: []
-    };
-    const ac= Enzyme.mount(<ButtonsAC appliance={data} onChange={(data) => console.log(data)} />);
-    const input = ac.find('input[type="checkbox"]');
-    expect(input.get(0).props.defaultChecked).toBe(true);
-  });
-
-  test('test default value "off"', () => {
-    const data: RemoAPI.Appliance = {
-      id: "test",
-      type: "AC",
-      aircon: {
-        range: {
-          modes: {
-            warm: {
-              temp: ['18','19','20','21'],
-              vol: ['1','2','3','4','auto',''],
-              dir: ['1','2','3','4','swing','auto',''],
-            },
-          },
-          fixedButtons: ['power-off'],
-        },
-        tempUnit: 'c',
-      },
-      settings: {
-        mode: 'warm',
-        temp: '18',
-        vol: '2',
-        dir: 'auto',
-        button: 'power-off',
-      },
-      signals: []
-    };
-    const ac= Enzyme.mount(<ButtonsAC appliance={data} onChange={(data) => console.log(data)} />);
-    const input = ac.find('input[type="checkbox"]');
-    expect(input.get(0).props.defaultChecked).toBe(false);
-  });
-
   test('test click power button', () => {
     const data: RemoAPI.Appliance = {
       id: "test",
@@ -204,12 +142,10 @@ describe('test ButtonsAC', () => {
       signals: []
     };
     const ac= Enzyme.mount(<ButtonsAC appliance={data} onChange={(data) => console.log(data)} />);
-    const input = ac.find('input[type="checkbox"]');
-    input.at(0).simulate('change', { 'target': {'checked': true}});
+    const input = ac.find('button');
+    input.at(0).simulate('click');
     expect(mockConsole.mock.calls.length).toBe(1);
-    expect(mockConsole.mock.calls[0][0]).toEqual({button: ''});
-    input.at(0).simulate('change', { 'target': {'checked': false}});
-    expect(mockConsole.mock.calls[1][0]).toEqual({button: 'power-off'});
+    expect(mockConsole.mock.calls[0][0]).toEqual({button: 'power-off'});
   });
 
   test('test render warm', () => {
@@ -423,7 +359,7 @@ describe('test ButtonsAC', () => {
     };
     const ac= Enzyme.mount(<ButtonsAC appliance={data} onChange={(data) => console.log(data)} />);
     const selects = ac.find('.mode button');
-    selects.at(1).simulate('click');
+    selects.at(2).simulate('click');
     expect(mockConsole.mock.calls[0][0]).toEqual({operation_mode: 'cool'});
   });
 
@@ -630,7 +566,7 @@ describe('test ButtonsAC', () => {
       signals: []
     };
     const ac= Enzyme.mount(<ButtonsAC appliance={data} />);
-    const input = ac.find('input[type="checkbox"]');
+    const input = ac.find('.mode button');
     input.at(0).simulate('change', { 'target': {'checked': true}});
     let selects = ac.find('.mode button');
     selects.at(1).simulate('click');
