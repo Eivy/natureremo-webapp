@@ -1,8 +1,27 @@
+$border-size: 2px;
 .buttons_ac {
   width: 100%;
   min-height: 100%;
   .buttons {
     .button_power {
+    }
+    .on {
+      position: relative;
+      box-sizing: content-box;
+    }
+    .on::after {
+      position: absolute;
+      box-sizing: content-box;
+      content: "";
+      padding: 0;
+      border: $border-size solid;
+      border-radius: 50%;
+      height: 100%;
+      width: 100%;
+      top: -$border-size;
+      left: -$border-size;
+      border-color: lightgray lightgray #61dafb #61dafb;
+      animation: circle-spin infinite 3s linear;
     }
     .mode, .settings {
       display: flex;
@@ -14,5 +33,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
+  }
+}
+
+@keyframes circle-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

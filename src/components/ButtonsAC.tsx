@@ -47,15 +47,33 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
     <div className={styles.buttons_ac} >
       <div className={styles.buttons} >
         <div className={styles.mode}>
-          <Button button={{name: i18n.t('power'), image: '', label: i18n.t('OFF')}} onClick={(event) => {if (props.onChange) props.onChange({button: 'power-off'})}} />
-          { Object.keys(props.appliance.aircon!.range!.modes!).map((v) => <Button key={v} button={{name: i18n.t(v), image: 'ico_ac_' + v, label: i18n.t(v)}} onClick={(event) => {if(props.onChange) props.onChange({operation_mode: v})}}>{v}</Button>) }
+          <Button className={props.appliance.settings!.button === 'power-off' ? styles.on: ''} button={{name: i18n.t('power'), image: '', label: i18n.t('OFF')}} onClick={(event) => {if (props.onChange) props.onChange({button: 'power-off'})}} />
+          { Object.keys(props.appliance.aircon!.range!.modes!).map((v) => (
+            <Button
+              key={v}
+              className={ props.appliance.settings!.button === '' && props.appliance.settings!.mode === v ? styles.on: ''}
+              button={{name: i18n.t(v), image: 'ico_ac_' + v, label: i18n.t(v)}}
+              onClick={(event) => {if(props.onChange) props.onChange({operation_mode: v})}}
+            >{v}</Button>)
+          )}
         </div>
         <div className={styles.settings}>
-          { props.appliance.settings && (props.appliance.aircon!.range!.modes! as any)[props.appliance.settings!.mode!] && <AirConSettings setting={props.appliance.settings!} range={(props.appliance.aircon!.range!.modes! as any)[props.appliance.settings!.mode!]} onChange={props.onChange!} />}
+          {
+            props.appliance.settings && (props.appliance.aircon!.range!.modes! as any)[props.appliance.settings!.mode!] &&
+            <AirConSettings setting={props.appliance.settings!} range={(props.appliance.aircon!.range!.modes! as any)[props.appliance.settings!.mode!]} onChange={props.onChange!} />
+          }
         </div>
       </div>
       <div className={styles.signals} >
-        { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} onClick={props.onSignalClick ? (event) => {props.onSignalClick!(v)} : (event) => {}} />) }
+        {
+          props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => (
+            <Signal
+              key={i}
+              signal={v}
+              onClick={props.onSignalClick ? (event) => {props.onSignalClick!(v)} : (event) => {}}
+            />)
+          )
+        }
       </div>
     </div>
   )
