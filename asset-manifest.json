@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/natureremo-webapp/static/css/main.d839706e.chunk.css",
-    "main.js": "/natureremo-webapp/static/js/main.72b8ce8f.chunk.js",
-    "main.js.map": "/natureremo-webapp/static/js/main.72b8ce8f.chunk.js.map",
+    "main.css": "/natureremo-webapp/static/css/main.c2b3eb61.chunk.css",
+    "main.js": "/natureremo-webapp/static/js/main.2c513069.chunk.js",
+    "main.js.map": "/natureremo-webapp/static/js/main.2c513069.chunk.js.map",
     "runtime-main.js": "/natureremo-webapp/static/js/runtime-main.e72e7595.js",
     "runtime-main.js.map": "/natureremo-webapp/static/js/runtime-main.e72e7595.js.map",
-    "static/js/2.945b955b.chunk.js": "/natureremo-webapp/static/js/2.945b955b.chunk.js",
-    "static/js/2.945b955b.chunk.js.map": "/natureremo-webapp/static/js/2.945b955b.chunk.js.map",
+    "static/js/2.ecffbd79.chunk.js": "/natureremo-webapp/static/js/2.ecffbd79.chunk.js",
+    "static/js/2.ecffbd79.chunk.js.map": "/natureremo-webapp/static/js/2.ecffbd79.chunk.js.map",
     "index.html": "/natureremo-webapp/index.html",
-    "precache-manifest.2ed4f8b8bf67de7acf0382eaa1825baa.js": "/natureremo-webapp/precache-manifest.2ed4f8b8bf67de7acf0382eaa1825baa.js",
+    "precache-manifest.e14ae1be04e4a361b99d0814470bfd2b.js": "/natureremo-webapp/precache-manifest.e14ae1be04e4a361b99d0814470bfd2b.js",
     "service-worker.js": "/natureremo-webapp/service-worker.js",
-    "static/css/main.d839706e.chunk.css.map": "/natureremo-webapp/static/css/main.d839706e.chunk.css.map",
-    "static/js/2.945b955b.chunk.js.LICENSE.txt": "/natureremo-webapp/static/js/2.945b955b.chunk.js.LICENSE.txt",
+    "static/css/main.c2b3eb61.chunk.css.map": "/natureremo-webapp/static/css/main.c2b3eb61.chunk.css.map",
+    "static/js/2.ecffbd79.chunk.js.LICENSE.txt": "/natureremo-webapp/static/js/2.ecffbd79.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/natureremo-webapp/static/media/logo.a7d3cf01.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.e72e7595.js",
-    "static/js/2.945b955b.chunk.js",
-    "static/css/main.d839706e.chunk.css",
-    "static/js/main.72b8ce8f.chunk.js"
+    "static/js/2.ecffbd79.chunk.js",
+    "static/css/main.c2b3eb61.chunk.css",
+    "static/js/main.2c513069.chunk.js"
   ]
 }

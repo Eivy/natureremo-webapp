@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f292a5d23e6c07d61aaf4ac29e034c5c",
+    "revision": "fa724015c08479a0198bf7512477280d",
     "url": "/natureremo-webapp/index.html"
   },
   {
-    "revision": "018d07851119b3c6c5d5",
-    "url": "/natureremo-webapp/static/css/main.d839706e.chunk.css"
+    "revision": "8752ed400951e8ae2a51",
+    "url": "/natureremo-webapp/static/css/main.c2b3eb61.chunk.css"
   },
   {
-    "revision": "56236928cdea1f1d9fc1",
-    "url": "/natureremo-webapp/static/js/2.945b955b.chunk.js"
+    "revision": "b5beaab59de5333bb84d",
+    "url": "/natureremo-webapp/static/js/2.ecffbd79.chunk.js"
   },
   {
     "revision": "44313165c0a5968f8454384fc21197fc",
-    "url": "/natureremo-webapp/static/js/2.945b955b.chunk.js.LICENSE.txt"
+    "url": "/natureremo-webapp/static/js/2.ecffbd79.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "018d07851119b3c6c5d5",
-    "url": "/natureremo-webapp/static/js/main.72b8ce8f.chunk.js"
+    "revision": "8752ed400951e8ae2a51",
+    "url": "/natureremo-webapp/static/js/main.2c513069.chunk.js"
   },
   {
     "revision": "82aeba228071a0b5b550",
