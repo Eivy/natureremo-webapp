@@ -5,29 +5,40 @@ import styles from './ButtonsAC.module.scss';
 import Signal from './Signal';
 import Button from './Button';
 
+interface AirConSettings {
+  temperature?: string,
+  operation_mode?: string,
+  air_volume?: string,
+  air_direction?: string,
+  button?: string,
+};
+
 interface ACSettingProps {
   setting: RemoAPI.AirConParams,
   range: RemoAPI.AirConRangeMode,
-  onChange?: (data: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }) => void,
+  onChange?: (data: RemoAPI.AirConParams) => void,
 }
 
 const AirConSettings : React.FC<ACSettingProps> = React.memo((props) => {
+  const target: {[key: string]: (v: string) => AirConSettings} = {
+    'vol': (v: string): AirConSettings => { return {air_volume: v}; },
+    'dir': (v: string): AirConSettings => { return {air_direction: v}; },
+    'temp': (v: string): AirConSettings => { return {temperature: v}; },
+  };
   return (
     <div>
-      {props.range.temp && props.range.temp.filter((v) => v !== '').length > 0 &&
-        <select className={styles.temp} defaultValue={props.setting.temp} onChange={(event) => {if (props.onChange) props.onChange({temperature: event.target.value})}} >
-          { props.range.temp!.map((v) => <option value={v} key={v}>{v}</option>) }
-        </select>
-      }
-      {props.range.dir && props.range.dir.filter((v) => v !== '').length > 0 &&
-        <select className={styles.dir} defaultValue={props.setting.dir} onChange={(event) => {if (props.onChange) props.onChange({air_direction: event.target.value})}} >
-          { props.range.dir!.map((v) => <option value={v} key={v}>{v}</option>) }
-        </select>
-      }
-      {props.range.vol && props.range.vol.filter((v) => v !== '').length > 0 &&
-        <select className={styles.vol} defaultValue={props.setting.vol} onChange={(event) => {if (props.onChange) props.onChange({air_volume: event.target.value})}} >
-          { props.range.vol!.map((v) => <option value={v} key={v}>{v}</option>) }
-        </select>
+      {
+        Object.keys(props.range).map((range) => (
+          (props.range as any)[range].filter((v: string) => v !== '').length > 0 &&
+          <select
+            key={range}
+            className={range}
+            defaultValue={(props.setting as any)[range]}
+            onChange={(event) => {if (props.onChange) props.onChange(target[range](event.target.value as string))}}
+          >
+            { (props.range as any)[range].map((v: string) => <option value={v} key={v}>{v}</option>) }
+          </select>
+        ))
       }
     </div>
   );
@@ -35,7 +46,7 @@ const AirConSettings : React.FC<ACSettingProps> = React.memo((props) => {
 
 interface Props {
   appliance: RemoAPI.Appliance,
-  onChange?: (data: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }) => void,
+  onChange?: (data: AirConSettings) => void,
   onSignalClick?: (button: RemoAPI.Signal) => void,
 }
 

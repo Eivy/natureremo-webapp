@@ -175,10 +175,12 @@ describe('test ButtonsAC', () => {
       signals: []
     };
     const ac= Enzyme.mount(<ButtonsAC appliance={data} />);
-    const selects = ac.find('select');
-    expect(selects.get(0).props.defaultValue).toBe(data.settings!.temp);
-    expect(selects.get(1).props.defaultValue).toBe(data.settings!.dir);
-    expect(selects.get(2).props.defaultValue).toBe(data.settings!.vol);
+    let select = ac.find('select[className="temp"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.temp);
+    select = ac.find('select[className="vol"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.vol);
+    select = ac.find('select[className="dir"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.dir);
   });
 
   test('test render cool', () => {
@@ -208,10 +210,12 @@ describe('test ButtonsAC', () => {
       signals: []
     };
     const ac= Enzyme.mount(<ButtonsAC appliance={data} />);
-    const selects = ac.find('select');
-    expect(selects.get(0).props.defaultValue).toBe(data.settings!.temp);
-    expect(selects.get(1).props.defaultValue).toBe(data.settings!.dir);
-    expect(selects.get(2).props.defaultValue).toBe(data.settings!.vol);
+    let select = ac.find('select[className="temp"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.temp);
+    select = ac.find('select[className="vol"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.vol);
+    select = ac.find('select[className="dir"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.dir);
   });
 
   test('test render dry', () => {
@@ -241,10 +245,12 @@ describe('test ButtonsAC', () => {
       signals: []
     };
     const ac= Enzyme.mount(<ButtonsAC appliance={data} />);
-    const selects = ac.find('select');
-    expect(selects.get(0).props.defaultValue).toBe(data.settings!.temp);
-    expect(selects.get(1).props.defaultValue).toBe(data.settings!.dir);
-    expect(selects.get(2).props.defaultValue).toBe(data.settings!.vol);
+    let select = ac.find('select[className="temp"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.temp);
+    select = ac.find('select[className="vol"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.vol);
+    select = ac.find('select[className="dir"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.dir);
   });
 
   test('test render blow', () => {
@@ -274,10 +280,12 @@ describe('test ButtonsAC', () => {
       signals: []
     };
     const ac= Enzyme.mount(<ButtonsAC appliance={data} />);
-    const selects = ac.find('select');
-    expect(selects.get(0).props.defaultValue).toBe(data.settings!.temp);
-    expect(selects.get(1).props.defaultValue).toBe(data.settings!.dir);
-    expect(selects.get(2).props.defaultValue).toBe(data.settings!.vol);
+    let select = ac.find('select[className="temp"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.temp);
+    select = ac.find('select[className="vol"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.vol);
+    select = ac.find('select[className="dir"]');
+    expect(select.get(0).props.defaultValue).toBe(data.settings!.dir);
   });
 
   test('test render auto', () => {
@@ -461,7 +469,7 @@ describe('test ButtonsAC', () => {
       },
       signals: []
     };
-    const ac= Enzyme.mount(<ButtonsAC appliance={data} onChange={(data) => console.log(data)} />);
+    const ac = Enzyme.mount(<ButtonsAC appliance={data} onChange={(data) => console.log(data)} />);
     const selects = ac.find('select[className^="vol"]');
     selects.at(0).simulate('change', { target: { value: '1' } });
     expect(mockConsole.mock.calls[0][0]).toEqual({air_volume: '1'});
