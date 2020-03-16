@@ -51,11 +51,7 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
           { Object.keys(props.appliance.aircon!.range!.modes!).map((v) => <Button key={v} button={{name: i18n.t(v), image: 'ico_ac_' + v, label: i18n.t(v)}} onClick={(event) => {if(props.onChange) props.onChange({operation_mode: v})}}>{v}</Button>) }
         </div>
         <div className={styles.settings}>
-          { props.appliance.aircon!.range!.modes!.auto && props.appliance.settings!.mode === 'auto' &&  <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.auto} onChange={props.onChange!} />}
-          { props.appliance.aircon!.range!.modes!.warm && props.appliance.settings!.mode === 'warm' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.warm} onChange={props.onChange!} />}
-          { props.appliance.aircon!.range!.modes!.cool && props.appliance.settings!.mode === 'cool' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.cool} onChange={props.onChange!} />}
-          { props.appliance.aircon!.range!.modes!.blow && props.appliance.settings!.mode === 'blow' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.blow} onChange={props.onChange!} />}
-          { props.appliance.aircon!.range!.modes!.dry && props.appliance.settings!.mode === 'dry' && <AirConSettings setting={props.appliance.settings!} range={props.appliance.aircon!.range!.modes!.dry} onChange={props.onChange!} />}
+          { props.appliance.settings && (props.appliance.aircon!.range!.modes! as any)[props.appliance.settings!.mode!] && <AirConSettings setting={props.appliance.settings!} range={(props.appliance.aircon!.range!.modes! as any)[props.appliance.settings!.mode!]} onChange={props.onChange!} />}
         </div>
       </div>
       <div className={styles.signals} >
