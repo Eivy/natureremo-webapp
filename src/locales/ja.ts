@@ -1,5 +1,7 @@
 export default {
   translation: {
+    dir: '風向',
+    vol: '風量',
     cool: '冷房',
     warm: '暖房',
     auto: '自動',

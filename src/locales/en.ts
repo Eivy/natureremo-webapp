@@ -1,5 +1,7 @@
 export default {
   translation: {
+    dir: 'Air Direction',
+    vol: 'Air Volume',
     cool: 'Cool',
     warm: 'Warm',
     auto: 'Auto',

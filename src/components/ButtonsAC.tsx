@@ -30,14 +30,16 @@ const AirConSettings : React.FC<ACSettingProps> = React.memo((props) => {
       {
         Object.keys(props.range).map((range) => (
           (props.range as any)[range].filter((v: string) => v !== '').length > 0 &&
-          <select
-            key={range}
-            className={range}
-            defaultValue={(props.setting as any)[range]}
-            onChange={(event) => {if (props.onChange) props.onChange(target[range](event.target.value as string))}}
-          >
-            { (props.range as any)[range].map((v: string) => <option value={v} key={v}>{v}</option>) }
-          </select>
+          <label key={range} >
+            { i18n.t(range) }:
+            <select
+              className={range}
+              defaultValue={(props.setting as any)[range]}
+              onChange={(event) => {if (props.onChange) props.onChange(target[range](event.target.value as string))}}
+            >
+              { (props.range as any)[range].map((v: string) => <option value={v} key={v}>{v}</option>) }
+            </select>
+          </label>
         ))
       }
     </div>
