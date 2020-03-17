@@ -58,4 +58,5 @@ export const components: { [key: string]: JSX.Element } = {
   "ico_light_all": <Icons.LightAll />,
   "ico_light_night": <Icons.LightNight />,
   "ico_light_favorite": <Icons.LightFavorite />,
+  "ico_ac_dry": <Icons.Dry />,
 };

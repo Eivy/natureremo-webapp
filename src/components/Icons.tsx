@@ -753,3 +753,24 @@ export const LightFavorite: React.FC = () => {
   );
 };
 
+export const Dry: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.lightfavorite, styles.fill].join(" ")} viewBox="0 0 200 200" fillRule="evenodd">
+      <path d="
+        M 100, 30
+        Q 50 70,50 120
+        a 50 50 0 1 0 100 0
+        Q 150 70,100 30
+        z
+        M 90,160
+        a 40 40 0 0 1 -30 -30
+        a 2 2 0 0 1 5 0
+        a 35 35 0 0 0 25 25
+        a 2 2 0 0 1 0 5
+        z
+      "/>
+      Eco
+    </svg>
+  );
+};
+
