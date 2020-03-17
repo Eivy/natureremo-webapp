@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/natureremo-webapp/static/css/main.c2b3eb61.chunk.css",
-    "main.js": "/natureremo-webapp/static/js/main.f10f4f3a.chunk.js",
-    "main.js.map": "/natureremo-webapp/static/js/main.f10f4f3a.chunk.js.map",
+    "main.js": "/natureremo-webapp/static/js/main.d161e266.chunk.js",
+    "main.js.map": "/natureremo-webapp/static/js/main.d161e266.chunk.js.map",
     "runtime-main.js": "/natureremo-webapp/static/js/runtime-main.e72e7595.js",
     "runtime-main.js.map": "/natureremo-webapp/static/js/runtime-main.e72e7595.js.map",
     "static/js/2.ecffbd79.chunk.js": "/natureremo-webapp/static/js/2.ecffbd79.chunk.js",
     "static/js/2.ecffbd79.chunk.js.map": "/natureremo-webapp/static/js/2.ecffbd79.chunk.js.map",
     "index.html": "/natureremo-webapp/index.html",
-    "precache-manifest.54a8d28fbe8a100df2fc8d819455e030.js": "/natureremo-webapp/precache-manifest.54a8d28fbe8a100df2fc8d819455e030.js",
+    "precache-manifest.f4a12eca61249d71ac948f9a4603b7ea.js": "/natureremo-webapp/precache-manifest.f4a12eca61249d71ac948f9a4603b7ea.js",
     "service-worker.js": "/natureremo-webapp/service-worker.js",
     "static/css/main.c2b3eb61.chunk.css.map": "/natureremo-webapp/static/css/main.c2b3eb61.chunk.css.map",
     "static/js/2.ecffbd79.chunk.js.LICENSE.txt": "/natureremo-webapp/static/js/2.ecffbd79.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.e72e7595.js",
     "static/js/2.ecffbd79.chunk.js",
     "static/css/main.c2b3eb61.chunk.css",
-    "static/js/main.f10f4f3a.chunk.js"
+    "static/js/main.d161e266.chunk.js"
   ]
 }

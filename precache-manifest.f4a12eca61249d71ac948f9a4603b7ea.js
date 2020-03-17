@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dca86aa122f488aa51f63df66761a2be",
+    "revision": "c31bbe08e4406dafa1a64a7868379b14",
     "url": "/natureremo-webapp/index.html"
   },
   {
-    "revision": "6a65be14aa1f4d976966",
+    "revision": "72dff2db042dd1702c8f",
     "url": "/natureremo-webapp/static/css/main.c2b3eb61.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/natureremo-webapp/static/js/2.ecffbd79.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6a65be14aa1f4d976966",
-    "url": "/natureremo-webapp/static/js/main.f10f4f3a.chunk.js"
+    "revision": "72dff2db042dd1702c8f",
+    "url": "/natureremo-webapp/static/js/main.d161e266.chunk.js"
   },
   {
     "revision": "82aeba228071a0b5b550",
