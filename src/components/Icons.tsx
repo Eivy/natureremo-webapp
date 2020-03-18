@@ -755,7 +755,7 @@ export const LightFavorite: React.FC = () => {
 
 export const Dry: React.FC = () => {
   return (
-    <svg className={[styles.icon, styles.lightfavorite, styles.fill].join(" ")} viewBox="0 0 200 200" fillRule="evenodd">
+    <svg className={[styles.icon, styles.dry, styles.fill].join(" ")} viewBox="0 0 200 200" fillRule="evenodd">
       <path d="
         M 100, 30
         Q 50 70,50 120
@@ -769,6 +769,93 @@ export const Dry: React.FC = () => {
         a 2 2 0 0 1 0 5
         z
       "/>
+      Eco
+    </svg>
+  );
+};
+
+export const Broadcast: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.cool].join(" ")} viewBox="0 0 200 200" >
+      <path d="
+        M170,100
+        v50
+        a 10 10 0 0 1 -10 10
+        h-120
+        a 10 10 0 0 1 -10 -10
+        v-100
+        a 10 10 0 0 1 10 -10
+        h70
+        M167.5,37.5
+        a 3 3 0 0 0 3 3
+        M 147.5,37.5
+        a 25 25 0 0 0 25 25
+        M 127.5,37.5
+        a 45 45 0 0 0 45 45
+      " />
+      Broadcast
+    </svg>
+  );
+};
+
+export const Cool: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.cool].join(" ")} viewBox="0 0 200 200" >
+      <path d="
+        M100,50
+        v100
+        M50,100
+        h100
+      " />
+      <g transform="rotate(45, 100, 100)">
+        <path d="
+          M 60,85
+          h 25 v-25
+          M 115,60
+          v 25 h 25
+          M 115,140
+          v -25 h 25
+          M 60,115
+          h 25 v 25
+        " />
+      </g>
+      Cool
+    </svg>
+  );
+};
+
+export const Warm: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.fan, styles.fill].join(" ")} viewBox="0 0 200 200" fillRule="evenodd">
+      <path d="
+        M 70,70
+        a 60 60 0 1 0 60 0
+        M 70,70
+        a 40 40 0 0 0 10 50
+        A 100 100 0 0 1 110 30
+        A 30 30 0 0 0 130 70
+        M 58 157
+        a 54 54 0 1 0 60 -85
+        a 60 60 0 0 1 -20 70
+        a 40 40 0 0 0 0 -20
+        A 60 60 0 0 1 58 157
+      " />
+      Warm
+    </svg>
+  );
+};
+
+export const Eco: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.eco, styles.fill].join(" ")} viewBox="0 0 200 200" >
+      <path d="
+        M 90 70
+        Q 133 109,160 160
+        Q 60 160, 50 60
+        Q 47 48, 40 40
+        Q 190 50, 162 159
+        Q 110 70, 70 70
+      " />
       Eco
     </svg>
   );
