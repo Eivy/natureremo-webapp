@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/natureremo-webapp/precache-manifest.f4a12eca61249d71ac948f9a4603b7ea.js"
+  "/natureremo-webapp/precache-manifest.99ecc41910788f3e04638c9bb1028288.js"
 );
 
 self.addEventListener('message', (event) => {
