@@ -63,4 +63,6 @@ export const components: { [key: string]: JSX.Element } = {
   "ico_ac_cool": <Icons.Cool />,
   "ico_bloadcast": <Icons.Broadcast />,
   "ico_ac_eco": <Icons.Eco />,
+  "ico_tool": <Icons.Tool />,
+  "ico_setting": <Icons.Gear />,
 };

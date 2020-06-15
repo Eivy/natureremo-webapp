@@ -861,3 +861,22 @@ export const Eco: React.FC = () => {
   );
 };
 
+export const Tool: React.FC = () => {
+  return (
+    <svg className={[styles.icon, styles.setting].join(" ")} viewBox="0 0 200 200" >
+      <path d="
+        M 70 150
+        a 10 10 0 0 1 -20 -20
+        l 50 -50
+        a 30 30 0 0 1 45 -35
+        l -20 20
+        a 5 5 0 1 0 10 10
+        l 20 -20
+        a 30 30 0 0 1 -35 45
+        l -50 50
+      " />
+      Tool
+    </svg>
+  );
+};
+
