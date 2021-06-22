@@ -2,7 +2,7 @@ import * as React from 'react';
 import {render} from '@testing-library/react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16'
-import ButtonsIR from './ButtonsIR';
+import ButtonsIR from '../../components/ButtonsIR';
 
 Enzyme.configure({ adapter: new Adapter() })
 const mockConsole = jest.spyOn(console, 'log');

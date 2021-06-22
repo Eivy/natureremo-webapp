@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import Signal from './Signal';
+import Signal from '../../components/Signal';
 
 const data: RemoAPI.Signal = {
   image: "ico_lightup",

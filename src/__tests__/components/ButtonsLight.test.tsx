@@ -2,7 +2,7 @@ import * as React from 'react';
 import {render} from '@testing-library/react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import ButtonsLight from './ButtonsLight';
+import ButtonsLight from '../../components/ButtonsLight';
 Enzyme.configure({adapter: new Adapter()});
 
 test('wrong appliance', () => {

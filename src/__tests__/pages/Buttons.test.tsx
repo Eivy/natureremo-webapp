@@ -6,11 +6,11 @@ import { withRouter } from 'react-router';
 import { MemoryRouter as Router, Route } from 'react-router-dom';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import store, { AppState } from '../stores';
-import { actions } from '../actions';
-import { reducer } from '../states';
-import Buttons from './Buttons';
-import Api from '../Api';
+import store, { AppState } from '../../stores';
+import { actions } from '../../actions';
+import { reducer } from '../../states';
+import Buttons from '../../pages/Buttons';
+import Api from '../../Api';
 
 describe('test buttons', () => {
 

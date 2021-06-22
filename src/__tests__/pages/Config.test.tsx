@@ -1,23 +1,21 @@
 import * as React from 'react'
 import { Router, Route } from 'react-router-dom';
 import { createStore, combineReducers } from 'redux';
-import { reducer } from '../states';
+import { reducer } from '../../states';
 import { Provider } from 'react-redux';
 import { withRouter } from 'react-router';
 import { render } from '@testing-library/react'
 import { createMemoryHistory as createHistory } from 'history';
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import Config from './Config';
-import { AppState } from '../stores';
-import Api from '../Api';
+import Config from '../../pages/Config';
+import { AppState } from '../../stores';
+import Api from '../../Api';
 
 Enzyme.configure({ adapter: new Adapter() })
 
 const mockGetDevices = jest.spyOn(Api, 'GetDevices');
 const mockGetAppliances = jest.spyOn(Api, 'GetAppliances');
-mockGetDevices.mockResolvedValue(new Promise((resolve, reject) => resolve([{"id": "device_id", "name": "test_device", "newest_events": {}}])));
-mockGetAppliances.mockResolvedValue(new Promise((resolve, reject) => resolve([{"id": "appliance_id", "nickname": "test_appliance", "device": {"id": "device_id"}}])));
 
 beforeEach(() => {
   localStorage.clear()
@@ -45,6 +43,8 @@ test('default input value', () => {
 });
 
 test('save token to localStorage', () => {
+  mockGetDevices.mockResolvedValue(new Promise((resolve, reject) => resolve([{"id": "device_id", "name": "test_device", "newest_events": {}}])));
+  mockGetAppliances.mockResolvedValue(new Promise((resolve, reject) => resolve([{"id": "appliance_id", "nickname": "test_appliance", "device": {"id": "device_id"}}])));
   const hist = createHistory();
   const inputValue = 'saved to localStorage';
   const store = createStore(

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render } from '@testing-library/react'
-import Device from './Device';
+import Device from '../../components/Device';
 
 const device: RemoAPI.Device = {
   id: 'test',

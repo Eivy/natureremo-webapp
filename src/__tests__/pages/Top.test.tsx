@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createStore, combineReducers } from 'redux';
-import { reducer } from '../states';
+import { reducer } from '../../states';
 import { withRouter } from 'react-router';
 import { Router, Route } from 'react-router-dom';
 import { createMemoryHistory as createHistory } from 'history';
@@ -8,10 +8,10 @@ import { render } from '@testing-library/react'
 import { Provider } from 'react-redux';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Top from './Top';
-import store, { AppState } from '../stores';
-import { actions } from '../actions';
-import Api from '../Api';
+import Top from '../../pages/Top';
+import store, { AppState } from '../../stores';
+import { actions } from '../../actions';
+import Api from '../../Api';
 
 describe('test top page', () => {
   Enzyme.configure({ adapter: new Adapter() });

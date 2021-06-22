@@ -1,6 +1,6 @@
 import * as cp from 'child_process'
 import * as path from 'path'
-import Api from './Api'
+import Api from '../Api'
 
 const sleep = (msec: number) => new Promise((resolve: Function) => setTimeout(resolve, msec))
 let sampleDevices: Array<RemoAPI.Device> = [{
@@ -134,7 +134,7 @@ describe('Api test', () => {
   Api.setApi('http://localhost:8000//1/')
   let server: cp.ChildProcessWithoutNullStreams
   beforeAll(async () => {
-    server = cp.spawn('node', [path.resolve(__dirname, '..', 'mock/mock.js')])
+    server = cp.spawn('node', [path.resolve(__dirname, '..', '..', 'mock/mock.js')])
     server.stdout.setEncoding('utf-8')
     server.stdout.on('data', (data) => {
       console.log(data)
