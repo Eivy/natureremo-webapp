@@ -9,7 +9,6 @@ import Top from './pages/Top';
 import Config from './pages/Config';
 import Buttons from './pages/Buttons';
 import {Gear} from './components/Icons';
-import logo from './logo.svg';
 import Api from './Api';
 
 type Props = State & Actions;
@@ -38,7 +37,7 @@ class App extends React.Component<Props> {
     return (
       <Router basename="/natureremo-webapp">
         <header>
-          <Link to="/" className="logo"><img src={logo} alt="logo"/>RemoWebApp</Link>
+          <Link to="/" className="logo">RemoWebApp</Link>
           <Link to="/config" className="config"><Gear/></Link>
         </header>
         <div id="main">

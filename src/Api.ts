@@ -1,7 +1,4 @@
 /// <reference path="schema.d.ts" />
-import * as path from 'path';
-import * as url from 'url';
-
 class Api {
   private static basePath: string = "https://api.nature.global/1/";
   private static requestHeaders: { [key: string]: string } = {};
@@ -31,26 +28,26 @@ class Api {
   }
 
   static async SendSignal(signal_id: string): Promise<void> {
-    return Api.post(path.join('signals', signal_id, 'send'), null);
+    return Api.post(`signals/${signal_id}/send`, null);
   }
 
   static async SendTVButton(appliance_id: string, button: string): Promise<RemoAPI.TVState> {
-    return Api.post(path.join('appliances', appliance_id, 'tv'), { button: button });
+    return Api.post(`appliances/${appliance_id}/tv`, { button: button });
   }
 
   static async SendLightButton(appliance_id: string, button: string): Promise<RemoAPI.LIGHTState> {
-    return Api.post(path.join('appliances', appliance_id, 'light'), { button: button });
+    return Api.post(`appliances/${appliance_id}/light`, { button: button });
   }
 
   static async SendAirconSettings(appliance_id: string, options: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }): Promise<RemoAPI.AirConParams> {
     return Api.post(
-      url.resolve(Api.basePath, path.join('appliances', appliance_id, 'aircon_settings')), options);
+      new URL(`appliances/${appliance_id}/aircon_settings`, Api.basePath).href, options);
   }
 
   private static async get(path: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', url.resolve(Api.basePath, path), true);
+      xhr.open('GET', new URL(path, Api.basePath).href, true);
       Object.keys(Api.requestHeaders).forEach((k: string) => xhr.setRequestHeader(k, Api.requestHeaders[k]));
       xhr.onload = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -71,7 +68,7 @@ class Api {
   private static async post(path: string, form: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', url.resolve(Api.basePath, path), true);
+      xhr.open('POST', new URL(path, Api.basePath).href, true);
       Object.keys(Api.requestHeaders).forEach((k: string) => xhr.setRequestHeader(k, Api.requestHeaders[k]));
       xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
       xhr.onload = () => {
