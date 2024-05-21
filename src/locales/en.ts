@@ -1,4 +1,4 @@
-export default {
+const en = {
   translation: {
     dir: 'Air Direction',
     vol: 'Air Volume',
@@ -74,3 +74,4 @@ export default {
     TV_option: 'Option',
   }
 };
+export default en;

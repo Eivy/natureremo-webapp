@@ -5,7 +5,7 @@ import styles from './ButtonsAC.module.scss';
 import Signal from './Signal';
 import Button from './Button';
 
-interface AirConSettings {
+interface IAirConSettings {
   temperature?: string,
   operation_mode?: string,
   air_volume?: string,
@@ -20,10 +20,10 @@ interface ACSettingProps {
 }
 
 const AirConSettings : React.FC<ACSettingProps> = React.memo((props) => {
-  const target: {[key: string]: (v: string) => AirConSettings} = {
-    'vol': (v: string): AirConSettings => { return {air_volume: v}; },
-    'dir': (v: string): AirConSettings => { return {air_direction: v}; },
-    'temp': (v: string): AirConSettings => { return {temperature: v}; },
+  const target: {[key: string]: (v: string) => IAirConSettings} = {
+    'vol': (v: string): IAirConSettings => { return {air_volume: v}; },
+    'dir': (v: string): IAirConSettings => { return {air_direction: v}; },
+    'temp': (v: string): IAirConSettings => { return {temperature: v}; },
   };
   return (
     <div>
@@ -48,7 +48,7 @@ const AirConSettings : React.FC<ACSettingProps> = React.memo((props) => {
 
 interface Props {
   appliance: RemoAPI.Appliance,
-  onChange?: (data: AirConSettings) => void,
+  onChange?: (data: IAirConSettings) => void,
   onSignalClick?: (button: RemoAPI.Signal) => void,
 }
 
@@ -60,13 +60,13 @@ const ButtonsAC : React.FC<Props> = React.memo((props) => {
     <div className={styles.buttons_ac} >
       <div className={styles.buttons} >
         <div className={styles.mode}>
-          <Button className={props.appliance.settings!.button === 'power-off' ? styles.on: ''} button={{name: i18n.t('power'), image: '', label: i18n.t('OFF')}} onClick={(event) => {if (props.onChange) props.onChange({button: 'power-off'})}} />
+          <Button className={props.appliance.settings!.button === 'power-off' ? styles.on: ''} button={{name: i18n.t('power'), image: '', label: i18n.t('OFF')}} onClick={(_) => {if (props.onChange) props.onChange({button: 'power-off'})}} />
           { Object.keys(props.appliance.aircon!.range!.modes!).map((v) => (
             <Button
               key={v}
               className={ props.appliance.settings!.button === '' && props.appliance.settings!.mode === v ? styles.on: ''}
               button={{name: i18n.t(v), image: 'ico_ac_' + v, label: i18n.t(v)}}
-              onClick={(event) => {if(props.onChange) props.onChange({operation_mode: v})}}
+              onClick={(_) => {if(props.onChange) props.onChange({operation_mode: v})}}
             >{v}</Button>)
           )}
         </div>

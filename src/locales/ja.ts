@@ -1,4 +1,4 @@
-export default {
+const ja = {
   translation: {
     dir: '風向',
     vol: '風量',
@@ -74,3 +74,4 @@ export default {
     TV_option: 'オプション',
   }
 };
+export default ja;

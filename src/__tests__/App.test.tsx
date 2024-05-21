@@ -29,7 +29,7 @@ describe('app', () => {
 
   test('render app', () => {
     localStorage.setItem('access_token', 'test');
-    var app = render(<Provider store={store}><App /></Provider>);
+    var app = render(<Provider store={store}><App /></Provider>, {basepath: '/natureremo-webapp'});
     setImmediate(() => {
       expect(app.getByText('Gear')).toBeInTheDocument();
     });
