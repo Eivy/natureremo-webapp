@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as timers from 'timers';
 import { Router, Route } from 'react-router-dom';
 import { createStore, combineReducers } from 'redux';
 import { reducer } from '../../states';
@@ -11,6 +12,11 @@ import Adapter from 'enzyme-adapter-react-16'
 import Config from '../../pages/Config';
 import { AppState } from '../../stores';
 import Api from '../../Api';
+
+if (typeof setImmediate !== 'function') {
+  global.setImmediate = timers.setImmediate;
+  global.clearImmediate = timers.clearImmediate;
+}
 
 Enzyme.configure({ adapter: new Adapter() })
 

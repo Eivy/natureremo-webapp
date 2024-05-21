@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as timers from 'timers';
 import {render} from '@testing-library/react';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
@@ -11,6 +12,11 @@ import { actions } from '../../actions';
 import { reducer } from '../../states';
 import Buttons from '../../pages/Buttons';
 import Api from '../../Api';
+
+if (typeof setImmediate !== 'function') {
+  global.setImmediate = timers.setImmediate;
+  global.clearImmediate = timers.clearImmediate;
+}
 
 describe('test buttons', () => {
 

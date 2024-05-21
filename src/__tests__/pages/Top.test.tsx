@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as timers from 'timers';
 import { createStore, combineReducers } from 'redux';
 import { reducer } from '../../states';
 import { withRouter } from 'react-router';
@@ -12,6 +13,11 @@ import Top from '../../pages/Top';
 import store, { AppState } from '../../stores';
 import { actions } from '../../actions';
 import Api from '../../Api';
+
+if (typeof setImmediate !== 'function') {
+  global.setImmediate = timers.setImmediate;
+  global.clearImmediate = timers.clearImmediate;
+}
 
 describe('test top page', () => {
   Enzyme.configure({ adapter: new Adapter() });

@@ -1,9 +1,15 @@
 import React from 'react';
+import * as timers from 'timers';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import Api from '../Api';
 import App from '../App';
 import store from '../stores';
+
+if (typeof setImmediate !== 'function') {
+  global.setImmediate = timers.setImmediate;
+  global.clearImmediate = timers.clearImmediate;
+}
 
 describe('app', () => {
 
