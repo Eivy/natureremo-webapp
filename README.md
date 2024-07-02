@@ -1,6 +1,6 @@
 # NatureRemo WebApp
 
-![](https://github.com/Eivy/natureremo-webapp/workflows/deploy%20to%20github%20pages/badge.svg)
+![](https://github.com/Eivy/natureremo-webapp/workflows/deploy.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/Eivy/natureremo-webapp/badge.svg?branch=master)](https://coveralls.io/github/Eivy/natureremo-webapp?branch=master)
 
 WebApp for [Nature Remo](https://nature.global/en/nature-remo)
