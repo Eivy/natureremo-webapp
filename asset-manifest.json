@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/natureremo-webapp/static/css/main.f6cd782a.css",
-    "main.js": "/natureremo-webapp/static/js/main.e8992bac.js",
+    "main.js": "/natureremo-webapp/static/js/main.895b8f33.js",
     "index.html": "/natureremo-webapp/index.html",
     "main.f6cd782a.css.map": "/natureremo-webapp/static/css/main.f6cd782a.css.map",
-    "main.e8992bac.js.map": "/natureremo-webapp/static/js/main.e8992bac.js.map"
+    "main.895b8f33.js.map": "/natureremo-webapp/static/js/main.895b8f33.js.map"
   },
   "entrypoints": [
     "static/css/main.f6cd782a.css",
-    "static/js/main.e8992bac.js"
+    "static/js/main.895b8f33.js"
   ]
 }
