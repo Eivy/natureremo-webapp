@@ -1,21 +1,24 @@
-import React from 'react';
-import { withRouter } from 'react-router';
+import { onMount } from 'solid-js';
+import { Router, Route } from '@solidjs/router';
 import './App.scss';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { State } from './states';
-import { Actions, mapDispatchToProps, mapStateToProps } from './dispatcher';
+import { setDevices, setAppliances } from './store';
 import Top from './pages/Top';
 import Config from './pages/Config';
 import Buttons from './pages/Buttons';
-import {Gear} from './components/Icons';
+import { Gear } from './components/Icons';
 import Api from './Api';
 
-type Props = State & Actions;
+function Header() {
+  return (
+    <header>
+      <a href="/natureremo-webapp/" class="logo">RemoWebApp</a>
+      <a href="/natureremo-webapp/config" class="config"><Gear /></a>
+    </header>
+  );
+}
 
-class App extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
+function AppLayout(props: { children?: any }) {
+  onMount(() => {
     const token = localStorage.getItem("access_token");
     if (!token) {
       return;
@@ -23,34 +26,32 @@ class App extends React.Component<Props> {
     Api.setToken(token);
     Api.GetDevices().then((v) => {
       if (v) {
-        props.updateDevices(v);
+        setDevices(v);
       }
     });
     Api.GetAppliances().then((v) => {
       if (v) {
-        props.updateAppliances(v);
+        setAppliances(v);
       }
     });
-  }
+  });
 
-  render() {
-    return (
-      <Router basename="/natureremo-webapp">
-        <header>
-          <Link to="/" className="logo">RemoWebApp</Link>
-          <Link to="/config" className="config"><Gear/></Link>
-        </header>
-        <div id="main">
-          <Switch>
-            <Route path="/appliances/:id" component={withRouter(Buttons)} />
-            <Route path="/config" component={withRouter(Config)} />
-            <Route path="/" component={withRouter(Top)} />
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
-
+  return (
+    <>
+      <Header />
+      <div id="main">
+        {props.children}
+      </div>
+    </>
+  );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default function App() {
+  return (
+    <Router base="/natureremo-webapp" root={AppLayout}>
+      <Route path="/appliances/:id" component={Buttons} />
+      <Route path="/config" component={Config} />
+      <Route path="/" component={Top} />
+    </Router>
+  );
+}

@@ -32,7 +32,7 @@ $aThird: calc(33vmin - (#{$margin} - #{$padding}) * 2);
   .nickname {
     display:inline-block;
     height: $nicknameHeight;
-    text-overflow:: ellipsis;
+    text-overflow: ellipsis;
     text-align: left;
     overflow: hidden;
     white-space:nowrap;

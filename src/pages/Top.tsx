@@ -1,59 +1,44 @@
-import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Actions, mapDispatchToProps, mapStateToProps } from '../dispatcher';
-import { State } from '../states';
+import { For } from 'solid-js';
+import { useNavigate } from '@solidjs/router';
+import { devices, appliances } from '../store';
+import { updateAppliance } from '../store';
 import Api from '../Api';
 import Device from '../components/Device';
 import Appliance from '../components/Appliance';
 
+export default function Top() {
+  const navigate = useNavigate();
 
-export type Props = State & Actions & RouteComponentProps;
-
-class Top extends React.Component<Props> {
-
-  constructor(props: Props) {
-    super(props);
-    const token = localStorage.getItem('access_token');
-    if (!token) {
-      this.props.history.push('./config');
-      return;
-    }
+  const token = localStorage.getItem('access_token');
+  if (!token) {
+    navigate('/config');
   }
 
-  render() {
-    const devices = this.props.devices.map((v: RemoAPI.Device) => (
-      <Device key={v.id} device={v}>
-      {
-        this.props.appliances.filter((a) => a.device!.id === v.id).map((v) => (
-          <Appliance
-            key={v.id}
-            data={v}
-            onClick={(event) => this.props.history.push('/appliances/' + v.id)}
-            onPowerClick={async (event) => {
-              if (v.type === 'LIGHT') {
-                const newState = await Api.SendLightButton(v.id!, v.light!.state!.power === 'on' ? 'off' : 'on');
-                v.light!.state = newState;
-                this.props.updateAppliance(v.id!, v);
-              } else if (v.type === 'AC') {
-                const newSettings = await Api.SendAirconSettings(v.id!, {button: v.settings!.button === 'power-off' ? '' : 'power-off'});
-                v.settings = newSettings;
-                this.props.updateAppliance(v.id!, v);
-              }
-            }}
-          />
-        ))
-      }
-      </Device>
-      )
-    );
-    return (
-      <React.Fragment>
-        { devices }
-      </React.Fragment>
-    );
-  }
-
+  return (
+    <For each={devices()}>
+      {(device: RemoAPI.Device) => (
+        <Device device={device}>
+          <For each={appliances().filter((a) => a.device!.id === device.id)}>
+            {(a: RemoAPI.Appliance) => (
+              <Appliance
+                data={a}
+                onClick={() => navigate('/appliances/' + a.id)}
+                onPowerClick={async () => {
+                  if (a.type === 'LIGHT') {
+                    const newState = await Api.SendLightButton(a.id!, a.light!.state!.power === 'on' ? 'off' : 'on');
+                    const updated = { ...a, light: { ...a.light!, state: newState } };
+                    updateAppliance(a.id!, updated);
+                  } else if (a.type === 'AC') {
+                    const newSettings = await Api.SendAirconSettings(a.id!, {button: a.settings!.button === 'power-off' ? '' : 'power-off'});
+                    const updated = { ...a, settings: newSettings };
+                    updateAppliance(a.id!, updated);
+                  }
+                }}
+              />
+            )}
+          </For>
+        </Device>
+      )}
+    </For>
+  );
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Top);

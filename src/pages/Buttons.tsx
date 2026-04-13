@@ -1,60 +1,58 @@
-import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Actions, mapDispatchToProps, mapStateToProps } from '../dispatcher';
-import { State } from '../states';
+import { Switch, Match } from 'solid-js';
+import { useParams } from '@solidjs/router';
+import { appliances } from '../store';
+import { updateAppliance } from '../store';
 import ButtonsLight from '../components/ButtonsLight';
 import ButtonsTV from '../components/ButtonsTV';
 import ButtonsAC from '../components/ButtonsAC';
 import ButtonsIR from '../components/ButtonsIR';
 import Api from '../Api';
 
-type Props = State & Actions & RouteComponentProps<{id: string}>;
+export default function Buttons() {
+  const params = useParams<{ id: string }>();
 
-class Buttons extends React.Component<Props> {
+  const appliance = () => appliances().find((v) => v.id === params.id);
 
-  async sendLightButton(button: RemoAPI.Button): Promise<void> {
-    const new_state = await Api.SendLightButton(this.props.match.params.id, button.name!)
-    const tmp = this.props.appliances.filter((v) => v.id === this.props.match.params.id)[0];
-    tmp.light!.state = new_state;
-    this.props.updateAppliance(this.props.match.params.id, tmp);
-  }
-
-  sendTVButton(button: RemoAPI.Button): void {
-    Api.SendTVButton(this.props.match.params.id, button.name!)
-  }
-
-  sendSignal(signal: RemoAPI.Signal): void {
-    Api.SendSignal(signal.id!)
-  }
-
-  async sendAriconSettings(id: string,data: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }): Promise<void> {
-    const new_settings = await Api.SendAirconSettings(id, data);
-    const tmp = this.props.appliances.filter((v) => v.id === this.props.match.params.id)[0];
-    tmp.settings! = new_settings;
-    this.props.updateAppliance(this.props.match.params.id, tmp);
-  }
-
-  render() {
-    const appliances = this.props.appliances.filter((v) => v.id === this.props.match.params.id);
-    if (appliances.length < 1) {
-      return <div>Wrong data!!</div>
+  const sendLightButton = async (button: RemoAPI.Button) => {
+    const new_state = await Api.SendLightButton(params.id, button.name!);
+    const tmp = appliance();
+    if (tmp) {
+      const updated = { ...tmp, light: { ...tmp.light!, state: new_state } };
+      updateAppliance(params.id, updated);
     }
-    const appliance = appliances[0];
-    switch (appliance.type) {
-      case "LIGHT":
-        return <ButtonsLight appliance={appliance} onSignalClick={(signal) => {this.sendSignal(signal)}} onButtonClick={(button) => {this.sendLightButton(button)}} />
-      case "IR":
-        return <ButtonsIR appliance={appliance} onSignalClick={(signal) => {this.sendSignal(signal)}} />
-      case "TV":
-        return <ButtonsTV appliance={appliance} onSignalClick={(signal) => {this.sendSignal(signal)}} onButtonClick={(button) => {this.sendTVButton(button)}} />
-      case "AC":
-        return <ButtonsAC appliance={appliance} onSignalClick={(signal) => {this.sendSignal(signal)}} onChange={(data) => {this.sendAriconSettings(this.props.match.params.id, data)}} />
-      default:
-        return <div>Wrong data!!</div>
-    }
-  }
+  };
 
+  const sendTVButton = (button: RemoAPI.Button) => {
+    Api.SendTVButton(params.id, button.name!);
+  };
+
+  const sendSignal = (signal: RemoAPI.Signal) => {
+    Api.SendSignal(signal.id!);
+  };
+
+  const sendAirconSettings = async (data: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }) => {
+    const new_settings = await Api.SendAirconSettings(params.id, data);
+    const tmp = appliance();
+    if (tmp) {
+      const updated = { ...tmp, settings: new_settings };
+      updateAppliance(params.id, updated);
+    }
+  };
+
+  return (
+    <Switch fallback={<div>Wrong data!!</div>}>
+      <Match when={appliance()?.type === "LIGHT"}>
+        <ButtonsLight appliance={appliance()!} onSignalClick={sendSignal} onButtonClick={sendLightButton} />
+      </Match>
+      <Match when={appliance()?.type === "IR"}>
+        <ButtonsIR appliance={appliance()!} onSignalClick={sendSignal} />
+      </Match>
+      <Match when={appliance()?.type === "TV"}>
+        <ButtonsTV appliance={appliance()!} onSignalClick={sendSignal} onButtonClick={sendTVButton} />
+      </Match>
+      <Match when={appliance()?.type === "AC"}>
+        <ButtonsAC appliance={appliance()!} onSignalClick={sendSignal} onChange={sendAirconSettings} />
+      </Match>
+    </Switch>
+  );
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Buttons);

@@ -1,5 +1,5 @@
 /// <reference path="../schema.d.ts" />
-import * as React from 'react';
+import { For, Show } from 'solid-js';
 import Signal from './Signal';
 import styles from './ButtonsIR.module.scss';
 
@@ -8,17 +8,16 @@ interface Props {
   onSignalClick?: (button: RemoAPI.Signal) => void,
 }
 
-const ButtonsIR : React.FC<Props> = React.memo((props) => {
-  if (props.appliance.type !== "IR") {
-    return <div>Wrong appliance!!</div>;
-  }
+export default function ButtonsIR(props: Props) {
   return (
-    <div className={styles.buttons_ir}>
-      <div className={styles.signals}>
-      { props.appliance.signals!.map((v: RemoAPI.Signal, i: number) => <Signal key={i} signal={v} onClick={props.onSignalClick ? (event) => {props.onSignalClick!(v)} : (event) => {}} />) }
+    <Show when={props.appliance.type === "IR"} fallback={<div>Wrong appliance!!</div>}>
+      <div class={styles.buttons_ir}>
+        <div class={styles.signals}>
+          <For each={props.appliance.signals!}>
+            {(v: RemoAPI.Signal) => <Signal signal={v} onClick={() => {if (props.onSignalClick) props.onSignalClick(v)}} />}
+          </For>
+        </div>
       </div>
-    </div>
-  )
-});
-
-export default ButtonsIR;
+    </Show>
+  );
+}

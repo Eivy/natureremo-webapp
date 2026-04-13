@@ -1,9 +1,8 @@
-import React from 'react'
-import styles from './Appliance.module.scss'
+import { Show } from 'solid-js';
+import styles from './Appliance.module.scss';
+import * as Icons from './Icons';
 
-import * as Icons from './Icons'
-
-const components: any = {
+const iconComponents: any = {
   "ico_av": Icons.AV,
   "ico_ac_1": Icons.AirCon1,
   "ico_ac_0": Icons.AirCon2,
@@ -15,7 +14,7 @@ const components: any = {
   "ico_light": Icons.Light,
   "ico_tv": Icons.TV,
   "ico_robot": Icons.Robot,
-}
+};
 
 interface Props {
   data: RemoAPI.Appliance,
@@ -23,34 +22,41 @@ interface Props {
   onPowerClick?: (event: any) => void,
 }
 
-const Appliance: React.FC<Props> = React.memo((props) => {
-   const eventWrapper = (event: any) => {
+export default function Appliance(props: Props) {
+  const eventWrapper = (event: any) => {
     event.stopPropagation();
     if (props.onPowerClick) {
       props.onPowerClick(event);
     }
   };
 
-  let power
-  let Icon
-  let mainClassName = [styles.main]
-  Icon = components.hasOwnProperty(props.data.image) ? components[props.data.image!] : Icons.Etc
-  if (props.data.type === 'LIGHT') {
-    power = (<button className={styles.power} onClick={eventWrapper} ><Icons.Power power={props.data.light!.state!.power!} /></button>)
-    mainClassName.push(styles.circle)
-    mainClassName.push(styles[props.data.light!.state!.power!])
-  } else if (props.data.type === 'AC') {
-    power = (<button className={styles.power} onClick={eventWrapper} ><Icons.Power power={props.data.settings!.button! === '' ? 'on' : 'off'} /></button>)
-    mainClassName.push(styles.circle)
-    mainClassName.push(styles[props.data.settings!.button! === '' ? 'on' : 'off'])
-  }
-  return (
-      <div className={styles.appliance} onClick={props.onClick} >
-        <button className={mainClassName.join(" ")}><Icon /></button>
-        <span className={styles.label}>{props.data.nickname}</span>
-        {power}
-      </div>
-      );
-});
+  const Icon = () => {
+    const Comp = iconComponents.hasOwnProperty(props.data.image) ? iconComponents[props.data.image!] : Icons.Etc;
+    return <Comp />;
+  };
 
-export default Appliance;
+  const mainClassName = () => {
+    const classes = [styles.main];
+    if (props.data.type === 'LIGHT') {
+      classes.push(styles.circle);
+      classes.push(styles[props.data.light!.state!.power!]);
+    } else if (props.data.type === 'AC') {
+      classes.push(styles.circle);
+      classes.push(styles[props.data.settings!.button! === '' ? 'on' : 'off']);
+    }
+    return classes.join(" ");
+  };
+
+  return (
+    <div class={styles.appliance} onClick={() => props.onClick?.({})}>
+      <button class={mainClassName()}><Icon /></button>
+      <span class={styles.label}>{props.data.nickname}</span>
+      <Show when={props.data.type === 'LIGHT'}>
+        <button class={styles.power} onClick={eventWrapper}><Icons.Power power={props.data.light!.state!.power!} /></button>
+      </Show>
+      <Show when={props.data.type === 'AC'}>
+        <button class={styles.power} onClick={eventWrapper}><Icons.Power power={props.data.settings!.button! === '' ? 'on' : 'off'} /></button>
+      </Show>
+    </div>
+  );
+}
