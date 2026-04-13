@@ -45,46 +45,23 @@ class Api {
   }
 
   private static async get(path: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', new URL(path, Api.basePath).href, true);
-      Object.keys(Api.requestHeaders).forEach((k: string) => xhr.setRequestHeader(k, Api.requestHeaders[k]));
-      xhr.onload = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          if (xhr.responseText) {
-            resolve(JSON.parse(xhr.responseText));
-          } else {
-            resolve(null);
-          }
-        } else {
-          reject(new Error(xhr.statusText));
-        }
-      };
-      xhr.onerror = () => reject(new Error(xhr.statusText));
-      xhr.send(null);
+    const res = await fetch(new URL(path, Api.basePath).href, {
+      headers: Api.requestHeaders,
     });
+    if (!res.ok) throw new Error(res.statusText);
+    const text = await res.text();
+    return text ? JSON.parse(text) : null;
   }
 
   private static async post(path: string, form: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', new URL(path, Api.basePath).href, true);
-      Object.keys(Api.requestHeaders).forEach((k: string) => xhr.setRequestHeader(k, Api.requestHeaders[k]));
-      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-      xhr.onload = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          if (xhr.responseText) {
-            resolve(JSON.parse(xhr.responseText));
-          } else {
-            resolve(null);
-          }
-        } else {
-          reject(new Error(xhr.statusText));
-        }
-      };
-      xhr.onerror = () => reject(new Error(xhr.statusText));
-      xhr.send(Api.EncodeHTMLForm(form));
+    const res = await fetch(new URL(path, Api.basePath).href, {
+      method: 'POST',
+      headers: { ...Api.requestHeaders, 'content-type': 'application/x-www-form-urlencoded' },
+      body: Api.EncodeHTMLForm(form),
     });
+    if (!res.ok) throw new Error(res.statusText);
+    const text = await res.text();
+    return text ? JSON.parse(text) : null;
   }
 
   private static EncodeHTMLForm(data: any): string {

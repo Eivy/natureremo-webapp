@@ -75,11 +75,11 @@ const sampleAppliances: Array<RemoAPI.Appliance> = [{
 }];
 
 describe('Api test', () => {
-  Api.setApi('http://localhost:8000//1/');
+  Api.setApi('http://localhost:8000/1/');
   let server: cp.ChildProcessWithoutNullStreams;
 
   beforeAll(async () => {
-    server = cp.spawn('node', [path.resolve(__dirname, '..', '..', 'mock/mock.js')]);
+    server = cp.spawn('node', [path.resolve(__dirname, '..', '..', 'mock/server.js')]);
     server.stdout.setEncoding('utf-8');
     server.stdout.on('data', (data) => console.log(data));
     await sleep(3000);
