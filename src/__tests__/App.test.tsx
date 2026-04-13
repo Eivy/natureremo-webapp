@@ -1,38 +1,28 @@
-import React from 'react';
-import * as timers from 'timers';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import { render, screen } from '@solidjs/testing-library';
+import { vi } from 'vitest';
 import Api from '../Api';
 import App from '../App';
-import store from '../stores';
-
-if (typeof setImmediate !== 'function') {
-  global.setImmediate = timers.setImmediate;
-  global.clearImmediate = timers.clearImmediate;
-}
 
 describe('app', () => {
-
-  const mockDevices = jest.spyOn(Api, 'GetDevices');
-  const mockAppliances = jest.spyOn(Api, 'GetAppliances');
+  const mockDevices = vi.spyOn(Api, 'GetDevices');
+  const mockAppliances = vi.spyOn(Api, 'GetAppliances');
 
   beforeEach(() => {
     mockDevices.mockReset();
     mockAppliances.mockReset();
-    mockDevices.mockResolvedValue(new Promise((resolve, reject) => {
-      resolve([{"id": "device_id", "name": "test_device", "newest_events": {}}]);
-    }));
-    mockAppliances.mockResolvedValue(new Promise((resolve, reject) => {
-      resolve([{"id": "appliance_id", "nickname": "test_appliance", "device": {"id": "device_id"}},{"id": "appliance_id_not_render", "nickname": "test_appliance_not_render", "device": {"id": "device_id_not_contain"}}]);
-    }));
+    mockDevices.mockResolvedValue([{ "id": "device_id", "name": "test_device", "newest_events": {} }]);
+    mockAppliances.mockResolvedValue([{ "id": "appliance_id", "nickname": "test_appliance", "device": { "id": "device_id" } }]);
   });
 
-  test('render app', () => {
+  test('render app header', () => {
     localStorage.setItem('access_token', 'test');
-    var app = render(<Provider store={store}><App /></Provider>, {basepath: '/natureremo-webapp'});
-    setImmediate(() => {
-      expect(app.getByText('Gear')).toBeInTheDocument();
-    });
+    render(() => <App />);
+    expect(screen.getByText('RemoWebApp')).toBeInTheDocument();
   });
 
+  test('render gear icon', () => {
+    localStorage.setItem('access_token', 'test');
+    render(() => <App />);
+    expect(screen.getByText('Gear')).toBeInTheDocument();
+  });
 });

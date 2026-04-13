@@ -1,274 +1,98 @@
-import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, fireEvent } from '@solidjs/testing-library';
+import { vi } from 'vitest';
 import Appliance from '../../components/Appliance';
-import Enzyme from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-Enzyme.configure({ adapter: new Adapter() })
-const mockConsole = jest.spyOn(console, 'log')
 
-beforeEach(() => {
-  mockConsole.mockReset();
+test('appliance light power off - no on class', () => {
+  const data: RemoAPI.Appliance = {
+    nickname: "light", type: "LIGHT", image: "ico_light",
+    light: { state: { power: "off" } }
+  };
+  const { container } = render(() => <Appliance data={data} />);
+  expect(container.querySelector('.circle')).toBeTruthy();
+  expect(container.querySelector('.on')).toBeNull();
 });
 
-test('appliance which power', () => {
+test('appliance light power on - has on class', () => {
   const data: RemoAPI.Appliance = {
-    nickname: "light",
-    type: "LIGHT",
-    image: "ico_light",
-    light: {
-      state: {
-        power: "off"
-      }
-    }
-  }
-  const appliance = Enzyme.shallow(<Appliance data={data} />);
-  let circle = appliance.find(".circle");
-  expect(circle.at(0)).not.toBeNull();
-  circle = appliance.find(".circle.on");
-  expect(circle.length).toBe(0);
+    nickname: "light", type: "LIGHT", image: "ico_light",
+    light: { state: { power: "on" } }
+  };
+  const { container } = render(() => <Appliance data={data} />);
+  expect(container.querySelector('.circle.on')).toBeTruthy();
 });
 
-test('appliance which light power is on', () => {
+test('appliance aircon power on - has on class', () => {
   const data: RemoAPI.Appliance = {
-    nickname: "light",
-    type: "LIGHT",
-    image: "ico_light",
-    light: {
-      state: {
-        power: "on"
-      }
-    }
-  }
-  const appliance = Enzyme.shallow(<Appliance data={data} />);
-  const circle = appliance.find(".circle").get(0);
-  expect(circle.props['className']).toContain('on');
+    nickname: "aircon", type: "AC", image: "ico_ac_1",
+    settings: { button: "" }
+  };
+  const { container } = render(() => <Appliance data={data} />);
+  expect(container.querySelector('.circle.on')).toBeTruthy();
 });
 
-test('appliance which aircon power is on', () => {
+test('appliance aircon power off - has off class', () => {
   const data: RemoAPI.Appliance = {
-    nickname: "aircon",
-    type: "AC",
-    image: "ico_ac_1",
-    settings: {
-      button: "",
-    }
-  }
-  const appliance = Enzyme.shallow(<Appliance data={data} />);
-  const circle = appliance.find(".circle").get(0);
-  expect(circle.props['className']).toContain('on');
-});
-
-test('appliance which aircon power is off', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "aircon",
-    type: "AC",
-    image: "ico_ac_1",
-    settings: {
-      button: "power-off",
-    }
-  }
-  const appliance = Enzyme.shallow(<Appliance data={data} />);
-  const circle = appliance.find(".circle").get(0);
-  expect(circle.props['className']).toContain('off');
+    nickname: "aircon", type: "AC", image: "ico_ac_1",
+    settings: { button: "power-off" }
+  };
+  const { container } = render(() => <Appliance data={data} />);
+  expect(container.querySelector('.circle.off')).toBeTruthy();
 });
 
 test('renders ico_light', () => {
-  const appliance: RemoAPI.Appliance = {
-    nickname: "light",
-    type: "LIGHT",
-    image: "ico_light",
-    light: {
-      state: {
-        power: "on"
-      }
-    }
-  }
-  const { getByText } = render(<Appliance data={appliance}/>);
-  const altText= getByText('Light');
-  expect(altText).toBeInTheDocument();
-  const label = getByText('light');
-  expect(label).toBeInTheDocument();
+  const data: RemoAPI.Appliance = {
+    nickname: "light", type: "LIGHT", image: "ico_light",
+    light: { state: { power: "on" } }
+  };
+  render(() => <Appliance data={data} />);
+  expect(screen.getByText('Light')).toBeInTheDocument();
+  expect(screen.getByText('light')).toBeInTheDocument();
 });
 
 test('renders ico_etc', () => {
-  const appliance: RemoAPI.Appliance = {
-    nickname: "machine",
-    type: "IR",
-    image: "ico_etc",
-    light: {
-      state: {
-        power: "on"
-      }
-    }
-  }
-  const { getByText } = render(<Appliance data={appliance} />);
-  const altText= getByText('Etc');
-  expect(altText).toBeInTheDocument();
-  const label = getByText('machine');
-  expect(label).toBeInTheDocument();
+  const data: RemoAPI.Appliance = { nickname: "machine", type: "IR", image: "ico_etc" };
+  render(() => <Appliance data={data} />);
+  expect(screen.getByText('Etc')).toBeInTheDocument();
+  expect(screen.getByText('machine')).toBeInTheDocument();
 });
 
-test('render ico_light', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "light",
-    type: "IR",
-    image: "ico_light",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("Light");
-  expect(circle).toBeInTheDocument();
+test.each([
+  ['ico_light', 'Light'],
+  ['ico_tv', 'TV'],
+  ['ico_ac_1', 'AC1'],
+  ['ico_ac_0', 'AC2'],
+  ['ico_curtain', 'Curtain'],
+  ['ico_air_purifier', 'AirPurifier'],
+  ['ico_robot', 'Robot'],
+  ['ico_fan', 'Fan'],
+  ['ico_audio', 'Audio'],
+  ['ico_av', 'AV'],
+  ['ico_etc', 'Etc'],
+  ['something', 'Etc'],
+])('renders %s icon', (image, altText) => {
+  const data: RemoAPI.Appliance = { nickname: "test", type: "IR", image };
+  render(() => <Appliance data={data} />);
+  expect(screen.getByText(altText)).toBeInTheDocument();
 });
 
-test('render ico_tv', () => {
+test('power click handler is called', () => {
+  const onPowerClick = vi.fn();
   const data: RemoAPI.Appliance = {
-    nickname: "tv",
-    type: "IR",
-    image: "ico_tv",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("TV");
-  expect(circle).toBeInTheDocument();
+    nickname: "light", type: "LIGHT", image: "ico_light",
+    light: { state: { power: "on" } }
+  };
+  const { container } = render(() => <Appliance data={data} onPowerClick={onPowerClick} />);
+  const powerButton = container.querySelector('.power') as HTMLElement;
+  fireEvent.click(powerButton);
+  expect(onPowerClick).toHaveBeenCalledTimes(1);
 });
 
-test('render ico_aircon1', () => {
+test('power click without handler does not throw', () => {
   const data: RemoAPI.Appliance = {
-    nickname: "aircon",
-    type: "IR",
-    image: "ico_ac_1",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("AC1");
-  expect(circle).toBeInTheDocument();
-});
-
-test('render ico_aircon2', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "aircon",
-    type: "IR",
-    image: "ico_ac_0",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("AC2");
-  expect(circle).toBeInTheDocument();
-});
-
-test('render ico_curtain', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "curtain",
-    type: "IR",
-    image: "ico_curtain",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("Curtain");
-  expect(circle).toBeInTheDocument();
-});
-
-test('render ico_air_purifier', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "air_purifier",
-    type: "IR",
-    image: "ico_air_purifier",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("AirPurifier");
-  expect(circle).toBeInTheDocument();
-});
-
-test('render ico_robot', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "robot",
-    type: "IR",
-    image: "ico_robot",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("Robot");
-  expect(circle).toBeInTheDocument();
-});
-
-test('render ico_fan', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "fan",
-    type: "IR",
-    image: "ico_fan",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("Fan");
-  expect(circle).toBeInTheDocument();
-});
-
-test('render ico_audio', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "audio",
-    type: "IR",
-    image: "ico_audio",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("Audio");
-  expect(circle).toBeInTheDocument();
-});
-
-test('render ico_av', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "av",
-    type: "IR",
-    image: "ico_av",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("AV");
-  expect(circle).toBeInTheDocument();
-});
-
-test('render ico_etc', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "etc",
-    type: "IR",
-    image: "ico_etc",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("Etc");
-  expect(circle).toBeInTheDocument();
-});
-
-test('render something', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "etc",
-    type: "IR",
-    image: "something",
-  }
-  const appliance = render(<Appliance data={data} />);
-  const circle = appliance.getByText("Etc");
-  expect(circle).toBeInTheDocument();
-});
-
-test('event handler', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "light",
-    type: "LIGHT",
-    image: "ico_light",
-    light: {
-      state: {
-        power: "on"
-      }
-    }
-  }
-  const appliance = Enzyme.shallow(<Appliance data={data} onPowerClick={() => console.log('test')}/>);
-  const button = appliance.find('button');
-  button.at(1).simulate('click', {target: null, stopPropagation: () => {}});
-  expect(mockConsole.mock.calls.length).toBe(1);
-});
-
-test('without event handler', () => {
-  const data: RemoAPI.Appliance = {
-    nickname: "light",
-    type: "LIGHT",
-    image: "ico_light",
-    light: {
-      state: {
-        power: "on"
-      }
-    }
-  }
-  const appliance = Enzyme.shallow(<Appliance data={data} />);
-  const button = appliance.find('button');
-  button.at(1).simulate('click', {target: null, stopPropagation: () => {}});
+    nickname: "light", type: "LIGHT", image: "ico_light",
+    light: { state: { power: "on" } }
+  };
+  const { container } = render(() => <Appliance data={data} />);
+  const powerButton = container.querySelector('.power') as HTMLElement;
+  expect(() => fireEvent.click(powerButton)).not.toThrow();
 });

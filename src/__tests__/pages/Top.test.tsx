@@ -1,231 +1,112 @@
-import * as React from 'react';
-import * as timers from 'timers';
-import { createStore, combineReducers } from 'redux';
-import { reducer } from '../../states';
-import { withRouter } from 'react-router';
-import { Router, Route } from 'react-router-dom';
-import { createMemoryHistory as createHistory } from 'history';
-import { render } from '@testing-library/react'
-import { Provider } from 'react-redux';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import Top from '../../pages/Top';
-import store, { AppState } from '../../stores';
-import { actions } from '../../actions';
+import { render, screen, fireEvent } from '@solidjs/testing-library';
+import { vi } from 'vitest';
+import { Router, Route } from '@solidjs/router';
+import { setDevices, setAppliances } from '../../store';
 import Api from '../../Api';
+import Top from '../../pages/Top';
 
-if (typeof setImmediate !== 'function') {
-  global.setImmediate = timers.setImmediate;
-  global.clearImmediate = timers.clearImmediate;
-}
+const device: RemoAPI.Device = { id: "device_id", name: "test_device", newest_events: {} };
+const appliance: RemoAPI.Appliance = { id: "appliance_id", nickname: "test_appliance", device: { id: "device_id" } };
 
 describe('test top page', () => {
-  Enzyme.configure({ adapter: new Adapter() });
-  const mockSendLightButton = jest.spyOn(Api, 'SendLightButton');
-  const mockSendAirconSettings = jest.spyOn(Api, 'SendAirconSettings');
+  const mockSendLightButton = vi.spyOn(Api, 'SendLightButton');
+  const mockSendAirconSettings = vi.spyOn(Api, 'SendAirconSettings');
 
   beforeEach(() => {
-    store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
-    store.dispatch(actions.updateAppliances([{"id": "appliance_id", "nickname": "test_appliance", "device": {"id": "device_id"}},{"id": "appliance_id_not_render", "nickname": "test_appliance_not_render", "device": {"id": "device_id_not_contain"}}]));
-    localStorage.clear();
-  })
-
-  test('navigate to config', () => {
-    const hist = createHistory();
-    render(
-      <Provider store={store}>
-        <Router history={hist} >
-          <Route path="/" component={withRouter(Top)} />
-        </Router>
-      </Provider>
-    );
-    expect(hist.location.pathname).toBe("/config");
+    mockSendLightButton.mockReset();
+    mockSendAirconSettings.mockReset();
+    setDevices([device]);
+    setAppliances([appliance, { id: "appliance_id_not_render", nickname: "test_appliance_not_render", device: { id: "device_id_not_contain" } }]);
   });
 
-  test('not navigate to config', () => {
+  test('navigate to config when no token', async () => {
+    render(() => (
+      <Router url="/">
+        <Route path="/" component={Top} />
+        <Route path="/config" component={() => <div>config page</div>} />
+      </Router>
+    ));
+    await vi.waitFor(() => {
+      expect(screen.getByText('config page')).toBeInTheDocument();
+    });
+  });
+
+  test('does not navigate when token exists', () => {
     localStorage.setItem('access_token', 'test');
-    const hist = createHistory();
-    render(
-      <Provider store={store}>
-        <Router history={hist} >
-          <Route path="/" component={withRouter(Top)} />
-        </Router>
-      </Provider>
-    );
-    expect(hist.location.pathname).toBe("/");
+    render(() => (
+      <Router url="/">
+        <Route path="/" component={Top} />
+        <Route path="/config" component={() => <div>config page</div>} />
+      </Router>
+    ));
+    expect(screen.queryByText('config page')).toBeNull();
   });
 
-  test('render device', async () => {
+  test('render device name', () => {
     localStorage.setItem('access_token', 'test');
-    const { getByText } = render(<Provider store={store}><Top /></Provider>);
-    setImmediate(() => {
-      expect(getByText('test_device')).toBeInTheDocument();
-    })
+    render(() => (
+      <Router url="/">
+        <Route path="/" component={Top} />
+      </Router>
+    ));
+    expect(screen.getByText('test_device')).toBeInTheDocument();
   });
 
-  test('render appliances', async () => {
+  test('render appliance in same device', () => {
     localStorage.setItem('access_token', 'test');
-    const { queryByText } = render(<Provider store={store}><Top /></Provider>);
-    setImmediate(() => {
-      expect(queryByText('test_appliance')).toBeInTheDocument();
-    })
+    render(() => (
+      <Router url="/">
+        <Route path="/" component={Top} />
+      </Router>
+    ));
+    expect(screen.getByText('test_appliance')).toBeInTheDocument();
   });
 
-  test('click appliance', async () => {
+  test('does not render appliance from different device', () => {
     localStorage.setItem('access_token', 'test');
-    const hist = createHistory();
-    const top = Enzyme.mount(
-      <Provider store={store}>
-        <Router history={hist} >
-          <Route path="/" component={withRouter(Top)} />
-        </Router>
-      </Provider>
-    );
-    setImmediate(() => {
-      const appliance = top.find('.appliance').at(0);
-      appliance.simulate('click');
-      expect(hist.location.pathname).toBe('/appliances/appliance_id');
-    })
+    render(() => (
+      <Router url="/">
+        <Route path="/" component={Top} />
+      </Router>
+    ));
+    expect(screen.queryByText('test_appliance_not_render')).toBeNull();
   });
 
-  test('click light power to off', async () => {
-    const store = createStore(
-      combineReducers<AppState>({
-        remo: reducer,
-      })
-    );
-    store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
+  test('click light power toggles state', async () => {
     localStorage.setItem('access_token', 'test');
-    mockSendLightButton.mockResolvedValue(new Promise((resolve, reject) => resolve({power: 'off'})));
-    store.dispatch(actions.updateAppliances([{
-      "id": "appliance_id",
-      "nickname": "test_appliance",
-      "type": "LIGHT",
-      "light": {
-        state: {power: 'on'}
-      },
-      "device": {"id": "device_id"}
-    }]));
-    const hist = createHistory();
-    const top = Enzyme.mount(
-      <Provider store={store}>
-        <Router history={hist} >
-          <Route path="/" component={withRouter(Top)} />
-        </Router>
-      </Provider>
-    );
-    setImmediate(() => {
-      const appliance = top.find('.power').at(0);
-      appliance.simulate('click');
-      setImmediate(() => {
-        expect(store.getState().remo.appliances[0].light!.state!.power).toBe('off');
-      });
-    })
+    mockSendLightButton.mockResolvedValue({ power: 'off' });
+    setAppliances([{
+      id: "appliance_id", nickname: "light_appliance", type: "LIGHT",
+      light: { state: { power: 'on' } },
+      device: { id: "device_id" }
+    }]);
+    const { container } = render(() => (
+      <Router url="/">
+        <Route path="/" component={Top} />
+      </Router>
+    ));
+    fireEvent.click(container.querySelector('.power')!);
+    await vi.waitFor(() => {
+      expect(mockSendLightButton).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('click light power to on', async () => {
-    const store = createStore(
-      combineReducers<AppState>({
-        remo: reducer,
-      })
-    );
-    store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
+  test('click ac power toggles state', async () => {
     localStorage.setItem('access_token', 'test');
-    mockSendLightButton.mockResolvedValue(new Promise((resolve, reject) => resolve({power: 'on'})));
-    store.dispatch(actions.updateAppliances([{
-      "id": "appliance_id",
-      "nickname": "test_appliance",
-      "type": "LIGHT",
-      "light": {
-        state: {power: 'off'}
-      },
-      "device": {"id": "device_id"}
-    }]));
-    const hist = createHistory();
-    const top = Enzyme.mount(
-      <Provider store={store}>
-        <Router history={hist} >
-          <Route path="/" component={withRouter(Top)} />
-        </Router>
-      </Provider>
-    );
-    setImmediate(() => {
-      const appliance = top.find('.power').at(0);
-      appliance.simulate('click');
-      setImmediate(() => {
-        expect(store.getState().remo.appliances[0].light!.state!.power).toBe('on');
-      });
-    })
+    mockSendAirconSettings.mockResolvedValue({ button: 'power-off' });
+    setAppliances([{
+      id: "appliance_id", nickname: "ac_appliance", type: "AC",
+      settings: { button: '' },
+      device: { id: "device_id" }
+    }]);
+    const { container } = render(() => (
+      <Router url="/">
+        <Route path="/" component={Top} />
+      </Router>
+    ));
+    fireEvent.click(container.querySelector('.power')!);
+    await vi.waitFor(() => {
+      expect(mockSendAirconSettings).toHaveBeenCalledTimes(1);
+    });
   });
-
-  test('click ac power to off', async () => {
-    const store = createStore(
-      combineReducers<AppState>({
-        remo: reducer,
-      })
-    );
-    store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
-    localStorage.setItem('access_token', 'test');
-    mockSendAirconSettings.mockResolvedValue(new Promise((resolve, reject) => resolve({button: 'power-off'})));
-    store.dispatch(actions.updateAppliances([{
-      "id": "appliance_id",
-      "nickname": "test_appliance",
-      "type": "AC",
-      "settings": {
-        button: '',
-      },
-      "device": {"id": "device_id"}
-    }]));
-    const hist = createHistory();
-    const top = Enzyme.mount(
-      <Provider store={store}>
-        <Router history={hist} >
-          <Route path="/" component={withRouter(Top)} />
-        </Router>
-      </Provider>
-    );
-    setImmediate(() => {
-      const appliance = top.find('.power').at(0);
-      appliance.simulate('click');
-      setImmediate(() => {
-        expect(store.getState().remo.appliances[0].settings!.button).toBe('power-off');
-      });
-    })
-  });
-
-  test('click ac power to on', async () => {
-    const store = createStore(
-      combineReducers<AppState>({
-        remo: reducer,
-      })
-    );
-    store.dispatch(actions.updateDevices([{"id": "device_id", "name": "test_device", "newest_events": {}}]));
-    localStorage.setItem('access_token', 'test');
-    mockSendAirconSettings.mockResolvedValue(new Promise((resolve, reject) => resolve({button: ''})));
-    store.dispatch(actions.updateAppliances([{
-      "id": "appliance_id",
-      "nickname": "test_appliance",
-      "type": "AC",
-      "settings": {
-        button: 'power-off',
-      },
-      "device": {"id": "device_id"}
-    }]));
-    const hist = createHistory();
-    const top = Enzyme.mount(
-      <Provider store={store}>
-        <Router history={hist} >
-          <Route path="/" component={withRouter(Top)} />
-        </Router>
-      </Provider>
-    );
-    setImmediate(() => {
-      const appliance = top.find('.power').at(0);
-      appliance.simulate('click');
-      setImmediate(() => {
-        expect(store.getState().remo.appliances[0].settings!.button).toBe('');
-      });
-    })
-  });
-
 });

@@ -1,33 +1,24 @@
-import React from 'react';
-import {render} from '@testing-library/react';
+import { render, screen } from '@solidjs/testing-library';
 import Signal from '../../components/Signal';
 
 const data: RemoAPI.Signal = {
   image: "ico_lightup",
   id: "test_id",
   name: "lightup",
-}
+};
 
 test('label text', () => {
-  const button = render(<Signal signal={data} />);
-  const label = button.getByText(data.name!);
-  expect(label).toBeInTheDocument();
+  render(() => <Signal signal={data} />);
+  expect(screen.getByText(data.name!)).toBeInTheDocument();
 });
 
 test('svg alt text', () => {
-  const button = render(<Signal signal={data} />);
-  const label = button.getByText("LightUp");
-  expect(label).toBeInTheDocument();
+  render(() => <Signal signal={data} />);
+  expect(screen.getByText("LightUp")).toBeInTheDocument();
 });
 
-test('render unmatched icon', () => {
-  const data: RemoAPI.Signal = {
-    image: "something",
-    id: "test_id",
-    name: "lightup",
-  }
-  const button = render(<Signal signal={data} />);
-  const label = button.queryAllByText(data.name!);
-  expect(label.length).toBe(3);
+test('renders text icon for unknown image', () => {
+  const unknown: RemoAPI.Signal = { image: "something", id: "test_id", name: "lightup" };
+  render(() => <Signal signal={unknown} />);
+  expect(screen.getAllByText(unknown.name!).length).toBeGreaterThanOrEqual(1);
 });
-

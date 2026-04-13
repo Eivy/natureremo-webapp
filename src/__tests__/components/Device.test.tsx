@@ -1,6 +1,4 @@
-import * as React from 'react';
-import { render } from '@testing-library/react'
-import Device from '../../components/Device';
+import { render, screen } from '@solidjs/testing-library';
 
 const device: RemoAPI.Device = {
   id: 'test',
@@ -9,32 +7,28 @@ const device: RemoAPI.Device = {
 };
 
 test('device name', () => {
-  const el = render(<Device device={device} />)
-  expect(el.getByText(/remo/)).toBeInTheDocument();
+  render(() => <Device device={device} />);
+  expect(screen.getByText(/remo/)).toBeInTheDocument();
 });
 
-test('device tempture', () => {
-  const te = {val: 19};
-  device.newest_events!.te = te;
-  const el = render(<Device device={device} />)
-  expect(el.getByText(/19/)).toBeInTheDocument();
+test('device temperature', () => {
+  render(() => <Device device={{ ...device, newest_events: { te: { val: 19 } } }} />);
+  expect(screen.getByText(/19/)).toBeInTheDocument();
 });
 
 test('device illuminance', () => {
-  const il = {val: 20};
-  device.newest_events!.il = il;
-  const el = render(<Device device={device} />)
-  expect(el.getByText(/20/)).toBeInTheDocument();
+  render(() => <Device device={{ ...device, newest_events: { il: { val: 20 } } }} />);
+  expect(screen.getByText(/20/)).toBeInTheDocument();
 });
 
 test('device humidity', () => {
-  const hu = {val: 21};
-  device.newest_events!.hu = hu;
-  const el = render(<Device device={device} />)
-  expect(el.getByText(/21/)).toBeInTheDocument();
+  render(() => <Device device={{ ...device, newest_events: { hu: { val: 21 } } }} />);
+  expect(screen.getByText(/21/)).toBeInTheDocument();
 });
 
 test('child component', () => {
-  const el = render(<Device device={device}><span>Appliance1</span></Device>)
-  expect(el.getByText(/Appliance1/)).toBeInTheDocument();
+  render(() => <Device device={device}><span>Appliance1</span></Device>);
+  expect(screen.getByText(/Appliance1/)).toBeInTheDocument();
 });
+
+import Device from '../../components/Device';
