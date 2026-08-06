@@ -67,4 +67,6 @@ export const components: { [key: string]: () => JSX.Element } = {
   "ico_setting": () => <Icons.Gear />,
   "ico_lock": () => <Icons.Lock />,
   "ico_unlock": () => <Icons.Unlock />,
+  "ico_curtain_open": () => <Icons.CurtainOpen />,
+  "ico_curtain_close": () => <Icons.CurtainClose />,
 };

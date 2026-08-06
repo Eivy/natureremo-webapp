@@ -850,6 +850,37 @@ export function Eco() {
   );
 }
 
+export function CurtainClose() {
+  return (
+    <svg class={[styles.icon, styles.curtainclose].join(" ")} viewBox="0 0 200 200">
+      <path d="
+      M 15,35 h170
+      M 20,35 v105 a 20 20 1 1 0 40,0 v-105
+      M 60,35 v105 a 20 20 1 1 0 40,0 v-105
+      M 100,35 v105 a 20 20 1 1 0 40,0 v-105
+      M 140,35 v105 a 20 20 1 1 0 40,0 v-105
+      " />
+      CurtainClose
+    </svg>
+  );
+}
+
+export function CurtainOpen() {
+  return (
+    <svg class={[styles.icon, styles.curtainopen].join(" ")} viewBox="0 0 200 200">
+      <path d="
+      M 15,35 h170
+      M 20,35 v105 a 15 15 1 1 0 30,0 v-105
+      M 50,35 v105 a 15 15 1 1 0 30,0 v-105
+      M 120,35 v105 a 15 15 1 1 0 30,0 v-105
+      M 150,35 v105 a 15 15 1 1 0 30,0 v-105
+      M 20,165 h160
+      " />
+      CurtainOpen
+    </svg>
+  );
+}
+
 function LockBody() {
   return (
     <>

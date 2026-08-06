@@ -50,6 +50,16 @@ declare namespace RemoAPI {
     sub_bd_address?: string;
     is_available?: boolean;
   }
+  export interface MorninPlusDevice {
+    id?: string;
+    name?: string;
+    image?: string;
+    active?: boolean;
+  }
+  export interface MorninPlus {
+    devices?: MorninPlusDevice[];
+    hi_speed_mode?: boolean;
+  }
   export interface Appliance {
     /**
      * Set when type is "EL_SMART_METER".
@@ -60,5 +70,6 @@ declare namespace RemoAPI {
      */
     ble?: BLE;
     qrio_lock?: QrioLock;
+    mornin_plus?: MorninPlus;
   }
 }

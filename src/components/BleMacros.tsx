@@ -11,6 +11,9 @@ import styles from './BleMacros.module.scss';
 const macroIcons: { [name: string]: string } = {
   lock: 'ico_lock',
   unlock: 'ico_unlock',
+  open: 'ico_curtain_open',
+  close: 'ico_curtain_close',
+  stop: 'ico_stop',
 };
 
 interface Props {

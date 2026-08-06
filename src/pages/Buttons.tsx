@@ -9,6 +9,7 @@ import ButtonsIR from '../components/ButtonsIR';
 import ButtonsOther from '../components/ButtonsOther';
 import SmartMeter from '../components/SmartMeter';
 import QrioLock from '../components/QrioLock';
+import MorninPlus from '../components/MorninPlus';
 import Api from '../Api';
 import i18n from '../i18n';
 import styles from './Buttons.module.scss';
@@ -71,6 +72,9 @@ export default function Buttons() {
       {/* The type strings of BLE appliances are not documented, so switch on the field they carry. */}
       <Match when={appliance()?.qrio_lock}>
         <QrioLock appliance={appliance()!} onMacroClick={execBLEMacro} />
+      </Match>
+      <Match when={appliance()?.mornin_plus}>
+        <MorninPlus appliance={appliance()!} onMacroClick={execBLEMacro} />
       </Match>
     </Switch>
   );

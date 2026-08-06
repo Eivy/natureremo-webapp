@@ -133,6 +133,20 @@ describe('test buttons page', () => {
     mockExecBLEMacro.mockRestore();
   });
 
+  test('click mornin plus macro', async () => {
+    const mockExecBLEMacro = vi.spyOn(Api, 'ExecBLEMacro').mockResolvedValue(undefined);
+    setAppliances([{
+      id: "test", nickname: "test_appliance", type: "MORNIN_PLUS",
+      mornin_plus: { devices: [{ id: "left", name: "mornin' plus L", active: true }], hi_speed_mode: false },
+      ble: { macros: { open: { id: "open_macro", url: "https://example.com/open" } } },
+      signals: [], device: { id: "device_id" }
+    }]);
+    const { container } = renderButtons();
+    fireEvent.click(container.querySelector('button')!);
+    await vi.waitFor(() => expect(mockExecBLEMacro).toHaveBeenCalledWith("open_macro"));
+    mockExecBLEMacro.mockRestore();
+  });
+
   test('render message when appliance not found', () => {
     setAppliances([]);
     renderButtons();

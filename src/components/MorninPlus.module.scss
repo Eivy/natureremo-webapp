@@ -1,0 +1,19 @@
+.mornin_plus {
+  .status {
+    margin: 1rem .5rem;
+    .device {
+      .name {
+        margin-right: .5rem;
+      }
+      .active {
+        color: #61dafb;
+      }
+      .inactive {
+        color: gray;
+      }
+    }
+    .hi_speed_mode {
+      font-size: .75rem;
+    }
+  }
+}
