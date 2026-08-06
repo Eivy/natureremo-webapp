@@ -18,7 +18,7 @@ export default function Top() {
     <For each={devices()}>
       {(device: RemoAPI.Device) => (
         <Device device={device}>
-          <For each={appliances().filter((a) => a.device!.id === device.id)}>
+          <For each={appliances().filter((a) => a.device?.id === device.id)}>
             {(a: RemoAPI.Appliance) => (
               <Appliance
                 data={a}

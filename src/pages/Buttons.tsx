@@ -6,7 +6,13 @@ import ButtonsLight from '../components/ButtonsLight';
 import ButtonsTV from '../components/ButtonsTV';
 import ButtonsAC from '../components/ButtonsAC';
 import ButtonsIR from '../components/ButtonsIR';
+import ButtonsOther from '../components/ButtonsOther';
+import SmartMeter from '../components/SmartMeter';
+import QrioLock from '../components/QrioLock';
+import MorninPlus from '../components/MorninPlus';
 import Api from '../Api';
+import i18n from '../i18n';
+import styles from './Buttons.module.scss';
 
 export default function Buttons() {
   const params = useParams<{ id: string }>();
@@ -30,6 +36,10 @@ export default function Buttons() {
     Api.SendSignal(signal.id!);
   };
 
+  const execBLEMacro = (macro: RemoAPI.BLEPrivateMacro) => {
+    Api.ExecBLEMacro(macro.id!);
+  };
+
   const sendAirconSettings = async (data: { temperature?: string, operation_mode?: string, air_volume?: string, air_direction?: string, button?: string }) => {
     const new_settings = await Api.SendAirconSettings(params.id, data);
     const tmp = appliance();
@@ -40,7 +50,10 @@ export default function Buttons() {
   };
 
   return (
-    <Switch fallback={<div>Wrong data!!</div>}>
+    <Switch fallback={<ButtonsOther appliance={appliance()!} onSignalClick={sendSignal} />}>
+      <Match when={!appliance()}>
+        <div class={styles.message}>{i18n.t('appliance_not_found')}</div>
+      </Match>
       <Match when={appliance()?.type === "LIGHT"}>
         <ButtonsLight appliance={appliance()!} onSignalClick={sendSignal} onButtonClick={sendLightButton} />
       </Match>
@@ -52,6 +65,16 @@ export default function Buttons() {
       </Match>
       <Match when={appliance()?.type === "AC"}>
         <ButtonsAC appliance={appliance()!} onSignalClick={sendSignal} onChange={sendAirconSettings} />
+      </Match>
+      <Match when={appliance()?.type === "EL_SMART_METER"}>
+        <SmartMeter appliance={appliance()!} />
+      </Match>
+      {/* The type strings of BLE appliances are not documented, so switch on the field they carry. */}
+      <Match when={appliance()?.qrio_lock}>
+        <QrioLock appliance={appliance()!} onMacroClick={execBLEMacro} />
+      </Match>
+      <Match when={appliance()?.mornin_plus}>
+        <MorninPlus appliance={appliance()!} onMacroClick={execBLEMacro} />
       </Match>
     </Switch>
   );

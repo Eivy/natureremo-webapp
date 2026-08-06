@@ -1,4 +1,3 @@
-import { onMount } from 'solid-js';
 import styles from './Icons.module.scss';
 
 export function AV() {
@@ -301,15 +300,11 @@ interface TextProps {
 }
 
 export function Text(props: TextProps) {
-  let ref: SVGSVGElement | undefined;
-  onMount(() => {
-    if (!ref) return;
-    const t = ref.querySelector("text")!;
-    t.style.fontSize = ref.clientWidth / 6 + 'px';
-  });
+  // viewBox の座標系での文字サイズ。文字数が多いほど小さくして枠内に収める
+  const fontSize = () => String(Math.min(20, 45 / Math.max(1, props.value.length)));
   return (
-    <svg class={`${styles.icon} ${styles.text}`} viewBox="0 0 50 50" ref={ref}>
-      <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">{props.value}</text>
+    <svg class={`${styles.icon} ${styles.text}`} viewBox="0 0 50 50">
+      <text x="50%" y="50%" font-size={fontSize()} dominant-baseline="central" text-anchor="middle">{props.value}</text>
       {props.value}
     </svg>
   );
@@ -851,6 +846,67 @@ export function Eco() {
         Q 110 70, 70 70
       " />
       Eco
+    </svg>
+  );
+}
+
+export function CurtainClose() {
+  return (
+    <svg class={[styles.icon, styles.curtainclose].join(" ")} viewBox="0 0 200 200">
+      <path d="
+      M 15,35 h170
+      M 20,35 v105 a 20 20 1 1 0 40,0 v-105
+      M 60,35 v105 a 20 20 1 1 0 40,0 v-105
+      M 100,35 v105 a 20 20 1 1 0 40,0 v-105
+      M 140,35 v105 a 20 20 1 1 0 40,0 v-105
+      " />
+      CurtainClose
+    </svg>
+  );
+}
+
+export function CurtainOpen() {
+  return (
+    <svg class={[styles.icon, styles.curtainopen].join(" ")} viewBox="0 0 200 200">
+      <path d="
+      M 15,35 h170
+      M 20,35 v105 a 15 15 1 1 0 30,0 v-105
+      M 50,35 v105 a 15 15 1 1 0 30,0 v-105
+      M 120,35 v105 a 15 15 1 1 0 30,0 v-105
+      M 150,35 v105 a 15 15 1 1 0 30,0 v-105
+      M 20,165 h160
+      " />
+      CurtainOpen
+    </svg>
+  );
+}
+
+function LockBody() {
+  return (
+    <>
+      <rect x="55" y="95" height="70" width="90" rx="10" ry="10" />
+      <circle r="8" cx="100" cy="120" />
+      <path d="M 100,128 v15" />
+    </>
+  );
+}
+
+export function Lock() {
+  return (
+    <svg class={[styles.icon, styles.lock].join(" ")} viewBox="0 0 200 200">
+      <LockBody />
+      <path d="M 75,95 v-20 a 25 25 0 0 1 50,0 v20" />
+      Lock
+    </svg>
+  );
+}
+
+export function Unlock() {
+  return (
+    <svg class={[styles.icon, styles.unlock].join(" ")} viewBox="0 0 200 200">
+      <LockBody />
+      <path d="M 145,95 v-20 a 25 25 0 0 0 -50,0" />
+      Unlock
     </svg>
   );
 }
