@@ -83,16 +83,46 @@ describe('test buttons page', () => {
     await vi.waitFor(() => expect(mockSendAirconSettings).toHaveBeenCalledTimes(1));
   });
 
-  test('render wrong data when unknown type', () => {
+  test('render message when unknown type has no signal', () => {
     setAppliances([{ id: "test", nickname: "test_appliance", type: "SOMETHING", signals: [], device: { id: "device_id" } }]);
     renderButtons();
-    expect(screen.getByText(/wrong data/i)).toBeInTheDocument();
+    expect(screen.getByText(/SOMETHING/)).toBeInTheDocument();
   });
 
-  test('render wrong data when appliance not found', () => {
+  test('click signal button of unknown type', async () => {
+    mockSendSignal.mockResolvedValue(undefined);
+    setAppliances([{
+      id: "test", nickname: "test_appliance", type: "SOMETHING",
+      signals: [{ id: "test_id", name: "test", image: "ico_io" }],
+      device: { id: "device_id" }
+    }]);
+    const { container } = renderButtons();
+    fireEvent.click(container.querySelector('button')!);
+    await vi.waitFor(() => expect(mockSendSignal).toHaveBeenCalledTimes(1));
+  });
+
+  test('render smart meter', () => {
+    setAppliances([{
+      id: "test", nickname: "test_appliance", type: "EL_SMART_METER",
+      smart_meter: {
+        echonetlite_properties: [
+          { name: 'measured_instantaneous', epc: 231, val: '580', updated_at: '2020-02-06T06:23:20Z' },
+          { name: 'coefficient', epc: 211, val: '1', updated_at: '2020-02-06T06:23:20Z' },
+          { name: 'cumulative_electric_energy_unit', epc: 225, val: '1', updated_at: '2020-02-06T06:23:20Z' },
+          { name: 'normal_direction_cumulative_electric_energy', epc: 224, val: '5641', updated_at: '2020-02-06T06:23:20Z' },
+        ],
+      },
+      signals: [], device: { id: "device_id" }
+    }]);
+    renderButtons();
+    expect(screen.getByText('580')).toBeInTheDocument();
+    expect(screen.getByText('564.1')).toBeInTheDocument();
+  });
+
+  test('render message when appliance not found', () => {
     setAppliances([]);
     renderButtons();
-    expect(screen.getByText(/wrong data/i)).toBeInTheDocument();
+    expect(screen.getByText(/not found/i)).toBeInTheDocument();
   });
 
   test('click light signal button', async () => {

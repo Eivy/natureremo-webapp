@@ -301,7 +301,7 @@ interface TextProps {
 
 export function Text(props: TextProps) {
   // viewBox の座標系での文字サイズ。文字数が多いほど小さくして枠内に収める
-  const fontSize = () => Math.min(20, 45 / Math.max(1, props.value.length));
+  const fontSize = () => String(Math.min(20, 45 / Math.max(1, props.value.length)));
   return (
     <svg class={`${styles.icon} ${styles.text}`} viewBox="0 0 50 50">
       <text x="50%" y="50%" font-size={fontSize()} dominant-baseline="central" text-anchor="middle">{props.value}</text>
