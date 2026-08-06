@@ -5,8 +5,8 @@
   "homepage": "https://eivy.github.io/natureremo-webapp/",
   "type": "module",
   "dependencies": {
-    "@solidjs/router": "^0.15.3",
-    "i18next": "^19.9.2",
+    "@solidjs/router": "^1.0.0",
+    "i18next": "^26.3.6",
     "solid-js": "^1.9.5"
   },
   "scripts": {
@@ -20,16 +20,16 @@
   "devDependencies": {
     "@eslint/js": "^9.39.4",
     "@solidjs/testing-library": "^0.8.10",
-    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/user-event": "^14.6.1",
     "@typescript-eslint/eslint-plugin": "^8.58.1",
     "@typescript-eslint/parser": "^8.58.1",
     "@vitest/coverage-v8": "^4.1.4",
     "eslint": "^9.39.4",
     "eslint-plugin-solid": "^0.14.5",
-    "jsdom": "^29.0.2",
+    "jsdom": "^30.0.1",
     "sass": "^1.87.0",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.3",
     "vite": "^8.0.16",
     "vite-plugin-solid": "^2.11.6",
     "vitest": "^4.1.4"
