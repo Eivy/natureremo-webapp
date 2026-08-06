@@ -850,6 +850,36 @@ export function Eco() {
   );
 }
 
+function LockBody() {
+  return (
+    <>
+      <rect x="55" y="95" height="70" width="90" rx="10" ry="10" />
+      <circle r="8" cx="100" cy="120" />
+      <path d="M 100,128 v15" />
+    </>
+  );
+}
+
+export function Lock() {
+  return (
+    <svg class={[styles.icon, styles.lock].join(" ")} viewBox="0 0 200 200">
+      <LockBody />
+      <path d="M 75,95 v-20 a 25 25 0 0 1 50,0 v20" />
+      Lock
+    </svg>
+  );
+}
+
+export function Unlock() {
+  return (
+    <svg class={[styles.icon, styles.unlock].join(" ")} viewBox="0 0 200 200">
+      <LockBody />
+      <path d="M 145,95 v-20 a 25 25 0 0 0 -50,0" />
+      Unlock
+    </svg>
+  );
+}
+
 export function Tool() {
   return (
     <svg class={[styles.icon, styles.setting].join(" ")} viewBox="0 0 200 200">

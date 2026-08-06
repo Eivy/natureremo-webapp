@@ -1,0 +1,14 @@
+.qrio_lock {
+  .status {
+    margin: 1rem .5rem;
+    .name {
+      margin-right: .5rem;
+    }
+    .available {
+      color: #61dafb;
+    }
+    .unavailable {
+      color: gray;
+    }
+  }
+}

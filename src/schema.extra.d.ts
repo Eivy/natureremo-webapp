@@ -22,10 +22,43 @@ declare namespace RemoAPI {
   export interface SmartMeter {
     echonetlite_properties?: EchonetLiteProperty[];
   }
+  /**
+   * A macro registered for a BLE appliance. BLE appliances have no dedicated
+   * endpoint, they are controlled by executing one of their macros.
+   */
+  export interface BLEPrivateMacro {
+    id?: string;
+    url?: string;
+  }
+  export interface BLE {
+    addr?: string;
+    addr_type?: string;
+    bonded?: boolean;
+    /**
+     * Macros of the appliance, keyed by name. ex: {"lock": {...}}
+     */
+    macros?: { [name: string]: BLEPrivateMacro };
+  }
+  export interface QrioLockDevice {
+    id?: number;
+    name?: string;
+    image?: string;
+  }
+  export interface QrioLock {
+    device?: QrioLockDevice;
+    bd_address?: string;
+    sub_bd_address?: string;
+    is_available?: boolean;
+  }
   export interface Appliance {
     /**
      * Set when type is "EL_SMART_METER".
      */
     smart_meter?: SmartMeter;
+    /**
+     * Set for appliances which are controlled over BLE.
+     */
+    ble?: BLE;
+    qrio_lock?: QrioLock;
   }
 }

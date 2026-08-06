@@ -119,6 +119,20 @@ describe('test buttons page', () => {
     expect(screen.getByText('564.1')).toBeInTheDocument();
   });
 
+  test('click qrio lock macro', async () => {
+    const mockExecBLEMacro = vi.spyOn(Api, 'ExecBLEMacro').mockResolvedValue(undefined);
+    setAppliances([{
+      id: "test", nickname: "test_appliance", type: "QRIO_LOCK",
+      qrio_lock: { device: { id: 1, name: "Qrio Lock" }, is_available: true },
+      ble: { macros: { lock: { id: "lock_macro", url: "https://example.com/lock" } } },
+      signals: [], device: { id: "device_id" }
+    }]);
+    const { container } = renderButtons();
+    fireEvent.click(container.querySelector('button')!);
+    await vi.waitFor(() => expect(mockExecBLEMacro).toHaveBeenCalledWith("lock_macro"));
+    mockExecBLEMacro.mockRestore();
+  });
+
   test('render message when appliance not found', () => {
     setAppliances([]);
     renderButtons();

@@ -31,6 +31,14 @@ class Api {
     return Api.post(`signals/${signal_id}/send`, null);
   }
 
+  /**
+   * Execute a macro of a BLE appliance such as Qrio Lock.
+   * BLE appliances have no appliance specific endpoint.
+   */
+  static async ExecBLEMacro(macro_id: string): Promise<void> {
+    return Api.post(`ble/private_macros/${macro_id}/exec`, null);
+  }
+
   static async SendTVButton(appliance_id: string, button: string): Promise<RemoAPI.TVState> {
     return Api.post(`appliances/${appliance_id}/tv`, { button: button });
   }
