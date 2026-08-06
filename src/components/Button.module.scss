@@ -1,9 +1,13 @@
 $margin: .5rem;
-$buttonWidth: calc(20vmin - #{$margin} * 2);
+// 家電ボタン (Device.module.scss の .appliances > div) と同じ上限。
+// 上限が無いと大きなデスクトップの画面で家電ボタンより大きくなってしまう
+$maxSize: 200px;
+$size: min(20vmin, #{$maxSize});
+$buttonWidth: calc(#{$size} - #{$margin} * 2);
 $iconRatio: 70%;
 .button {
   width: $buttonWidth;
-  height: calc(20vmin + #{$margin} * 3);
+  height: calc(#{$size} + #{$margin} * 3);
   margin: 0 $margin;
   button {
     border: 0;
