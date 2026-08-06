@@ -1,4 +1,3 @@
-import { onMount } from 'solid-js';
 import styles from './Icons.module.scss';
 
 export function AV() {
@@ -301,15 +300,11 @@ interface TextProps {
 }
 
 export function Text(props: TextProps) {
-  let ref: SVGSVGElement | undefined;
-  onMount(() => {
-    if (!ref) return;
-    const t = ref.querySelector("text")!;
-    t.style.fontSize = ref.clientWidth / 6 + 'px';
-  });
+  // viewBox の座標系での文字サイズ。文字数が多いほど小さくして枠内に収める
+  const fontSize = () => Math.min(20, 45 / Math.max(1, props.value.length));
   return (
-    <svg class={`${styles.icon} ${styles.text}`} viewBox="0 0 50 50" ref={ref}>
-      <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">{props.value}</text>
+    <svg class={`${styles.icon} ${styles.text}`} viewBox="0 0 50 50">
+      <text x="50%" y="50%" font-size={fontSize()} dominant-baseline="central" text-anchor="middle">{props.value}</text>
       {props.value}
     </svg>
   );

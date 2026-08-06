@@ -1,5 +1,6 @@
 $margin: .5rem;
 $buttonWidth: calc(20vmin - #{$margin} * 2);
+$iconRatio: 70%;
 .button {
   width: $buttonWidth;
   height: calc(20vmin + #{$margin} * 3);
@@ -11,6 +12,15 @@ $buttonWidth: calc(20vmin - #{$margin} * 2);
     width: $buttonWidth;
     height: $buttonWidth;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      display: block;
+      // 円に内接する正方形 (約70.7%) 以下にしてアイコンをボタン内に収める
+      width: $iconRatio;
+      height: $iconRatio;
+    }
   }
   .label {
     text-align: center;
